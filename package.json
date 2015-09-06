@@ -4,7 +4,9 @@
   "description": "Notification for focus",
   "main": "index.js",
   "scripts": {
-    "test": "mocha\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D"
+    "test": "mocha",
+    "start": "node server.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,26 @@
   "bugs": {
     "url": "https://github.com/pierr/notif/issues"
   },
-  "homepage": "https://github.com/pierr/notif#readme"
+  "homepage": "https://github.com/pierr/notif#readme",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "material-design-lite": "^1.0.4-2",
+    "react": "^0.13.3",
+    "react-tools": "^0.13.3",
+    "redux": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^5.8.23",
+    "babel-eslint": "^4.0.5",
+    "babel-loader": "^5.1.2",
+    "css-loader": "^0.16.0",
+    "eslint": "^1.0.0-rc-1",
+    "eslint-plugin-react": "^3.1.0",
+    "json-loader": "^0.5.2",
+    "react-hot-loader": "^1.2.7",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2",
+    "mocha": "^2.3.0"
+  }
 }
