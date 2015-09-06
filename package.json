@@ -1,0 +1,23 @@
+{
+  "name": "notif",
+  "version": "1.0.0",
+  "description": "Notification for focus",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pierr/notif.git"
+  },
+  "keywords": [
+    "notification",
+    "focus"
+  ],
+  "author": "Pierre Besson <pierre.besson7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pierr/notif/issues"
+  },
+  "homepage": "https://github.com/pierr/notif#readme"
+}
