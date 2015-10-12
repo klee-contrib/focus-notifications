@@ -1,19 +1,16 @@
-//Dependencies
-import React, { Component } from 'react';
-import Noficication from './component/notification'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NotificationList from '../component/notification-list';
 
 
-export default class App extends Component {
-  constructor(props) {
-      super(props);
-  }
-  render() {
-      return (
-          <div>
-              <h1>NOTIFICATION</h1>
-              <Notification content='Super content' date={new Date()} title='titre'/>
-              <button className='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored'><i className="material-icons">add</i></button>
-          </div>
-      );
-  }
-}
+console.log('Exemple Notification center');
+
+const mockNotifs = [
+    {title: 'TITRE', content: 'CONTENT ...', date: new Date().toISOString(), type: 'info', author: 'joe.lopez@gmail.com'},
+    {title: 'TITRE 2', content: 'CONTENT 2 ...', date: new Date().toISOString(), type: 'info', author: 'david.lopez@gmail.com'},
+    {title: 'TITRE 3', content: 'CONTENT 3 ...', date: new Date().toISOString(), type: 'info', author: 'joe.lopez@gmail.com'}
+];
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    ReactDOM.render(<NotificationList data={mockNotifs}/>, document.getElementById('root'));
+});
