@@ -1,8 +1,6 @@
 //Dependencies
 import React, { Component , PropTypes} from 'react';
-function types(name){
-    return PropTypes[name];
-}
+
 /**
 * Component use for uploading files.
 */
@@ -25,7 +23,7 @@ class Notification extends Component {
 
 Notification.displayName = 'Notification';
 Notification.propTypes = {
-    content: types('string'),
-    date: type('date')
+    content: PropTypes.string,
+    date: PropTypes.date
 };
-export default Notification
+export default Notification;
