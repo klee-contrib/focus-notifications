@@ -6,12 +6,12 @@ const propTypes = {
     content: PropTypes.string,
     date: PropTypes.string,
     type: PropTypes.string,
-    author: propTypes.string
+    author: PropTypes.string
 };
 
 const Notification = ({author, date, content, title, type}) => {
     return (
-        <div dataFocus='notification' dataType={type}>
+        <div data-focus='notification' data-type={type}>
             <h2>{title}</h2>
             <div>{content}</div>
             <div>{date}</div>
