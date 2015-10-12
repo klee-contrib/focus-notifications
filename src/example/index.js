@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NotificationList from '../component/notification-list';
+import NotificationCenter from '../component/notification-center';
 
 
 console.log('Exemple Notification center');
@@ -12,5 +12,5 @@ const mockNotifs = [
 ];
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    ReactDOM.render(<NotificationList data={mockNotifs}/>, document.getElementById('root'));
+    ReactDOM.render(<NotificationCenter notificationList={mockNotifs}/>, document.getElementById('root'));
 });
