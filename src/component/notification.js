@@ -20,5 +20,6 @@ const Notification = ({author, date, content, title, type}) => {
 };
 
 Notification.propTypes = propTypes;
+Notification.displayName = 'Notification';
 
 export default Notification;
