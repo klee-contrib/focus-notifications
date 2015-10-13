@@ -1,6 +1,6 @@
 import {addNotification, readNotification, setVisibilityFilter, VisibilityFilters, ADD_NOTIFICATION, READ_NOTIFICATION, SET_VISIBILITY_FILTER} from '../'
 
-describe.only('actions', () => {
+describe('actions', () => {
     it('actionType should be strings', () => {
         expect(ADD_NOTIFICATION).to.be.a('string');
         expect(READ_NOTIFICATION).to.be.a('string');
