@@ -21,7 +21,7 @@ export const VisibilityFilters = {
 */
 
 export function addNotification(notif) {
-    return { type: ADD_NOTIFICATION, notif };
+    return { type: ADD_NOTIFICATION, notification: notif };
 }
 
 export function readNotification(notificationId) {
