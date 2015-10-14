@@ -1,6 +1,6 @@
 import config from '../config.json';
 import fetch from 'isomorphic-fetch';
-const URL = `${config.root}/${notificationURL}`
+const URL = `${config.rootURL}/${config.notificationURL}`
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
 function requestNotifications(user) {
     return {
@@ -41,17 +41,15 @@ export function fetchNotifications(user) {
         // In this case, we return a promise to wait for.
         // This is not required by thunk middleware, but it is convenient for us.
 
-        return fetch(`${URL}/${user}`)
+        return fetch(`${URL}`)
         .then(response => response.json())
         .then(json =>
 
             // We can dispatch many times!
             // Here, we update the app state with the results of the API call.
 
-            dispatch(requestNotifications(user, json))
-        );
-
-        // In a real world app, you also want to
-        // catch any error in the network call.
+            dispatch(receiveNotifications(user, json))
+        )
+        .catch(err => console.error('Fetch notification error', err));
     };
 }
