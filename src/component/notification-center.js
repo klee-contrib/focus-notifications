@@ -4,6 +4,7 @@ import NotificationList from './notification-list';
 import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter } from '../actions';
+import { fetchNotifications } from '../actions/fetch-notifications';
 
 // Notification center component
 class NotificationCenter extends Component {
@@ -11,7 +12,8 @@ class NotificationCenter extends Component {
         const {dispatch, hasAddNotif, notificationList} = this.props;
         return (
             <div data-focus='notification-center'>
-                <h1>{`You have ${notificationList.length} notifications`}</h1>
+                <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
+                {JSON.stringify(this.props)}
                 {
                     hasAddNotif &&
                     <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
@@ -40,12 +42,13 @@ function selectNotifications(notificationList, filter) {
 
 // Select the part of the state.
 function select(state) {
-    const {notificationList, visibilityFilter} = state;
+    const {notificationList, visibilityFilter, isFetching} = state;
     return {
         //select the notification list from the state
         notificationList: selectNotifications(notificationList, visibilityFilter),
         // select the visibility filter
-        visibilityFilter: visibilityFilter
+        visibilityFilter,
+        isFetching
     };
 }
 
