@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { VisibilityFilters, ADD_NOTIFICATION, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../actions';
+import { VisibilityFilters, ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../actions';
 const { SHOW_ALL } = VisibilityFilters;
 
 
@@ -15,18 +15,20 @@ function visibilityFilter(state = SHOW_ALL, action) {
 
 
 function notifications(state = [], action) {
-    console.log('reducer notif', state, action)
     switch (action.type) {
         case ADD_NOTIFICATION:
             return [...state, {
-                ...action.notification,
-                completed: false
+                ...action.payload,
+                read: false
             }];
+        case ADD_NOTIFICATIONS:
+            const data = action.payload.map((notif) => ({...notif, read: false}));
+            return [...state, ...data];
         case READ_NOTIFICATION:
             return [
                 ...state.slice(0, action.index),
                 Object.assign({}, state[action.index], {
-                    completed: true
+                    read: true
                 }),
                 ...state.slice(action.index + 1)
             ];
