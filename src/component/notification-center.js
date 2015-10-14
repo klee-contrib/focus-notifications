@@ -8,10 +8,14 @@ import { addNotification, readNotification, setVisibilityFilter } from '../actio
 // Notification center component
 class NotificationCenter extends Component {
     render() {
-        const {dispatch, notificationList} = this.props;
+        const {dispatch, hasAddNotif, notificationList} = this.props;
         return (
             <div data-focus='notification-center'>
-                <NotificationAdd onAddClick={text => dispatch(addNotification({content: text, author: 'joe.lopez@gmail.com', title: 'title', date: new Date().toISOString()}))} />
+                <h1>{`You have ${notificationList.length} notifications`}</h1>
+                {
+                    hasAddNotif &&
+                    <NotificationAdd onAddClick={text => dispatch(addNotification({content: text, author: 'joe.lopez@gmail.com', title: 'title', date: new Date().toISOString()}))} />
+                }
                 <NotificationList data={notificationList} />
             </div>
         );
@@ -20,8 +24,12 @@ class NotificationCenter extends Component {
 
 NotificationCenter.displayName = 'NotificationCenter';
 
+NotificationCenter.defaultProps = {
+    hasAddNotif: false
+};
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
+    hasAddNotif: PropTypes.bool,
     notificationList: PropTypes.array
 }
 
