@@ -64,4 +64,7 @@ describe('reducers', () => {
         });
     });
 
+    describe.skip('visibilityFilterReducer', () => {
+
+    });
 });
