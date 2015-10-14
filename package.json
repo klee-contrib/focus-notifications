@@ -24,12 +24,14 @@
   },
   "homepage": "https://github.com/pierr/notif#readme",
   "dependencies": {
+    "isomorphic-fetch": "^2.1.1",
     "lodash": "^3.10.1",
     "material-design-lite": "1.0.5",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^3.1.0",
-    "redux": "^3.0.2"
+    "redux": "^3.0.2",
+    "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
