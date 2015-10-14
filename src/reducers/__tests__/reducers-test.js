@@ -49,12 +49,17 @@ describe('reducers', () => {
                 expect(() => reducerCaller('ABCD')).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: 'ABCD'}, expectedType: 'array'}));
                 expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: {a: 'a'}}, expectedType: 'array'}));
             });
-            it.skip('should add the notification given ad add the read property', () => {
-                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
-                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
-                expect(reducerCall).to.be.an('array');
-                // it should add the read attribute
-                expect(reducerCall).to.include({...NEW_NOTIF, read: false});
+            it('should add the notification given ad add the read property', () => {
+                const NEW_NOTIFS = [
+                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                ];
+                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATIONS, payload: NEW_NOTIFS});
+                expect(reducerCall)
+                .to.be.an('array')
+                .and.have.length.of(3)
+                .and.include({...NEW_NOTIFS[0], read: false})
+                .and.include({...NEW_NOTIFS[1], read: false});
             });
         });
     });
