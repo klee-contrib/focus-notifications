@@ -34,17 +34,18 @@ NotificationCenter.propTypes = {
 }
 
 // Select the notification from the state.
-function selectNotifications(notifications, filter) {
-    return notifications;
+function selectNotifications(notificationList, filter) {
+    return notificationList;
 }
 
 // Select the part of the state.
 function select(state) {
+    const {notificationList, visibilityFilter} = state;
     return {
         //select the notification list from the state
-        notificationList: selectNotifications(state.notifications, state.visibilityFilter),
+        notificationList: selectNotifications(notificationList, visibilityFilter),
         // select the visibility filter
-        visibilityFilter: state.visibilityFilter
+        visibilityFilter: visibilityFilter
     };
 }
 
