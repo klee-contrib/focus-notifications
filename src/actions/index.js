@@ -3,6 +3,7 @@
 */
 
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const ADD_NOTIFICATIONS = 'ADD_NOTIFICATIONS';
 export const READ_NOTIFICATION = 'READ_NOTIFICATION';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 
@@ -21,7 +22,11 @@ export const VisibilityFilters = {
 */
 
 export function addNotification(notif) {
-    return { type: ADD_NOTIFICATION, notification: notif };
+    return { type: ADD_NOTIFICATION, payload: notif };
+}
+
+export function addNotifications(notifs) {
+    return { type: ADD_NOTIFICATIONS, payload: notifs };
 }
 
 export function readNotification(notificationId) {

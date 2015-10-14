@@ -5,9 +5,7 @@ import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter } from '../actions';
 
-/**
- * Notification.
- */
+// Notification center component
 class NotificationCenter extends Component {
     render() {
         const {dispatch, notificationList} = this.props;
@@ -35,8 +33,12 @@ function selectNotifications(notifications, filter) {
 // Select the part of the state.
 function select(state) {
     return {
+        //select the notification list from the state
         notificationList: selectNotifications(state.notifications, state.visibilityFilter),
+        // select the visibility filter
         visibilityFilter: state.visibilityFilter
     };
 }
+
+// connect the notification center to the state.
 export default connect(select)(NotificationCenter);

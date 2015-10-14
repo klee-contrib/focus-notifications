@@ -1,4 +1,4 @@
-import {addNotification, readNotification, setVisibilityFilter, VisibilityFilters, ADD_NOTIFICATION, READ_NOTIFICATION, SET_VISIBILITY_FILTER} from '../'
+import {addNotification,addNotifications, readNotification, setVisibilityFilter, VisibilityFilters, ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER} from '../'
 
 describe('actions', () => {
     it('actionType should be strings', () => {
@@ -10,14 +10,28 @@ describe('actions', () => {
         it('should be a function', () => {
             expect(addNotification).to.be.a('function');
         });
-        it('should return an object with a type and a notification property', () => {
+        it('should return an object with a type and a payload property containing an object', () => {
             const NOTIF = {content: 'lopez'};
             const addNotificationResult = addNotification(NOTIF);
             expect(addNotificationResult).to.be.an('object');
             expect(addNotificationResult).to.have.ownProperty('type');
-            expect(addNotificationResult).to.have.ownProperty('notification');
-            expect(addNotificationResult.notification).to.deep.equal(NOTIF);
+            expect(addNotificationResult).to.have.ownProperty('payload');
+            expect(addNotificationResult.payload).to.deep.equal(NOTIF);
             expect(addNotificationResult.type).to.equal(ADD_NOTIFICATION);
+        });
+    });
+    describe('addNotifications', () => {
+        it('should be a function', () => {
+            expect(addNotifications).to.be.a('function');
+        });
+        it('should return an object with a type and a payload property containing an array', () => {
+            const NOTIFS = [{content: 'lopez joe'}, {content: 'lopez david'}];
+            const addNotificationsResult = addNotifications(NOTIFS);
+            expect(addNotificationsResult).to.be.an('object');
+            expect(addNotificationsResult).to.have.ownProperty('type');
+            expect(addNotificationsResult).to.have.ownProperty('payload');
+            expect(addNotificationsResult.payload).to.deep.equal(NOTIFS);
+            expect(addNotificationsResult.type).to.equal(ADD_NOTIFICATIONS);
         });
     });
     describe('readNotification', () => {
