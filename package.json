@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha src/**/__tests__/**/*.js",
     "start": "node server.js",
+    "api": "node api-mock",
     "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.prod.js",
     "lint": "eslint src"
   },
