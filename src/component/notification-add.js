@@ -4,7 +4,7 @@ export default class AddNotification extends Component {
     handleClick(e) {
         const node = findDOMNode(this.refs.input);
         const text = node.value.trim();
-        this.props.onAddClick(text);
+        this.props.onAddClick({content: text, author: 'joe.lopez@gmail.com', title: 'title', date: new Date().toISOString()});
         node.value = '';
     }
     render() {

@@ -14,7 +14,7 @@ class NotificationCenter extends Component {
                 <h1>{`You have ${notificationList.length} notifications`}</h1>
                 {
                     hasAddNotif &&
-                    <NotificationAdd onAddClick={text => dispatch(addNotification({content: text, author: 'joe.lopez@gmail.com', title: 'title', date: new Date().toISOString()}))} />
+                    <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                 }
                 <NotificationList data={notificationList} />
             </div>
