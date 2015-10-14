@@ -1,7 +1,7 @@
 import notificationReducers from '../'
 import notificationListReducer from '../notifications-list';
 import visibilityFilterReducer from '../visibility-filter';
-import { ADD_NOTIFICATION, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../../actions';
+import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../../actions';
 import generateError from '../util/error-generator';
 const INITAL_ARRAY_STATE = [{content: 'LOPEZ JOE'}];
 describe('reducers', () => {
@@ -40,7 +40,22 @@ describe('reducers', () => {
                 // it should add the read attribute
                 expect(reducerCall).to.include({...NEW_NOTIF, read: false});
             });
-
+        });
+        describe('when it receive an ADD_NOTIFICATIONS action ', () => {
+            it('should throw an error when the payload is not an array', () => {
+                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
+                const reducerCaller = (payload) => notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATIONS, payload});
+                expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: 3}, expectedType: 'array'}));
+                expect(() => reducerCaller('ABCD')).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: 'ABCD'}, expectedType: 'array'}));
+                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: {a: 'a'}}, expectedType: 'array'}));
+            });
+            it.skip('should add the notification given ad add the read property', () => {
+                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
+                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
+                expect(reducerCall).to.be.an('array');
+                // it should add the read attribute
+                expect(reducerCall).to.include({...NEW_NOTIF, read: false});
+            });
         });
     });
 
