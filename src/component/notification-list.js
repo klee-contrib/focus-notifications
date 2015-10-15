@@ -6,7 +6,7 @@ import moment from 'moment';
 const propTypes = {
     data: PropTypes.array
 };
-
+//Maybe i should add a Notification Group component by date which uses a notifciation list component
 const NotificationList = ({data}) => {
     const groupedByDayNotifs = groupBy(data, (n) => moment(n.creationDate).format('L'));
 
@@ -17,7 +17,7 @@ const NotificationList = ({data}) => {
                     groupedByDayNotifs,
                     (group, day) => {
                         return (
-                            <div>{moment(day).fromNow()} {group.map((notif, id) => <Notification key={id} hasDate={false} {...notif} />)}</div>
+                            <div>{moment(day).fromNow()} {group.map((notif, id) => <Notification key={id} {...notif} />)}</div>
                         )
                     }
                 )
