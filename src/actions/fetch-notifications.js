@@ -21,7 +21,7 @@ function receiveNotifications(user, json) {
 //Example call
 // store.dispatch(fetchNotifications('userId'));
 
-exprt function fetchNotifications(user) {
+export function fetchNotifications(user) {
 
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
