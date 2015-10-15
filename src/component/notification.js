@@ -3,6 +3,7 @@ import React, { Component , PropTypes} from 'react';
 import moment from 'moment';
 import {notification as notificationStyle} from './style';
 const propTypes = {
+    hasDate: PropTypes.bool,
     uuid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
@@ -13,14 +14,14 @@ const propTypes = {
     icon: PropTypes.string.isRequired
 };
 
-const Notification = ({sender, creationDate, content, title, type, icon, targetUrl}) => {
+const Notification = ({sender, creationDate, content, title, type, icon, targetUrl, hasDate}) => {
     const {style, iconStyle, contentStyle, headerStyle, bodyStyle, dateStyle} = notificationStyle;
     return (
         <div data-focus='notification' data-type={type} style={style}>
             <img src={icon} style={iconStyle}/>
             <div style={bodyStyle}>
                 <h3 style={headerStyle}>{title}</h3>
-                <div style={dateStyle}>{moment(creationDate).fromNow()}</div>
+                {hasDate && <div style={dateStyle}>{moment(creationDate).fromNow()}</div>}
                 <div style={contentStyle}>{content}</div>
             </div>
         </div>
@@ -29,5 +30,7 @@ const Notification = ({sender, creationDate, content, title, type, icon, targetU
 
 Notification.propTypes = propTypes;
 Notification.displayName = 'Notification';
-
+Notification.defaultProps = {
+    hasDate: true
+}
 export default Notification;
