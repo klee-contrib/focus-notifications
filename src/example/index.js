@@ -2,14 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import NotificationCenter from '../component/notification-center';
-import notificationReducers from '../reducers';
+import createStore from '../store/create';
 import { addNotifications } from '../actions';
 
 // Create the global redux store.
-const store = createStore(notificationReducers);
+const store = createStore();
 
 // Initial store population
 const mockNotifs = [

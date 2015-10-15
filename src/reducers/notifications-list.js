@@ -1,7 +1,10 @@
 import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION} from '../actions';
+import {RECEIVE_NOTIFICATIONS} from '../actions/fetch-notifications';
 import generateError from './util/error-generator';
 import {isObject, isArray} from 'lodash/lang';
 const REDUCER_NAME = 'NOTIFICATION_LIST';
+
+
 // reducers in charge of generatin the notification list
 export default function notifications(state = [], action = {}) {
     const {type, index, payload} = action;
@@ -13,6 +16,7 @@ export default function notifications(state = [], action = {}) {
                 read: false
             }];
         case ADD_NOTIFICATIONS:
+        case RECEIVE_NOTIFICATIONS:
             if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
             const data = action.payload.map((notif) => ({...notif, read: false}));
             return [...state, ...data];

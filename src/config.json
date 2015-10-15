@@ -1,4 +1,4 @@
 {
-  "rootURL": "http://localhost:9998",
-  "fileURL": "file"
+  "rootURL": "http://localhost:9999",
+  "notificationURL": "notifications"
 }

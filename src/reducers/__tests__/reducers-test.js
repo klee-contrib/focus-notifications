@@ -1,7 +1,9 @@
 import notificationReducers from '../'
 import notificationListReducer from '../notifications-list';
 import visibilityFilterReducer from '../visibility-filter';
+import isFetchingReducer from '../is-fetching';
 import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../../actions';
+import { REQUEST_NOTIFICATIONS, RECEIVE_NOTIFICATIONS } from '../../actions/fetch-notifications'
 import generateError from '../util/error-generator';
 const INITAL_ARRAY_STATE = [{content: 'LOPEZ JOE'}];
 describe('reducers', () => {
@@ -62,9 +64,75 @@ describe('reducers', () => {
                 .and.include({...NEW_NOTIFS[1], read: false});
             });
         });
+        describe('when it receive an RECEIVE_NOTIFICATIONS action ', () => {
+            it('should throw an error when the payload is not an array', () => {
+                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
+                const reducerCaller = (payload) => notificationListReducer(INITAL_ARRAY_STATE, {type: RECEIVE_NOTIFICATIONS, payload});
+                expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: 3}, expectedType: 'array'}));
+                expect(() => reducerCaller('ABCD')).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: 'ABCD'}, expectedType: 'array'}));
+                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: {a: 'a'}}, expectedType: 'array'}));
+            });
+            it('should add the notification given ad add the read property', () => {
+                const NEW_NOTIFS = [
+                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                ];
+                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: RECEIVE_NOTIFICATIONS, payload: NEW_NOTIFS});
+                expect(reducerCall)
+                .to.be.an('array')
+                .and.have.length.of(3)
+                .and.include({...NEW_NOTIFS[0], read: false})
+                .and.include({...NEW_NOTIFS[1], read: false});
+            });
+        });
     });
 
     describe.skip('visibilityFilterReducer', () => {
+
+    });
+    describe('isFetchingReducer', () => {
+
+        describe('when it receive an UNKNOWN action ', () => {
+            it('should return false or the initial state', () => {
+
+                expect(isFetchingReducer())
+                .to.be.a('boolean')
+                .and.equal(false);
+
+                expect(isFetchingReducer(true))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+        });
+
+        describe('when it receive an REQUEST_NOTIFICATIONS action ', () => {
+            it('should return true when initial state was true', () => {
+                expect(isFetchingReducer(true, {type: REQUEST_NOTIFICATIONS}))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+
+            it('should return true when initial state was false', () => {
+                expect(isFetchingReducer(false, {type: REQUEST_NOTIFICATIONS}))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+        });
+
+        describe('when it receive an RECEIVE_NOTIFICATIONS action ', () => {
+
+            it('should return false when initial state was true', () => {
+                expect(isFetchingReducer(true, {type: RECEIVE_NOTIFICATIONS}))
+                .to.be.a('boolean')
+                .and.equal(false);
+            });
+
+            it('should return false when initial state was fasle', () => {
+                expect(isFetchingReducer(false, {type: RECEIVE_NOTIFICATIONS}))
+                .to.be.a('boolean')
+                .and.equal(false);
+            });
+        });
 
     });
 });
