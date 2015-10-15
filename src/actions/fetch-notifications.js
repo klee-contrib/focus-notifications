@@ -18,11 +18,10 @@ function receiveNotifications(user, json) {
     };
 }
 
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
-// store.dispatch(fetchPosts('reactjs'));
+//Example call
+// store.dispatch(fetchNotifications('userId'));
 
-export function fetchNotifications(user) {
+exprt function fetchNotifications(user) {
 
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
@@ -45,7 +44,6 @@ export function fetchNotifications(user) {
         .then(response => response.json())
         .then(json =>
 
-            // We can dispatch many times!
             // Here, we update the app state with the results of the API call.
 
             dispatch(receiveNotifications(user, json))
