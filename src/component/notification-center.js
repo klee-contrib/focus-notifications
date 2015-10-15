@@ -5,13 +5,14 @@ import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
+import { notificationCenter as style } from './style';
 
 // Notification center component
 class NotificationCenter extends Component {
     render() {
         const {dispatch, hasAddNotif, notificationList} = this.props;
         return (
-            <div data-focus='notification-center'>
+            <div data-focus='notification-center' style={style}>
                 <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
                 {
                     hasAddNotif &&

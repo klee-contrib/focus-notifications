@@ -6,7 +6,12 @@ import { Provider } from 'react-redux';
 import NotificationCenter from '../component/notification-center';
 import createStore from '../store/create';
 import { addNotifications } from '../actions';
-
+const style = {
+    display: 'flex',
+    minHeight: '100%',
+    background: '#fb3',
+	font: '100%/1.5 sans-serif'
+};
 // Create the global redux store.
 const store = createStore();
 
@@ -24,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // The child must be wrapped in a function
     // to work around an issue in React 0.13.
     ReactDOM.render(<Provider store={store}>
-        <NotificationCenter hasAddNotif={false} />
+        <div style={style}><NotificationCenter hasAddNotif={false} /></div>
     </Provider>,
     rootElement);
 });
