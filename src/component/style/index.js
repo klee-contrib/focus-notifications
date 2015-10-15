@@ -11,7 +11,8 @@ export const notificationCenter = {
     background: BG_COLOR,
     color: 'white',
     textAlign: 'left',
-    width: '40%'
+    width: '40%',
+    opacity: 0.75
 };
 
 export const notification = {
