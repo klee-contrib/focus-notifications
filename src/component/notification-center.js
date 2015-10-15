@@ -13,12 +13,13 @@ class NotificationCenter extends Component {
         return (
             <div data-focus='notification-center'>
                 <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
-                {JSON.stringify(this.props)}
                 {
                     hasAddNotif &&
                     <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                 }
                 <NotificationList data={notificationList} />
+                <h2>{'Debug'}</h2>
+                {JSON.stringify(this.props)}
             </div>
         );
     }
