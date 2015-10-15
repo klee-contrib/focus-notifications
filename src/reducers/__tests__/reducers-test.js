@@ -64,6 +64,27 @@ describe('reducers', () => {
                 .and.include({...NEW_NOTIFS[1], read: false});
             });
         });
+        describe('when it receive an RECEIVE_NOTIFICATIONS action ', () => {
+            it('should throw an error when the payload is not an array', () => {
+                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
+                const reducerCaller = (payload) => notificationListReducer(INITAL_ARRAY_STATE, {type: RECEIVE_NOTIFICATIONS, payload});
+                expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: 3}, expectedType: 'array'}));
+                expect(() => reducerCaller('ABCD')).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: 'ABCD'}, expectedType: 'array'}));
+                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: 'RECEIVE_NOTIFICATIONS', payload: {a: 'a'}}, expectedType: 'array'}));
+            });
+            it('should add the notification given ad add the read property', () => {
+                const NEW_NOTIFS = [
+                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                ];
+                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: RECEIVE_NOTIFICATIONS, payload: NEW_NOTIFS});
+                expect(reducerCall)
+                .to.be.an('array')
+                .and.have.length.of(3)
+                .and.include({...NEW_NOTIFS[0], read: false})
+                .and.include({...NEW_NOTIFS[1], read: false});
+            });
+        });
     });
 
     describe.skip('visibilityFilterReducer', () => {
