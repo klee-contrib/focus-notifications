@@ -1,17 +1,10 @@
-
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import NotificationCenter from '../component/notification-center';
 import createStore from '../store/create';
 import { addNotifications } from '../actions';
-const style = {
-    display: 'flex',
-    minHeight: '100%',
-    background: '#fb3',
-	font: '100%/1.5 sans-serif'
-};
+import {exampleStyle as style} from './style'
 // Create the global redux store.
 const store = createStore();
 
@@ -21,15 +14,16 @@ const mockNotifs = [
     {title: 'TITRE 2', content: 'CONTENT 2 ...', date: new Date().toISOString(), type: 'info', author: 'david.lopez@gmail.com'},
     {title: 'TITRE 3', content: 'CONTENT 3 ...', date: new Date().toISOString(), type: 'info', author: 'joe.lopez@gmail.com'}
 ];
-store.dispatch(addNotifications(mockNotifs));
+//store.dispatch(addNotifications(mockNotifs));
 
 // Create the react component when the DOM is loaded.
 document.addEventListener('DOMContentLoaded', (event) => {
     const rootElement = document.getElementById('root');
     // The child must be wrapped in a function
     // to work around an issue in React 0.13.
-    ReactDOM.render(<Provider store={store}>
-        <div style={style}><NotificationCenter hasAddNotif={false} /></div>
-    </Provider>,
+    ReactDOM.render(
+        <Provider store={store}>
+            <div style={style}><NotificationCenter hasAddNotif={false} /></div>
+        </Provider>,
     rootElement);
 });

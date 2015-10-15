@@ -10,9 +10,33 @@ export const notificationCenter = {
     boxSizing: 'border-box',
     background: BG_COLOR,
     color: 'white',
-    textAlign: 'left'
+    textAlign: 'left',
+    width: '40%'
 };
 
 export const notification = {
-    borderTop: `1px solid ${SEPARATOR_COLOR}`
+    style: {
+        borderTop: `1px solid ${SEPARATOR_COLOR}`,
+        display: 'flex',
+        flexFlow: 'row wrap',
+        justifyContent: 'space-around'
+    },
+    bodyStyle:{
+        //flexGrow: 9,
+        display: 'flex',
+        flexFlow: 'row wrap',
+        justifyContent: 'space-around',
+        width: '80%'
+    },
+    iconStyle:{
+        width: '10%',
+        height: '10%'
+        //flexGrow: 1
+    },
+    headerStyle:{},
+    dateStyle:{},
+    contentStyle:{
+        width: '100%'
+    },
+
 };
