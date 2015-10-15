@@ -26,7 +26,7 @@ export const notification = {
         //flexGrow: 9,
         display: 'flex',
         flexFlow: 'row wrap',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
         width: '80%'
     },
     iconStyle:{
