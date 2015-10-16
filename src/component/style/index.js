@@ -1,5 +1,5 @@
 // global colors
-const BG_COLOR = '#655';
+const BG_COLOR = 'rgba(102,85,85, 0.66)';
 const TEXT_COLOR = 'white';
 
 const SEPARATOR_COLOR = 'rgb(78,82,81)'
@@ -11,8 +11,7 @@ export const notificationCenter = {
     background: BG_COLOR,
     color: 'white',
     textAlign: 'left',
-    width: '40%',
-    opacity: 0.75
+    width: '40%'
 };
 
 export const notification = {
