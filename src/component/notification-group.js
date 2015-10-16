@@ -6,18 +6,36 @@ import moment from 'moment';
 const propTypes = {
     data: PropTypes.array
 };
-
+function _isYoungerThanA(periodName, date) {
+    return moment(date).diff(moment().subtract(1, periodName)) > 0;
+}
 // function to group date
-function groupDate({creationDate}) {
-    return moment(creationDate).format('L');
+function groupDate({creationDate: date}) {
+    console.log(date);
+    if(_isYoungerThanA('day', date)) {
+        return 'today';
+    }
+    if(_isYoungerThanA('week', date)) {
+        return 'week';
+    }
+    if(_isYoungerThanA('month', date)) {
+        return 'month';
+    }
+    return 'before';
 }
 
+
 function formatDate(date) {
-    const momentDate = moment(date);
-    const currentDate = moment();
-    const isOlderThanAWeek = momentDate.diff(currentDate.subtract(1, 'week')) > 0;
-    const isOlderThanAMonth = momentDate.diff(currentDate.subtract(1, 'month')) > 0;
-    return momentDate.fromNow();
+    if(_isYoungerThanA('day', date)) {
+        return momentDate.fromNow();
+    }
+    if(_isYoungerThanA('week', date)) {
+        return 'Last week';
+    }
+    if(_isYoungerThanA('month', date)) {
+        return 'Last month';
+    }
+    return 'Before';
 }
 
 //Maybe i should add a Notification Group component by date which uses a notifciation list component
@@ -28,10 +46,10 @@ const NotificationGroup = ({data}) => {
             {
                 map(
                     groupBy(data, groupDate),
-                    (group, day) => {
+                    (group, groupTitle) => {
                         return (
                             <div key={idx++}>
-                                <h2>{formatDate(day)}</h2>
+                                <h2>{groupTitle}</h2>
                                 <NotificationList data={group}/>
                             </div>
                         );
