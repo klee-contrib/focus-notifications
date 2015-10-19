@@ -1,0 +1,46 @@
+// global colors
+$BG_COLOR : rgba(102,85,85, 0.66);
+$TEXT_COLOR  :  white;
+$SEPARATOR_COLOR  :  rgb(78,82,81);
+[data-focus='notification-center'] {
+    padding: 1em 2em;
+    margin: auto;
+    box-sizing: border-box;
+    background: $BG_COLOR;
+    color: white;
+    text-lign: left;
+    width: 40%;
+    ul {
+        -webkit-padding-start: 0px;
+    }
+    [data-focus='notification']{
+        border-top: 1px solid $SEPARATOR_COLOR;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+
+        [data-focus='notification-icon']{
+            width: 20%;
+            flex-grow: 1;
+            img{
+                width: 90%;
+            }
+        }
+        [data-focus='notification-body']{
+            //flexGrow: 9;
+        //    display: flex;
+        //    flex-flow: row wrap;
+        //    justify-content: flex-start;
+            width: 40%;
+            flex-grow: 4;
+            [data-focus='notification-content']{
+            //    width: 100%;
+            }
+        }
+        [data-focus='notification-date']{
+            width: 20%;
+            //flex-grow: 1;
+        }
+    }
+
+};
