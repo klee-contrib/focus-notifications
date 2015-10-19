@@ -12,7 +12,7 @@ class NotificationCenter extends Component {
     render() {
         const {dispatch, hasAddNotif, notificationList} = this.props;
         return (
-            <div data-focus='notification-center' style={style}>
+            <div data-focus='notification-center'>
                 <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
                 {
                     hasAddNotif &&

@@ -7,9 +7,9 @@ const propTypes = {
 
 const NotificationList = ({data}) => {
     return (
-        <div data-focus='notification-list'>
+        <ul data-focus='notification-list'>
             {data.map((notif, id) => <Notification key={id} {...notif} />)}
-        </div>
+        </ul>
     );
 };
 

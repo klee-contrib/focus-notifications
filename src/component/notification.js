@@ -1,7 +1,6 @@
 //Dependencies
 import React, { Component , PropTypes} from 'react';
 import moment from 'moment';
-import {notification as notificationStyle} from './style';
 const propTypes = {
     hasDate: PropTypes.bool,
     uuid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -15,16 +14,15 @@ const propTypes = {
 };
 
 const Notification = ({sender, creationDate, content, title, type, icon, targetUrl, hasDate}) => {
-    const {style, iconStyle, contentStyle, headerStyle, bodyStyle, dateStyle} = notificationStyle;
     return (
-        <div data-focus='notification' data-type={type} style={style}>
-            <img src={icon} style={iconStyle}/>
-            <div style={bodyStyle}>
-                <h3 style={headerStyle}>{title}</h3>
-                {hasDate && <div style={dateStyle}>{moment(creationDate).fromNow()}</div>}
-                <div style={contentStyle}>{content}</div>
+        <li data-focus='notification' data-type={type}>
+            <div data-focus='notification-icon'><img src={icon}/></div>
+            <div data-focus='notification-body' >
+                <h3 data-focus='notification-title'>{title}</h3>
+                <div data-focus='notification-content'>{content}</div>
             </div>
-        </div>
+            {hasDate && <div data-focus='notification-date'>{moment(creationDate).fromNow()}</div>}
+        </li>
     );
 };
 
