@@ -21,12 +21,10 @@ export default function notifications(state = [], action = {}) {
             const data = action.payload.map((notif) => ({...notif, read: false}));
             return [...state, ...data];
         case READ_NOTIFICATION:
+            const index = state.findIndex( (notif) => notif.uuid === action.payload);
             return [
-                ...state.slice(0, action.index),
-                Object.assign({}, state[action.index], {
-                    read: true
-                }),
-                ...state.slice(action.index + 1)
+                ...state.slice(0, index),
+                ...state.slice(index + 1)
             ];
         default:
             return state;
