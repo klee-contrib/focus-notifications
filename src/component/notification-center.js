@@ -5,7 +5,6 @@ import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
-import { notificationCenter as style } from './style';
 
 // Notification center component
 class NotificationCenter extends Component {
