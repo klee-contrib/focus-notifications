@@ -4,7 +4,8 @@ import NotificationList from './notification-list';
 import {groupBy, map} from 'lodash/collection';
 import moment from 'moment';
 const propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    onRead: PropTypes.func.isRequired
 };
 function _isYoungerThanA(periodName, date) {
     return moment(date).diff(moment().subtract(1, periodName)) > 0;
@@ -39,7 +40,7 @@ function formatDate(date) {
 }
 
 //Maybe i should add a Notification Group component by date which uses a notifciation list component
-const NotificationGroup = ({data}) => {
+const NotificationGroup = ({data, onRead}) => {
     let idx = 0;
     return (
         <div data-focus='notification-group'>
@@ -50,7 +51,7 @@ const NotificationGroup = ({data}) => {
                         return (
                             <div key={idx++}>
                                 <h2>{groupTitle}</h2>
-                                <NotificationList data={group}/>
+                                <NotificationList data={group} onRead={onRead}/>
                             </div>
                         );
                     }

@@ -17,7 +17,7 @@ class NotificationCenter extends Component {
                     hasAddNotif &&
                     <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                 }
-                <NotificationGroup data={notificationList} />
+                <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
                 <h2>{'Debug'}</h2>
                 {JSON.stringify(this.props)}
             </div>
