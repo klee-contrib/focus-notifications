@@ -1,7 +1,7 @@
 // global colors
 $BG_COLOR : rgba(102,85,85, 0.66);
 $TEXT_COLOR  :  white;
-$SEPARATOR_COLOR  :  rgb(78,82,81);
+$SEPARATOR_COLOR  :  rgba(0,0,0,1);
 [data-focus='notification-center'] {
     padding: 1em 2em;
     margin: auto;
@@ -10,6 +10,13 @@ $SEPARATOR_COLOR  :  rgb(78,82,81);
     color: white;
     text-lign: left;
     width: 40%;
+    h1{
+        font-size: 45px;
+    }
+    h2{
+        background-color: rgba(1,1,1, 0.6);
+        font-size: 35px;
+    }
     ul {
         -webkit-padding-start: 0px;
     }
@@ -32,7 +39,8 @@ $SEPARATOR_COLOR  :  rgb(78,82,81);
             width: 55%;
             flex-grow: 4;
             h4[data-focus='notification-title']{
-                margin: 7px 0 7px;
+                font-size: 19px;
+                margin: 5px 0 5px;
             }
             [data-focus='notification-content']{
                 max-height: 50px;
@@ -59,6 +67,7 @@ $SEPARATOR_COLOR  :  rgb(78,82,81);
             }
         }
         [data-focus='notification-date']{
+            text-align: center;
             width: 15%;
             button{
                 display: none;
