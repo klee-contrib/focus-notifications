@@ -4,3 +4,5 @@ export const exampleStyle = {
     background: '#fb3',
 	font: '100%/1.5 sans-serif'
 }
+
+require('../component/style/notification-center.scss');
