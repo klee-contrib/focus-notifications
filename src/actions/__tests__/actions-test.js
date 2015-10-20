@@ -1,10 +1,18 @@
-import {addNotification,addNotifications, readNotification, setVisibilityFilter, VisibilityFilters, ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER} from '../'
+import {
+    addNotification,addNotifications,
+    readNotification, setVisibilityFilter, VisibilityFilters,
+    ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER,
+    OPEN_CENTER, CLOSE_CENTER, openCenter, closeCenter
+} from '../'
 
 describe('actions', () => {
     it('actionType should be strings', () => {
         expect(ADD_NOTIFICATION).to.be.a('string');
         expect(READ_NOTIFICATION).to.be.a('string');
         expect(SET_VISIBILITY_FILTER).to.be.a('string');
+        expect(ADD_NOTIFICATIONS).to.be.a('string');
+        expect(OPEN_CENTER).to.be.a('string');
+        expect(CLOSE_CENTER).to.be.a('string');
     } )
     describe('addNotification', () => {
         it('should be a function', () => {
@@ -56,6 +64,24 @@ describe('actions', () => {
     describe('VisibilityFilters', () => {
         it('should be an object', () => {
             expect(VisibilityFilters).to.be.an('object');
+        });
+    });
+    describe('opening / closing center', () => {
+        it('openCenter should be a function', () => {
+            expect(openCenter).to.be.a('function');
+        });
+        it('openCenter should return an object with type OPEN_CENTER', () => {
+            expect(openCenter())
+            .to.be.an('object')
+            .and.deep.equal({type: OPEN_CENTER});
+        });
+        it('closeCenter should be a function', () => {
+            expect(closeCenter).to.be.a('function');
+        });
+        it('closeCenter should return an object with type OPEN_CENTER', () => {
+            expect(closeCenter())
+            .to.be.an('object')
+            .and.deep.equal({type: CLOSE_CENTER});
         });
     });
 });

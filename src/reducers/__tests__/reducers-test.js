@@ -2,7 +2,8 @@ import notificationReducers from '../'
 import notificationListReducer from '../notifications-list';
 import visibilityFilterReducer from '../visibility-filter';
 import isFetchingReducer from '../is-fetching';
-import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER } from '../../actions';
+import isOpenReducer from '../is-open';
+import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER, OPEN_CENTER, CLOSE_CENTER } from '../../actions';
 import { REQUEST_NOTIFICATIONS, RECEIVE_NOTIFICATIONS } from '../../actions/fetch-notifications'
 import generateError from '../util/error-generator';
 const INITAL_ARRAY_STATE = [{content: 'LOPEZ JOE'}];
@@ -135,4 +136,53 @@ describe('reducers', () => {
         });
 
     });
+    //isOpenReducer
+    describe('isOpenReducer', () => {
+        it('should be a function', () => {
+            expect(isOpenReducer).to.be.a('function');
+        });
+        describe('when it receive an UNKNOWN action ', () => {
+            it('should return false or the initial state', () => {
+
+                expect(isOpenReducer())
+                .to.be.a('boolean')
+                .and.equal(false);
+
+                expect(isOpenReducer(true))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+        });
+
+        describe('when it receive an OPEN_CENTER action ', () => {
+            it('should return true when initial state was true', () => {
+                expect(isOpenReducer(true, {type: OPEN_CENTER}))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+
+            it('should return true when initial state was false', () => {
+                expect(isOpenReducer(false, {type: OPEN_CENTER}))
+                .to.be.a('boolean')
+                .and.equal(true);
+            });
+        });
+
+        describe('when it receive an CLOSE_CENTER action ', () => {
+
+            it('should return false when initial state was true', () => {
+                expect(isOpenReducer(true, {type: CLOSE_CENTER}))
+                .to.be.a('boolean')
+                .and.equal(false);
+            });
+
+            it('should return false when initial state was fasle', () => {
+                expect(isOpenReducer(false, {type: CLOSE_CENTER}))
+                .to.be.a('boolean')
+                .and.equal(false);
+            });
+        });
+
+    });
+
 });
