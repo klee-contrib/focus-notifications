@@ -95,9 +95,10 @@ describe('reducers', () => {
             it('should throw an error when the payload is not an string', () => {
                 const uuid = '123456AZEEDD';
                 const reducerCaller = (payload) => notificationListReducer(INITIAL_UNREAD_NOTIFS, {type: READ_NOTIFICATION, payload});
-                expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: 3}, expectedType: 'string'}));
-                expect(() => reducerCaller([3])).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: [3]}, expectedType: 'string'}));
-                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: {a: 'a'}}, expectedType: 'string'}));
+                expect(() => reducerCaller('3')).to.not.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: '3'}, expectedType: 'string|number'}));
+                expect(() => reducerCaller(3)).to.not.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: 3}, expectedType: 'string|number'}));
+                expect(() => reducerCaller([3])).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: [3]}, expectedType: 'string|number'}));
+                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION, payload: {a: 'a'}}, expectedType: 'string|number'}));
             });
             it('should add mark the notification given as id as read', () => {
                 const reducerCall = notificationListReducer(INITIAL_UNREAD_NOTIFS, {type: READ_NOTIFICATION, payload: '1'});
