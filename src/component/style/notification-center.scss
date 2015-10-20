@@ -1,5 +1,5 @@
 // global colors
-$BG_COLOR : rgba(0,0,0, 0.4);
+$BG_COLOR : rgba(0,0,0, 0.7);
 $TEXT_COLOR  :  white;
 $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
 [data-focus='notification-center-panel'] {
@@ -24,9 +24,10 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
    }
     width: 33%;
     height: 100%;
-    overflow-y: scroll;
+    //overflow-y: scroll;
     position: absolute;
     right: 0;
+    top:0;
     //padding: 1em 2em;
     margin: auto;
     box-sizing: border-box;
