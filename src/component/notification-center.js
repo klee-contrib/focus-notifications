@@ -3,21 +3,29 @@ import React, { Component , PropTypes } from 'react';
 import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
-import { addNotification, readNotification, setVisibilityFilter } from '../actions';
+import { addNotification, readNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
 
 // Notification center component
 class NotificationCenter extends Component {
     render() {
-        const {dispatch, hasAddNotif, notificationList} = this.props;
+        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching} = this.props;
+        const onClickHandler = () =>  dispatch(isOpen ? closeCenter() : openCenter());
         return (
-            <div data-focus='notification-center'>
-                <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
+            <div>
+                <span className='material-icons mdl-badge' data-badge={notificationList.length} data-focus='notification-bell' onClick={onClickHandler} >add_alert</span>
+                {!isOpen && <div data-focus='notification-receiver'></div>}
                 {
-                    hasAddNotif &&
-                    <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
+                    isOpen &&
+                    <div  data-fetching={isFetching} data-focus='notification-center'>
+                        <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
+                        {
+                            hasAddNotif &&
+                            <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
+                        }
+                        <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
+                    </div>
                 }
-                <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
             </div>
         );
     }
@@ -31,6 +39,7 @@ NotificationCenter.defaultProps = {
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
     hasAddNotif: PropTypes.bool,
+    isOpen: PropTypes.bool,
     notificationList: PropTypes.array
 }
 
@@ -41,13 +50,12 @@ function selectNotifications(notificationList, filter) {
 
 // Select the part of the state.
 function select(state) {
-    const {notificationList, visibilityFilter, isFetching} = state;
+    const {notificationList, visibilityFilter, ...otherStateProperties} = state;
     return {
         //select the notification list from the state
         notificationList: selectNotifications(notificationList, visibilityFilter),
-        // select the visibility filter
         visibilityFilter,
-        isFetching
+        ...otherStateProperties
     };
 }
 
