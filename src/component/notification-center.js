@@ -18,6 +18,9 @@ class NotificationCenter extends Component {
                 {
                     isOpen &&
                     <div  data-fetching={isFetching} data-focus='notification-center-panel'>
+                        <button data-focus='notification-center-close' className='mdl-button mdl-button--icon' onClick={() => dispatch(closeCenter())}>
+                          <i className="material-icons">clear</i>
+                        </button>
                         <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
                         {
                             hasAddNotif &&

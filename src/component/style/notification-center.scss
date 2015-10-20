@@ -3,6 +3,25 @@ $BG_COLOR : rgba(0,0,0, 0.4);
 $TEXT_COLOR  :  white;
 $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
 [data-focus='notification-center-panel'] {
+    &[data-fetching='true'] {
+    div[data-focus='notification-group']{
+
+      margin: 0;
+      padding: 0;
+      position: relative;
+       &:after {
+           content: 'Loading...';
+           position: absolute;
+           height: 100%;
+           width: 100%;
+           top: 0;
+           left: 0;
+           background-color: rgba(0, 0, 0, 0.19);
+           text-align: center;
+           color: #FFF;
+       }
+    }
+   }
     width: 33%;
     height: 100%;
     overflow-y: scroll;
@@ -14,6 +33,11 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
     background: $BG_COLOR;
     color: white;
     text-lign: left;
+    button[data-focus='notification-center-close'] {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
     h1{
         font-size: 45px;
     }
