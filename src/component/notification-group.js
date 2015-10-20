@@ -13,7 +13,6 @@ function _isYoungerThanA(periodName, date) {
 }
 // function to group date
 function groupDate({creationDate: date}) {
-    console.log(date);
     if(_isYoungerThanA('day', date)) {
         return 'today';
     }
