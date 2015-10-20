@@ -3,7 +3,7 @@ import notificationListReducer from '../notifications-list';
 import visibilityFilterReducer from '../visibility-filter';
 import isFetchingReducer from '../is-fetching';
 import isOpenReducer from '../is-open';
-import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER, OPEN_CENTER, CLOSE_CENTER } from '../../actions';
+import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION,READ_NOTIFICATION_GROUP, SET_VISIBILITY_FILTER, OPEN_CENTER, CLOSE_CENTER } from '../../actions';
 import { REQUEST_NOTIFICATIONS, RECEIVE_NOTIFICATIONS } from '../../actions/fetch-notifications'
 import generateError from '../util/error-generator';
 const INITAL_ARRAY_STATE = [{content: 'LOPEZ JOE'}];
@@ -86,6 +86,12 @@ describe('reducers', () => {
                 .and.include({...NEW_NOTIFS[1], read: false});
             });
         });
+        describe.skip('when it receives an READ_NOTIFICATION action', () => {
+
+        });
+        describe.skip('when it receives an READ_NOTIFICATION_GROUP action', () => {
+
+        })
     });
 
     describe.skip('visibilityFilterReducer', () => {
