@@ -6,11 +6,24 @@ import NotificationCenterIcon from './notification-center-icon';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, readNotificationGroup, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
-
+import polling from '../util/polling';
 // Notification center component
 class NotificationCenter extends Component {
+    componentWillMount() {
+        //build a polling timeout.
+        const {pollingTimer, dispatch} = this.props;
+        polling(() => {
+            dispatch(fetchNotifications(this.lastFetch));
+            this.lastFetch = new Date().toISOString();
+        }, pollingTimer);
+        dispatch(fetchNotifications());
+        this.lastFetch = new Date().toISOString();
+    }
+    //componentWillUnMount() {
+    //    clearTimeout(this.pollingTimeoutID)
+    //}
+    //Should be replaced by a promise.cancel
     render() {
-
         const {dispatch, hasAddNotif, notificationList, isOpen, isFetching} = this.props;
 
         //display only the undred notifications
@@ -42,13 +55,15 @@ class NotificationCenter extends Component {
 NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
-    hasAddNotif: false
+    hasAddNotif: false,
+    pollingTimer: 60 * 1000 //1 min
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
     hasAddNotif: PropTypes.bool,
     isOpen: PropTypes.bool,
-    notificationList: PropTypes.array
+    notificationList: PropTypes.array,
+    pollingTimer: PropTypes.number
 }
 
 // Select the notification from the state.
