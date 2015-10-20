@@ -43,8 +43,8 @@ describe('actions', () => {
             const readNotificationResult = readNotification(NOTIF_ID);
             expect(readNotificationResult).to.be.an('object');
             expect(readNotificationResult).to.have.ownProperty('type');
-            expect(readNotificationResult).to.have.ownProperty('notificationId');
-            expect(readNotificationResult.notificationId).to.deep.equal(NOTIF_ID);
+            expect(readNotificationResult).to.have.ownProperty('payload');
+            expect(readNotificationResult.payload).to.deep.equal(NOTIF_ID);
             expect(readNotificationResult.type).to.equal(READ_NOTIFICATION);
         });
     });

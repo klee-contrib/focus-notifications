@@ -5,11 +5,11 @@ const propTypes = {
     data: PropTypes.array
 };
 
-const NotificationList = ({data}) => {
+const NotificationList = ({data, onRead}) => {
     return (
-        <div data-focus='notification-list'>
-            {data.map((notif, id) => <Notification key={id} {...notif} />)}
-        </div>
+        <ul data-focus='notification-list'>
+            {data.map((notif, id) => <Notification key={id} onRead={onRead} {...notif} />)}
+        </ul>
     );
 };
 

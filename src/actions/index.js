@@ -30,7 +30,7 @@ export function addNotifications(notifs) {
 }
 
 export function readNotification(notificationId) {
-    return { type: READ_NOTIFICATION, notificationId };
+    return { type: READ_NOTIFICATION, payload: notificationId };
 }
 
 export function setVisibilityFilter(filter) {

@@ -1,6 +1,6 @@
 //Dependencies
 import React, { Component , PropTypes } from 'react';
-import NotificationList from './notification-list';
+import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter } from '../actions';
@@ -17,9 +17,7 @@ class NotificationCenter extends Component {
                     hasAddNotif &&
                     <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                 }
-                <NotificationList data={notificationList} />
-                <h2>{'Debug'}</h2>
-                {JSON.stringify(this.props)}
+                <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
             </div>
         );
     }

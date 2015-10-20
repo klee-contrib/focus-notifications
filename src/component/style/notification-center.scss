@@ -1,0 +1,84 @@
+// global colors
+$BG_COLOR : rgba(0,0,0, 0.4);
+$TEXT_COLOR  :  white;
+$SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
+[data-focus='notification-center'] {
+    width: 33%;
+    height: 100%;
+    overflow-y: scroll;
+    position: absolute;
+    right: 0;
+    padding: 1em 2em;
+    margin: auto;
+    box-sizing: border-box;
+    background: $BG_COLOR;
+    color: white;
+    text-lign: left;
+    h1{
+        font-size: 45px;
+    }
+    h2{
+        background-color: rgba(1,1,1, 0.6);
+        font-size: 35px;
+    }
+    ul {
+        -webkit-padding-start: 0px;
+    }
+    [data-focus='notification']{
+        border-top: 1px solid $SEPARATOR_COLOR;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+
+        [data-focus='notification-icon']{
+            width: 10%;
+            flex-grow: 1;
+            img{
+                -webkit-filter: grayscale(0.7);
+                width: 90%;
+            }
+        }
+        [data-focus='notification-body']{
+            width: 55%;
+            flex-grow: 4;
+            h4[data-focus='notification-title']{
+                font-size: 19px;
+                margin: 5px 0 5px;
+            }
+            [data-focus='notification-content']{
+                max-height: 50px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:hover{
+                    white-space: normal;
+                    overflow: visible;
+                    max-height: 200px;
+
+                }
+            }
+        }
+        //On hover on the line, the date is hidden and the button is visible.
+        &:hover {
+            div[data-focus='notification-date'] {
+                button {
+                    display: inline-flex;
+                }
+                div{
+                    display: none;
+                }
+            }
+        }
+        [data-focus='notification-date']{
+            text-align: center;
+            width: 15%;
+            button{
+                display: none;
+            }
+
+            //flex-grow: 1;
+        }
+    }
+
+};
