@@ -24,8 +24,8 @@ const Notification = ({sender, creationDate, content, title, type, icon, targetU
             </div>
             {hasDate &&
                 <div data-focus='notification-date'>
-                    <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" onClick={() => onRead(uuid)}>
-                        <i className="material-icons">done</i>
+                    <button className='mdl-button mdl-js-button mdl-button--icon' onClick={() => onRead(uuid)}>
+                        <i className='material-icons'>done</i>
                     </button>
                     <div>{moment(creationDate).fromNow()}</div>
                 </div>
