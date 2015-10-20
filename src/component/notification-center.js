@@ -10,10 +10,15 @@ import { fetchNotifications } from '../actions/fetch-notifications';
 // Notification center component
 class NotificationCenter extends Component {
     render() {
+
         const {dispatch, hasAddNotif, notificationList, isOpen, isFetching} = this.props;
+
+        //display only the undred notifications
+        const unreadNotifs = notificationList.filter( n => !n.read);
+
         return (
             <div data-focus='notification-center'>
-                <NotificationCenterIcon number={notificationList.length} openCenter={ () => dispatch(openCenter())}/>
+                <NotificationCenterIcon number={unreadNotifs.length} openCenter={ () => dispatch(openCenter())}/>
                 {!isOpen && <div data-focus='notification-receiver'></div>}
                 {
                     isOpen &&
@@ -21,12 +26,12 @@ class NotificationCenter extends Component {
                         <button data-focus='notification-center-close' className='mdl-button mdl-button--icon' onClick={() => dispatch(closeCenter())}>
                           <i className="material-icons">clear</i>
                         </button>
-                        <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
+                        <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${unreadNotifs.length} notifications`}</h1>
                         {
                             hasAddNotif &&
                             <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                         }
-                        <NotificationGroup data={notificationList} onGroupRead={data => dispatch(readNotificationGroup(data))} onSingleRead={data => dispatch(readNotification(data))} />
+                        <NotificationGroup data={unreadNotifs} onGroupRead={data => dispatch(readNotificationGroup(data))} onSingleRead={data => dispatch(readNotification(data))} />
                     </div>
                 }
             </div>

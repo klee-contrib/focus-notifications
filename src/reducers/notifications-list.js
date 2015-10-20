@@ -2,7 +2,6 @@ import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, READ_NOTIFICATI
 import {RECEIVE_NOTIFICATIONS} from '../actions/fetch-notifications';
 import generateError from './util/error-generator';
 import {isObject, isArray} from 'lodash/lang';
-import {reject} from 'lodash/collection';
 const REDUCER_NAME = 'NOTIFICATION_LIST';
 
 
@@ -19,17 +18,26 @@ export default function notifications(state = [], action = {}) {
         case ADD_NOTIFICATIONS:
         case RECEIVE_NOTIFICATIONS:
             if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
-            const data = action.payload.map((notif) => ({...notif, read: false}));
+            const data = action.payload.map((notif) => ({...notif, read: notif.read || false}));
             return [...state, ...data];
         case READ_NOTIFICATION:
             const index = state.findIndex( (notif) => notif.uuid === action.payload);
             return [
                 ...state.slice(0, index),
+                //Add the read element to the index fitting the payload.
+                {...state[index], read: true},
                 ...state.slice(index + 1)
             ];
         case READ_NOTIFICATION_GROUP:
-            const ids = action.payload;
-            return reject(state, (notif) => ids.indexOf(notif.uuid) !== -1);
+            if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
+            const ids = payload;
+            //Reduce the state to change the read elements.
+            return state.reduce((newState, notif) => {
+                //The notif is already read or its index is in the read indexes.
+                const read = notif.read || ids.indexOf(notif.uuid) !== -1;
+                newState.push({...notif, read});
+                return newState;
+            }, []);
         default:
             return state;
     }
