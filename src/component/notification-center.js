@@ -4,7 +4,7 @@ import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
 import NotificationCenterIcon from './notification-center-icon';
 import { connect } from 'react-redux';
-import { addNotification, readNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import { addNotification, readNotification, readNotificationGroup, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
 
 // Notification center component
@@ -26,7 +26,7 @@ class NotificationCenter extends Component {
                             hasAddNotif &&
                             <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                         }
-                        <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
+                        <NotificationGroup data={notificationList} onGroupRead={data => dispatch(readNotifications(data))} onSingleRead={data => dispatch(readNotification(data))} />
                     </div>
                 }
             </div>

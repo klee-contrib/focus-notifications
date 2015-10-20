@@ -27,7 +27,7 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
     overflow-y: scroll;
     position: absolute;
     right: 0;
-    padding: 1em 2em;
+    //padding: 1em 2em;
     margin: auto;
     box-sizing: border-box;
     background: $BG_COLOR;
@@ -44,6 +44,13 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
     h2{
         background-color: rgba(1,1,1, 0.6);
         font-size: 35px;
+        padding-left:  12px;
+        button{
+            position: absolute;
+            right: 5px;
+            top: auto;
+            bottom: auto;
+        }
     }
     ul {
         -webkit-padding-start: 0px;
