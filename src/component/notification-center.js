@@ -26,7 +26,7 @@ class NotificationCenter extends Component {
                             hasAddNotif &&
                             <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                         }
-                        <NotificationGroup data={notificationList} onGroupRead={data => dispatch(readNotifications(data))} onSingleRead={data => dispatch(readNotification(data))} />
+                        <NotificationGroup data={notificationList} onGroupRead={data => dispatch(readNotificationGroup(data))} onSingleRead={data => dispatch(readNotification(data))} />
                     </div>
                 }
             </div>

@@ -1,7 +1,7 @@
 //Dependencies
 import React, { Component , PropTypes} from 'react';
 import NotificationList from './notification-list';
-import {groupBy, map} from 'lodash/collection';
+import {groupBy, map, pluck} from 'lodash/collection';
 import moment from 'moment';
 const propTypes = {
     data: PropTypes.array,
@@ -51,7 +51,7 @@ const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
                     (group, groupTitle) => {
                         return (
                             <div key={idx++}>
-                                <h2>{groupTitle} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={onGroupRead}><i className='material-icons'>done_all</i></button></h2>
+                                <h2>{groupTitle} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
                                 <NotificationList data={group} onRead={onSingleRead}/>
                             </div>
                         );

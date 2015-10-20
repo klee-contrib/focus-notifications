@@ -1,7 +1,8 @@
-import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION} from '../actions';
+import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, READ_NOTIFICATION_GROUP} from '../actions';
 import {RECEIVE_NOTIFICATIONS} from '../actions/fetch-notifications';
 import generateError from './util/error-generator';
 import {isObject, isArray} from 'lodash/lang';
+import {reject} from 'lodash/collection';
 const REDUCER_NAME = 'NOTIFICATION_LIST';
 
 
@@ -26,6 +27,9 @@ export default function notifications(state = [], action = {}) {
                 ...state.slice(0, index),
                 ...state.slice(index + 1)
             ];
+        case READ_NOTIFICATION_GROUP:
+            const ids = action.payload;
+            return reject(state, (notif) => ids.indexOf(notif.uuid) !== -1);
         default:
             return state;
     }
