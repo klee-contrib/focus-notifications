@@ -2,6 +2,7 @@
 import React, { Component , PropTypes } from 'react';
 import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
+import NotificationCenterIcon from './notification-center-icon';
 import { connect } from 'react-redux';
 import { addNotification, readNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
@@ -10,14 +11,13 @@ import { fetchNotifications } from '../actions/fetch-notifications';
 class NotificationCenter extends Component {
     render() {
         const {dispatch, hasAddNotif, notificationList, isOpen, isFetching} = this.props;
-        const onClickHandler = () =>  dispatch(isOpen ? closeCenter() : openCenter());
         return (
-            <div>
-                <span className='material-icons mdl-badge' data-badge={notificationList.length} data-focus='notification-bell' onClick={onClickHandler} >add_alert</span>
+            <div data-focus='notification-center'>
+                <NotificationCenterIcon number={notificationList.length} openCenter={ () => dispatch(openCenter())}/>
                 {!isOpen && <div data-focus='notification-receiver'></div>}
                 {
                     isOpen &&
-                    <div  data-fetching={isFetching} data-focus='notification-center'>
+                    <div  data-fetching={isFetching} data-focus='notification-center-panel'>
                         <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
                         {
                             hasAddNotif &&
