@@ -1,7 +1,7 @@
 import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, READ_NOTIFICATION_GROUP} from '../actions';
 import {RECEIVE_NOTIFICATIONS} from '../actions/fetch-notifications';
 import generateError from './util/error-generator';
-import {isObject, isArray} from 'lodash/lang';
+import {isObject, isArray, isString} from 'lodash/lang';
 const REDUCER_NAME = 'NOTIFICATION_LIST';
 
 
@@ -21,7 +21,11 @@ export default function notifications(state = [], action = {}) {
             const data = action.payload.map((notif) => ({...notif, read: notif.read || false}));
             return [...state, ...data];
         case READ_NOTIFICATION:
+            if(!isString(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'string'})); }
             const index = state.findIndex( (notif) => notif.uuid === action.payload);
+            if(index === -1) {
+                return state;
+            }
             return [
                 ...state.slice(0, index),
                 //Add the read element to the index fitting the payload.
