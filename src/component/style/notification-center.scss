@@ -2,7 +2,7 @@
 $BG_COLOR : rgba(0,0,0, 0.4);
 $TEXT_COLOR  :  white;
 $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
-[data-focus='notification-center'] {
+[data-focus='notification-center-panel'] {
     width: 33%;
     height: 100%;
     overflow-y: scroll;
