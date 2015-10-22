@@ -13,7 +13,7 @@ class NotificationCenter extends Component {
         //build a polling timeout.
         const {pollingTimer, dispatch} = this.props;
         polling(() => {
-            dispatch(fetchNotifications(this.lastFetch));
+            dispatch(fetchNotifications(null, this.lastFetch));
             this.lastFetch = new Date().toISOString();
         }, pollingTimer);
         dispatch(fetchNotifications());
@@ -56,7 +56,7 @@ NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
     hasAddNotif: false,
-    pollingTimer: 60 * 1000 //1 min
+    pollingTimer: 6 * 1000 //1 min
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,

@@ -2,6 +2,9 @@ import config from '../config.json';
 import fetch from 'isomorphic-fetch';
 const URL = `${config.rootURL}/${config.notificationURL}`
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
+export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
+
+//
 function requestNotifications(user) {
     return {
         type: REQUEST_NOTIFICATIONS,
@@ -9,7 +12,7 @@ function requestNotifications(user) {
     };
 }
 
-export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
+//
 function receiveNotifications(user, json) {
     return {
         type: RECEIVE_NOTIFICATIONS,
@@ -21,7 +24,7 @@ function receiveNotifications(user, json) {
 //Example call
 // store.dispatch(fetchNotifications('userId'));
 
-export function fetchNotifications(user) {
+export function fetchNotifications(user, fromDate) {
 
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
@@ -39,8 +42,8 @@ export function fetchNotifications(user) {
 
         // In this case, we return a promise to wait for.
         // This is not required by thunk middleware, but it is convenient for us.
-
-        return fetch(`${URL}`)
+        const datePartURL = fromDate ? `?date=${fromDate}` : '';
+        return fetch(`${URL}${datePartURL}`)
         .then(response => response.json())
         .then(json =>
 
