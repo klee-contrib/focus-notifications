@@ -1,18 +1,18 @@
 //Dependencies
 import React, { Component , PropTypes} from 'react';
 import NotificationList from './notification-list';
-import {groupBy, map} from 'lodash/collection';
+import {groupBy, map, pluck} from 'lodash/collection';
 import moment from 'moment';
 const propTypes = {
     data: PropTypes.array,
-    onRead: PropTypes.func.isRequired
+    onSingleRead: PropTypes.func.isRequired,
+    onGroupRead: PropTypes.func.isRequired
 };
 function _isYoungerThanA(periodName, date) {
     return moment(date).diff(moment().subtract(1, periodName)) > 0;
 }
 // function to group date
 function groupDate({creationDate: date}) {
-    console.log(date);
     if(_isYoungerThanA('day', date)) {
         return 'today';
     }
@@ -40,7 +40,7 @@ function formatDate(date) {
 }
 
 //Maybe i should add a Notification Group component by date which uses a notifciation list component
-const NotificationGroup = ({data, onRead}) => {
+const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
     let idx = 0;
     return (
         <div data-focus='notification-group'>
@@ -50,8 +50,8 @@ const NotificationGroup = ({data, onRead}) => {
                     (group, groupTitle) => {
                         return (
                             <div key={idx++}>
-                                <h2>{groupTitle}</h2>
-                                <NotificationList data={group} onRead={onRead}/>
+                                <h2>{groupTitle} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
+                                <NotificationList data={group} onRead={onSingleRead}/>
                             </div>
                         );
                     }

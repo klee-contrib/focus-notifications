@@ -36,6 +36,7 @@ app.use(allowCrossDomain);
 app.get('/notifications', function(req, res) {
     res.json(notificationsJSON);}
 );
+
 app.get('/notifications/user/:name', function(req, res) {
    res.json(_.find(notificationsJSON, function(notification) {
        return notification.author == req.params.name;

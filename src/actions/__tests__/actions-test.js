@@ -1,7 +1,7 @@
 import {
     addNotification,addNotifications,
-    readNotification, setVisibilityFilter, VisibilityFilters,
-    ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, SET_VISIBILITY_FILTER,
+    readNotification, readNotificationGroup, setVisibilityFilter, VisibilityFilters,
+    ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION,READ_NOTIFICATION_GROUP, SET_VISIBILITY_FILTER,
     OPEN_CENTER, CLOSE_CENTER, openCenter, closeCenter
 } from '../'
 
@@ -13,6 +13,7 @@ describe('actions', () => {
         expect(ADD_NOTIFICATIONS).to.be.a('string');
         expect(OPEN_CENTER).to.be.a('string');
         expect(CLOSE_CENTER).to.be.a('string');
+        expect(READ_NOTIFICATION_GROUP).to.be.a('string');
     } )
     describe('addNotification', () => {
         it('should be a function', () => {
@@ -56,6 +57,21 @@ describe('actions', () => {
             expect(readNotificationResult.type).to.equal(READ_NOTIFICATION);
         });
     });
+    describe('readNotificationGroup', () => {
+        it('should be a function', () => {
+            expect(readNotificationGroup).to.be.a('function');
+        });
+        it('should return an object with a type and a notification property', () => {
+            const NOTIF_IDS = [12345, 56789];
+            const readNotificationGroupResult = readNotificationGroup(NOTIF_IDS);
+            expect(readNotificationGroupResult).to.be.an('object');
+            expect(readNotificationGroupResult).to.have.ownProperty('type');
+            expect(readNotificationGroupResult).to.have.ownProperty('payload');
+            expect(readNotificationGroupResult.payload).to.deep.equal(NOTIF_IDS);
+            expect(readNotificationGroupResult.type).to.equal(READ_NOTIFICATION_GROUP);
+        });
+    });
+
     describe('setVisibilityFilter', () => {
         it('should be a function', () => {
             expect(setVisibilityFilter).to.be.a('function');

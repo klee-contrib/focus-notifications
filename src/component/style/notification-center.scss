@@ -1,25 +1,60 @@
 // global colors
-$BG_COLOR : rgba(0,0,0, 0.4);
+$BG_COLOR : rgba(0,0,0, 0.7);
 $TEXT_COLOR  :  white;
 $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
-[data-focus='notification-center'] {
+[data-focus='notification-center-panel'] {
+    &[data-fetching='true'] {
+    div[data-focus='notification-group']{
+
+      margin: 0;
+      padding: 0;
+      position: relative;
+       &:after {
+           content: 'Loading...';
+           position: absolute;
+           height: 100%;
+           width: 100%;
+           top: 0;
+           left: 0;
+           background-color: rgba(0, 0, 0, 0.19);
+           text-align: center;
+           color: #FFF;
+       }
+    }
+   }
     width: 33%;
     height: 100%;
-    overflow-y: scroll;
+    //overflow-y: scroll;
     position: absolute;
     right: 0;
-    padding: 1em 2em;
+    top:0;
+    //padding: 1em 2em;
     margin: auto;
     box-sizing: border-box;
     background: $BG_COLOR;
     color: white;
     text-lign: left;
+    button[data-focus='notification-center-close'] {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
     h1{
-        font-size: 45px;
+        font-size: 35px;
+        text-align: center;
+        -webkit-margin-before: 0.1em;
+        -webkit-margin-after: 0.1em;
     }
     h2{
         background-color: rgba(1,1,1, 0.6);
         font-size: 35px;
+        padding-left:  12px;
+        button{
+            position: absolute;
+            right: 5px;
+            top: auto;
+            bottom: auto;
+        }
     }
     ul {
         -webkit-padding-start: 0px;
@@ -30,7 +65,9 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
         flex-flow: row wrap;
         align-items: center;
         justify-content: center;
-
+        &:hover {
+            background-color: rgba(148, 148, 148, 0.5)
+        }
         [data-focus='notification-icon']{
             width: 10%;
             flex-grow: 1;
@@ -47,16 +84,18 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
                 margin: 5px 0 5px;
             }
             [data-focus='notification-content']{
-                max-height: 50px;
+                //max-height: 50px;
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis;
-                &:hover{
-                    white-space: normal;
-                    overflow: visible;
-                    max-height: 200px;
+                /*
+                    text-overflow: ellipsis;
+                    &:hover{
+                        white-space: normal;
+                        overflow: visible;
+                        max-height: 200px;
 
-                }
+                    }
+                */
             }
         }
         //On hover on the line, the date is hidden and the button is visible.

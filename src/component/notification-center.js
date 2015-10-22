@@ -2,28 +2,49 @@
 import React, { Component , PropTypes } from 'react';
 import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
+import NotificationCenterIcon from './notification-center-icon';
 import { connect } from 'react-redux';
-import { addNotification, readNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import { addNotification, readNotification, readNotificationGroup, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
-
+import polling from '../util/polling';
 // Notification center component
 class NotificationCenter extends Component {
+    componentWillMount() {
+        //build a polling timeout.
+        const {pollingTimer, dispatch} = this.props;
+        polling(() => {
+            dispatch(fetchNotifications(null, this.lastFetch));
+            this.lastFetch = new Date().toISOString();
+        }, pollingTimer);
+        dispatch(fetchNotifications());
+        this.lastFetch = new Date().toISOString();
+    }
+    //componentWillUnMount() {
+    //    clearTimeout(this.pollingTimeoutID)
+    //}
+    //Should be replaced by a promise.cancel
     render() {
         const {dispatch, hasAddNotif, notificationList, isOpen, isFetching} = this.props;
-        const onClickHandler = () =>  dispatch(isOpen ? closeCenter() : openCenter());
+
+        //display only the undred notifications
+        const unreadNotifs = notificationList.filter( n => !n.read);
+
         return (
-            <div>
-                <span className='material-icons mdl-badge' data-badge={notificationList.length} data-focus='notification-bell' onClick={onClickHandler} >add_alert</span>
+            <div data-focus='notification-center'>
+                <NotificationCenterIcon number={unreadNotifs.length} openCenter={ () => dispatch(openCenter())}/>
                 {!isOpen && <div data-focus='notification-receiver'></div>}
                 {
                     isOpen &&
-                    <div  data-fetching={isFetching} data-focus='notification-center'>
-                        <h1 onClick={() => dispatch(fetchNotifications())}>{`You have ${notificationList.length} notifications`}</h1>
+                    <div  data-fetching={isFetching} data-focus='notification-center-panel'>
+                        <button data-focus='notification-center-close' className='mdl-button mdl-button--icon' onClick={() => dispatch(closeCenter())}>
+                          <i className="material-icons">clear</i>
+                        </button>
+                        <h1 onClick={() => dispatch(fetchNotifications())}>{`Notification center (${unreadNotifs.length})`}</h1>
                         {
                             hasAddNotif &&
                             <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
                         }
-                        <NotificationGroup data={notificationList} onRead={data => dispatch(readNotification(data))} />
+                        <NotificationGroup data={unreadNotifs} onGroupRead={data => dispatch(readNotificationGroup(data))} onSingleRead={data => dispatch(readNotification(data))} />
                     </div>
                 }
             </div>
@@ -34,13 +55,15 @@ class NotificationCenter extends Component {
 NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
-    hasAddNotif: false
+    hasAddNotif: false,
+    pollingTimer: 6 * 1000 //1 min
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
     hasAddNotif: PropTypes.bool,
     isOpen: PropTypes.bool,
-    notificationList: PropTypes.array
+    notificationList: PropTypes.array,
+    pollingTimer: PropTypes.number
 }
 
 // Select the notification from the state.

@@ -5,6 +5,7 @@
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const ADD_NOTIFICATIONS = 'ADD_NOTIFICATIONS';
 export const READ_NOTIFICATION = 'READ_NOTIFICATION';
+export const READ_NOTIFICATION_GROUP = 'READ_NOTIFICATION_GROUP';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const OPEN_CENTER = 'OPEN_CENTER';
 export const CLOSE_CENTER = 'CLOSE_CENTER';
@@ -33,6 +34,10 @@ export function addNotifications(notifs) {
 
 export function readNotification(notificationId) {
     return { type: READ_NOTIFICATION, payload: notificationId };
+}
+
+export function readNotificationGroup(notificationIds) {
+    return { type: READ_NOTIFICATION_GROUP, payload: notificationIds };
 }
 
 export function setVisibilityFilter(filter) {

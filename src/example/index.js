@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import NotificationCenter from '../component/notification-center';
 import createStore from '../store/create';
-import { addNotifications } from '../actions';
+import { addNotifications, openCenter } from '../actions';
 import {exampleStyle as style} from './style'
 // Create the global redux store.
 const store = createStore();
@@ -22,8 +22,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // The child must be wrapped in a function
     // to work around an issue in React 0.13.
     ReactDOM.render(
-        <Provider store={store}>
-            <div style={style}><NotificationCenter hasAddNotif={false} /></div>
-        </Provider>,
+            <div className='mdl-layout  mdl-layout--fixed-header'>
+            <header className='mdl-layout__header'>
+            <div className='mdl-layout__header-row'>
+              <span className='mdl-layout-title'>Title</span>
+              <div className='mdl-layout-spacer'></div>
+              <nav className='mdl-navigation mdl-layout--large-screen-only'>
+                <a className='mdl-navigation__link' href=''>Link</a>
+                <a className='mdl-navigation__link' href=''>Link</a>
+                <a className='mdl-navigation__link' href=''>Link</a>
+                <Provider store={store}><NotificationCenter hasAddNotif={false} /></Provider>
+              </nav>
+
+            </div>
+            </header>
+            <div className='mdl-layout__drawer'>
+            <span className='mdl-layout-title'>Title</span>
+            <nav className='mdl-navigation'>
+              <a className='mdl-navigation__link' href=''>Link</a>
+              <a className='mdl-navigation__link' href=''>Link</a>
+              <a className='mdl-navigation__link' href=''>Link</a>
+              <a className='mdl-navigation__link' href=''>Link</a>
+            </nav>
+            </div>
+            <main className='mdl-layout__content'>
+            <div className='page-content'>APPLICATION CONTENT</div>
+            </main>
+            </div>,
     rootElement);
 });
