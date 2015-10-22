@@ -65,7 +65,9 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
         flex-flow: row wrap;
         align-items: center;
         justify-content: center;
-
+        &:hover {
+            background-color: rgba(148, 148, 148, 0.5)
+        }
         [data-focus='notification-icon']{
             width: 10%;
             flex-grow: 1;
@@ -82,16 +84,18 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
                 margin: 5px 0 5px;
             }
             [data-focus='notification-content']{
-                max-height: 50px;
+                //max-height: 50px;
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis;
-                &:hover{
-                    white-space: normal;
-                    overflow: visible;
-                    max-height: 200px;
+                /*
+                    text-overflow: ellipsis;
+                    &:hover{
+                        white-space: normal;
+                        overflow: visible;
+                        max-height: 200px;
 
-                }
+                    }
+                */
             }
         }
         //On hover on the line, the date is hidden and the button is visible.
