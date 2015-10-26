@@ -56,7 +56,7 @@ NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
     hasAddNotif: false,
-    pollingTimer: 6 * 1000 //1 min
+    pollingTimer: 6 * 10 * 1000 //1 min
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
