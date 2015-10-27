@@ -185,9 +185,13 @@ describe('reducers', () => {
             it('should add the notification given if it does no exists', () => {
 
                 const reducerCall = notificationReceivedReducer({}, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
-                console.log(reducerCall)
                 expect(reducerCall).to.be.an('object').and.have.ownProperty(NEW_NOTIF.uuid);
                 expect(reducerCall[NEW_NOTIF.uuid]).to.be.an('object').and.deep.equal(NEW_NOTIF);
+            });
+            it('should not add the notification given if it exists', () => {
+                notificationReceivedReducer({}, {type: ADD_NOTIFICATION, payload: NEW_NOTIF})
+                const secondReducerCall = notificationReceivedReducer({}, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
+                expect(secondReducerCall).to.be.an('object').and.contain.all.keys([NEW_NOTIF.uuid]);
             });
         });
         describe.skip('when it receive an ADD_NOTIFICATIONS action ', () => {
