@@ -184,7 +184,7 @@ describe('reducers', () => {
             });
             it('should add the notification given if it does no exists', () => {
 
-                const reducerCall = notificationReceivedReducer({}, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
+                const reducerCall = notificationReceivedReducer(INITAL_OBJECT_STATE, {type: ADD_NOTIFICATION, payload: NEW_NOTIF});
                 expect(reducerCall).to.be.an('object').and.have.ownProperty(NEW_NOTIF.uuid);
                 expect(reducerCall[NEW_NOTIF.uuid]).to.be.an('object').and.deep.equal(NEW_NOTIF);
             });
@@ -194,25 +194,22 @@ describe('reducers', () => {
                 expect(secondReducerCall).to.be.an('object').and.contain.all.keys([NEW_NOTIF.uuid]);
             });
         });
-        describe.skip('when it receive an ADD_NOTIFICATIONS action ', () => {
+        describe('when it receive an ADD_NOTIFICATIONS action ', () => {
             it('should throw an error when the payload is not an array', () => {
-                const NEW_NOTIF = {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'};
-                const reducerCaller = (payload) => notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATIONS, payload});
+                const reducerCaller = (payload) => notificationReceivedReducer(INITAL_OBJECT_STATE, {type: ADD_NOTIFICATIONS, payload});
                 expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: 3}, expectedType: 'array'}));
                 expect(() => reducerCaller('ABCD')).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: 'ABCD'}, expectedType: 'array'}));
                 expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: 'ADD_NOTIFICATIONS', payload: {a: 'a'}}, expectedType: 'array'}));
             });
-            it('should add the notification given ad add the read property', () => {
+            it('should add the notification ', () => {
                 const NEW_NOTIFS = [
-                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
-                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                    {uuid: 123, content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {uuid: 456, content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
                 ];
-                const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATIONS, payload: NEW_NOTIFS});
+                const reducerCall = notificationReceivedReducer(INITAL_OBJECT_STATE, {type: ADD_NOTIFICATIONS, payload: NEW_NOTIFS});
                 expect(reducerCall)
-                .to.be.an('array')
-                .and.have.length.of(3)
-                .and.include({...NEW_NOTIFS[0], read: false})
-                .and.include({...NEW_NOTIFS[1], read: false});
+                .to.be.an('object')
+                .and.contain.keys([`${NEW_NOTIFS[0].uuid}`, `${NEW_NOTIFS[1].uuid}`]);
             });
         });
         describe.skip('when it receive an RECEIVE_NOTIFICATIONS action ', () => {

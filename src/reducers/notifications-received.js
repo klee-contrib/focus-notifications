@@ -22,8 +22,8 @@ export default function notificationsReceived(state = {}, action = {}) {
         case ADD_NOTIFICATIONS:
         case RECEIVE_NOTIFICATIONS:
             if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
-            const data = action.payload.map((notif) => ({...notif, read: notif.read || false}));
-            return [...state, ...data];
+            action.payload.forEach((notif) => _addNotifToStateIfNeeded(state, notif));
+            return state;
         case READ_NOTIFICATION:
             if(!isString(payload) && !isNumber(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'string|number'})); }
             const index = state.findIndex( (notif) => notif.uuid === action.payload);
