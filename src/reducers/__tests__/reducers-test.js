@@ -250,7 +250,7 @@ describe('reducers', () => {
             const INITIAL_UNDISPLAYED_NOTIFS ={
                 1: {uuid: '1'},
                 2: {uuid: '2'},
-                3: {uuid: '3', read: true}
+                3: {uuid: '3', displayed: true}
             };
             it('should throw an error when the payload is not an string or a number', () => {
                 const reducerCaller = (payload) => notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION, payload});
@@ -278,7 +278,7 @@ describe('reducers', () => {
             const INITIAL_UNDISPLAYED_NOTIFS ={
                 1: {uuid: '1'},
                 2: {uuid: '2'},
-                3: {uuid: '3', read: true}
+                3: {uuid: '3', displayed: true}
             };
             it('should throw an error when the payload is not an string or a number', () => {
                 const reducerCaller = (payload) => notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: DISMISS_NOTIFICATION, payload});
@@ -302,38 +302,36 @@ describe('reducers', () => {
                 .that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS)
             });
         });
-        describe.skip('when it receives an READ_NOTIFICATION_GROUP action', () => {
-            const INITIAL_UNDISPLAYED_NOTIFS = [
-                {uuid: '0', read: false},
-                {uuid: '1', read: false},
-                {uuid: '2', read: false},
-                {uuid: '3', read: true},
-                {uuid: '4', read: false}
-            ];
+        describe('when it receives an READ_NOTIFICATION_GROUP action', () => {
+
+            const INITIAL_UNDISPLAYED_NOTIFS ={
+                1: {uuid: '1'},
+                2: {uuid: '2'},
+                3: {uuid: '3', displayed: true},
+                4: {uuid: '4'}
+            };
+
             it('should throw an error when the payload is not an array', () => {
-                const reducerCaller = (payload) => notificationListReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload});
+                const reducerCaller = (payload) => notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload});
                 expect(() => reducerCaller('3')).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION_GROUP, payload: '3'}, expectedType: 'array'}));
                 expect(() => reducerCaller(3)).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION_GROUP, payload: 3}, expectedType: 'array'}));
                 expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION_GROUP, payload: {a: 'a'}}, expectedType: 'array'}));
                 expect(() => reducerCaller([3, 4, 5])).not.to.throw(generateError({name: REDUCER_NAME, action: {type: READ_NOTIFICATION_GROUP, payload: [3]}, expectedType: 'array'}));
             });
-            it('should add mark all the notifications given as ids as read', () => {
-                const reducerCall = notificationListReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload: ['1', '2']});
+            it('should add mark all the notifications given as ids as displayed', () => {
+                const reducerCall = notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload: ['1', '2']});
                 expect(reducerCall)
-                .to.be.an('array')
-                .and.have.length.of(5)
-                .and.include(INITIAL_UNDISPLAYED_NOTIFS[0])
-                .and.include({...INITIAL_UNDISPLAYED_NOTIFS[1], read: true})
-                .and.include({...INITIAL_UNDISPLAYED_NOTIFS[2], read: true})
-                .and.include(INITIAL_UNDISPLAYED_NOTIFS[3])
-                .and.include(INITIAL_UNDISPLAYED_NOTIFS[4]);
+                .to.be.an('object')
+                expect(reducerCall).to.have.property('1').that.deep.equal({...INITIAL_UNDISPLAYED_NOTIFS['1'], displayed: true});
+                expect(reducerCall).to.have.property('2').that.deep.equal({...INITIAL_UNDISPLAYED_NOTIFS['2'], displayed: true});
+                expect(reducerCall).to.have.property('3').that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS['3'])
+                expect(reducerCall).to.have.property('4').that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS['4']);
             });
             it('should do nothing when the uuids provided in the action are unknown', () => {
-                const reducerCall = notificationListReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload: ['UNKNOWN_UUID']});
+                const reducerCall = notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: READ_NOTIFICATION_GROUP, payload: ['UNKNOWN_UUID']});
                 expect(reducerCall)
-                .to.be.an('array')
-                .and.have.length.of(5)
-                .and.deep.equal(INITIAL_UNREAD_NOTIFS); //Deep equal is necessary because there is a reduce.
+                .to.be.an('object')
+                .and.be.deep.equal(INITIAL_UNDISPLAYED_NOTIFS);
             });
         })
 
