@@ -1,5 +1,6 @@
 import { ADD_NOTIFICATION, ADD_NOTIFICATIONS, READ_NOTIFICATION, READ_NOTIFICATION_GROUP} from '../actions';
-import {RECEIVE_NOTIFICATIONS, DISMISS_NOTIFICATION} from '../actions/fetch-notifications';
+import {RECEIVE_NOTIFICATIONS} from '../actions/fetch-notifications';
+import { DISMISS_NOTIFICATION} from '../actions/receive-notifications';
 import generateError from './util/error-generator';
 import {isObject, isArray, isString, isNumber} from 'lodash/lang';
 const REDUCER_NAME = 'NOTIFICATIONS_RECEIVED';
@@ -30,6 +31,7 @@ export default function notificationsReceived(state = {}, action = {}) {
             if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
             action.payload.forEach((notif) => _addNotifToStateIfNeeded(state, notif));
             return state;
+        case DISMISS_NOTIFICATION:
         case READ_NOTIFICATION:
             if(!isString(payload) && !isNumber(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'string|number'})); }
             return _addReadToNotificationIfExists(state,payload);

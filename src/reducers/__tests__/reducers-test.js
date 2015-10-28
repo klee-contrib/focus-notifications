@@ -274,6 +274,34 @@ describe('reducers', () => {
                 .that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS)
             });
         });
+        describe('when it receives an DISMISS_NOTIFICATION action', () => {
+            const INITIAL_UNDISPLAYED_NOTIFS ={
+                1: {uuid: '1'},
+                2: {uuid: '2'},
+                3: {uuid: '3', read: true}
+            };
+            it('should throw an error when the payload is not an string or a number', () => {
+                const reducerCaller = (payload) => notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: DISMISS_NOTIFICATION, payload});
+                expect(() => reducerCaller('3')).to.not.throw(generateError({name: REDUCER_NAME, action: {type: DISMISS_NOTIFICATION, payload: '3'}, expectedType: 'string|number'}));
+                expect(() => reducerCaller(3)).to.not.throw(generateError({name: REDUCER_NAME, action: {type: DISMISS_NOTIFICATION, payload: 3}, expectedType: 'string|number'}));
+                expect(() => reducerCaller([3])).to.throw(generateError({name: REDUCER_NAME, action: {type: DISMISS_NOTIFICATION, payload: [3]}, expectedType: 'string|number'}));
+                expect(() => reducerCaller({a: 'a'})).to.throw(generateError({name: REDUCER_NAME, action: {type: DISMISS_NOTIFICATION, payload: {a: 'a'}}, expectedType: 'string|number'}));
+            });
+            it('should add displayed on the displayed notifs', () => {
+                const reducerCall = notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: DISMISS_NOTIFICATION, payload: '1'});
+                expect(reducerCall).to.be.an('object');
+                expect(reducerCall).to.have.property('1').that.deep.equal({...INITIAL_UNDISPLAYED_NOTIFS['1'], displayed: true});
+                expect(reducerCall).to.have.property('2').that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS['2'])
+                expect(reducerCall).to.have.property('3').that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS['3']);
+            });
+            it('should do nothing when the uuid provided in the action is unknown', () => {
+                const reducerCall = notificationReceivedReducer(INITIAL_UNDISPLAYED_NOTIFS, {type: DISMISS_NOTIFICATION, payload: 'UNKNOWN_UUID'});
+
+                expect(reducerCall)
+                .to.be.an('object')
+                .that.deep.equal(INITIAL_UNDISPLAYED_NOTIFS)
+            });
+        });
         describe.skip('when it receives an READ_NOTIFICATION_GROUP action', () => {
             const INITIAL_UNDISPLAYED_NOTIFS = [
                 {uuid: '0', read: false},
