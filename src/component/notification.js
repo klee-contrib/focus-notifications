@@ -27,7 +27,7 @@ const Notification = ({sender, creationDate, content, title, type, icon, targetU
                     <button className='mdl-button mdl-js-button mdl-button--icon' onClick={() => onRead(uuid)}>
                         <i className='material-icons'>done</i>
                     </button>
-                    <div>{moment(creationDate).fromNow()}</div>
+                    <div>{moment(creationDate).fromNow() }</div>
                 </div>
             }
         </li>
