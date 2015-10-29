@@ -6,3 +6,4 @@ export const exampleStyle = {
 }
 
 require('../component/style/notification-center.scss');
+require('../component/style/notification-receiver.scss');
