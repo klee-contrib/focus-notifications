@@ -58,6 +58,7 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
     }
     ul {
         -webkit-padding-start: 0px;
+         list-style-type: none;
     }
     [data-focus='notification']{
         border-top: 1px solid $SEPARATOR_COLOR;
@@ -85,7 +86,7 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
             }
             [data-focus='notification-content']{
                 //max-height: 50px;
-                white-space: nowrap;
+                //white-space: nowrap;
                 overflow: hidden;
                 /*
                     text-overflow: ellipsis;
