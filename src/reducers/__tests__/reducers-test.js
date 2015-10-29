@@ -57,8 +57,8 @@ describe('reducers', () => {
             });
             it('should add the notification given ad add the read property', () => {
                 const NEW_NOTIFS = [
-                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
-                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                    {uuid: 10, content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {uuid: 11, content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
                 ];
                 const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: ADD_NOTIFICATIONS, payload: NEW_NOTIFS});
                 expect(reducerCall)
@@ -78,8 +78,8 @@ describe('reducers', () => {
             });
             it('should add the notification given ad add the read property', () => {
                 const NEW_NOTIFS = [
-                    {content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
-                    {content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
+                    {uuid: 10, content: 'new super notification', author: 'rodrigo', targetURL: 'http://test.com'},
+                    {uuid: 11, content: 'new super notification2', author: 'rodrigo2', targetURL: 'http://test2.com'}
                 ];
                 const reducerCall = notificationListReducer(INITAL_ARRAY_STATE, {type: RECEIVE_NOTIFICATIONS, payload: NEW_NOTIFS});
                 expect(reducerCall)

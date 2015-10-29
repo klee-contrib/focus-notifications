@@ -18,8 +18,14 @@ export default function notifications(state = [], action = {}) {
         case ADD_NOTIFICATIONS:
         case RECEIVE_NOTIFICATIONS:
             if(!isArray(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'array'})); }
-            const data = action.payload.map((notif) => ({...notif, read: notif.read || false}));
-            return [...state, ...data];
+
+            return payload.reduce((newState, notif) => {
+                const {uuid: newNotifId, read} = notif;
+                if(newState.findIndex(({uuid}) => uuid === newNotifId) === -1) {
+                    newState.push({...notif, read: read || false});
+                }
+                return newState;
+            }, state);
         case READ_NOTIFICATION:
             if(!isString(payload) && !isNumber(payload)) { throw new Error(generateError({name: REDUCER_NAME, action, expectedType: 'string|number'})); }
             const index = state.findIndex( (notif) => notif.uuid === action.payload);
