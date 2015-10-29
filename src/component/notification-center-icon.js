@@ -11,7 +11,7 @@ const NotificationCenterIcon = ({number, openCenter}) => {
             <span className='material-icons mdl-badge' data-badge={number} onClick={openCenter}>
                 add_alert
             </span>
-            <span id='notification-center-icon'>&nbsp;</span>
+            <span id='notification-center-icon'></span>
             <div className='mdl-tooltip mdl-tooltip--large' htmlFor='notification-center-icon'>{`you have ${number} notifications`}</div>
         </div>
     );

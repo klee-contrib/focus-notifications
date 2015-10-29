@@ -1,12 +1,12 @@
 ul[data-focus='notification-receiver']{
     width: 33%;
-    height: 100%;
-    //overflow-y: scroll;
+    //height: 100%;
+    overflow-y: scroll;
     top: 60px;
-      right: 10px;
-      z-index: 7777;
-      max-width: 500px;
-      min-width: 200px;
+    right: 10px;
+    z-index: 7777;
+    max-width: 500px;
+    min-width: 200px;
     position: absolute;
 
     -webkit-padding-start: 0px;

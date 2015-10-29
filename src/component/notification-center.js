@@ -26,22 +26,24 @@ class NotificationCenter extends Component {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationsReceived} = this.props;
-        console.debug('data-received', notificationsReceived);
+        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver} = this.props;
+        const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
         //display only the undred notifications
         const unreadNotifs = notificationList.filter( n => !n.read);
 
         return (
             <div data-focus='notification-center'>
                 <NotificationCenterIcon number={unreadNotifs.length} openCenter={ () => dispatch(openCenter())}/>
-                {!isOpen && <NotificationReceiver data={notificationsReceived} onDismiss={ notifId => dispatch(dismissNotification(notifId)) }/>}
+                {!isOpen && hasFetchedOnce && <NotificationReceiver data={notificationsReceived} onDismiss={ notifId => dispatch(dismissNotification(notifId)) }/>}
                 {
                     isOpen &&
                     <div  data-fetching={isFetching} data-focus='notification-center-panel'>
-                        <button data-focus='notification-center-close' className='mdl-button mdl-button--icon' onClick={() => dispatch(closeCenter())}>
-                          <i className="material-icons">clear</i>
-                        </button>
-                        <h1 onClick={() => dispatch(fetchNotifications())}>{`Notification center (${unreadNotifs.length})`}</h1>
+                        <header>
+                            <button data-focus='notification-center-close' className='mdl-button mdl-button--icon' onClick={() => dispatch(closeCenter())}>
+                              <i className="material-icons">clear</i>
+                            </button>
+                            <h1 onClick={() => dispatch(fetchNotifications())}>{`Notification center (${unreadNotifs.length})`}</h1>
+                        </header>
                         {
                             hasAddNotif &&
                             <NotificationAdd onAddClick={data => dispatch(addNotification(data))} />
@@ -58,7 +60,7 @@ NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
     hasAddNotif: false,
-    pollingTimer: 6 * 10 * 1000 //1 min
+    pollingTimer: 10 * 1000 //1 min
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
@@ -66,7 +68,7 @@ NotificationCenter.propTypes = {
     isFetching: PropTypes.bool,
     isOpen: PropTypes.bool,
     notificationList: PropTypes.array,
-    notificationsReceived: PropTypes.object,
+    notificationReceiver: PropTypes.object,
     pollingTimer: PropTypes.number
 }
 

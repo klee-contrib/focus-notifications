@@ -23,27 +23,35 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
     }
    }
     width: 33%;
-    height: 100%;
-    //overflow-y: scroll;
+    overflow-y: scroll;
     position: absolute;
     right: 0;
     top:0;
+    bottom: 0;
     //padding: 1em 2em;
     margin: auto;
     box-sizing: border-box;
     background: $BG_COLOR;
     color: white;
     text-lign: left;
-    button[data-focus='notification-center-close'] {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-    }
-    h1{
-        font-size: 35px;
-        text-align: center;
-        -webkit-margin-before: 0.1em;
-        -webkit-margin-after: 0.1em;
+    header{
+        //position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        //border: 1px dashed green;
+        button[data-focus='notification-center-close'] {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        h1{
+            font-size: 35px;
+            text-align: center;
+            -webkit-margin-before: 0.1em;
+            -webkit-margin-after: 0.1em;
+        }
+
     }
     h2{
         background-color: rgba(1,1,1, 0.6);

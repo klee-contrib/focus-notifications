@@ -8,6 +8,7 @@ const propTypes = {
 };
 
 const NotificationReceiver = ({data, onDismiss}) => {
+    console.log('data', data);
     return (
         <ul data-focus='notification-receiver'>
             {values(data).filter( notif => !notif.displayed ).map((notif, id) => <NotificationReceived key={id} onDismiss={onDismiss} {...notif} />)}
