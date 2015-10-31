@@ -25,29 +25,31 @@ The notification center will need an API to be able to work.
 
 ### Components structure
 
+
 ```
-|__ConnectedNotificationCenter
-    |__ NotificationCenter
-        //The stateless notification center component
-        |__ NotificationCenterIcon
-            // The icon with a counter to display in your application bar
-        |__ NotificationCenterReceiver
-            // The receiver is in charge of displaying the new notifications when the panel is cloed and display them for a small amout of time (`dismissTimerDuration`)
-           |__ NotificationReceived
-               // The notification received is displayed by the notification receiver for (`dismissTimerDuration`)
-        |__ NotificationCenterPanel
-           // The panel which is displayed when the use clicks on the notification center icon
-           // It is composed of sevral groups of notifications each with a title and a list (by default grouped by time period)
-          |__ NotificationAdd
-            // A simple add component in order to add notification in the panel (not displayed by defaults)
-          |__ NotificationGroup
-              // A group of notification is composed of a list and a title
-              |__ NotificationGroupTitle
-                 // The title of the group
-              |__ NotificationList
-                // The list of notifications in the group²
-                 |__ Notification
-                 // The uniq notification (see model for more information)(icon | title + content | date or read action on hover)
++-- ConnectedNotificationCenter
+|   +-- NotificationCenter
+|   |   //The stateless notification center component
+|   |   +-- NotificationCenterIcon
+|   |   // The icon with a counter to display in your application bar
+|   |   +-- NotificationCenterReceiver
+|   |   // The receiver is in charge of displaying the new notifications when the panel is cloed and display them for a small amout of time (`dismissTimerDuration`)
+|   |   |   +-- NotificationReceived
+|   |   |   // The notification received is displayed by the notification receiver for (`dismissTimerDuration`)
+|   |   +-- NotificationCenterPanel
+|   |   |   // The panel which is displayed when the use clicks on the notification center icon
+|   |   |  // It is composed of sevral groups of notifications each with a title and a list (by default grouped by time period)
+|   |     +-- NotificationAdd
+|   |     | // A simple add component in order to add notification in the panel (not displayed by defaults)
+|   |     +-- NotificationGroup
+|   |     | // A group of notification is composed of a list and a title
+|   |     |   +-- NotificationGroupTitle
+|   |     |   // The title of the group
+|   |     |   +-- NotificationList
+|   |     |   // The list of notifications in the group²
+|   |     |   +-- Notification
+|   |     |   // The uniq notification (see model for more information)(icon | title + content | date or read action on hover)
++--
 ```
 ## How to start using it
 
