@@ -59,7 +59,7 @@ The notification center is really easy to plug in you own application.
   );
  ```
 
-## How it works under the hood ?
+## How does it work under the hood ?
 
 ### Components structure
 
