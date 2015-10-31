@@ -21,7 +21,34 @@ The notification center will need an API to be able to work.
 - **DELETE** `notifications/{uuid}` where `uuid` is the identifier of the notification to concider **READ**
 - **DELETE** `notifications` where the `ids` to delete are given as body part of the request.
 
+## How it works under the hood ?
 
+### Components structure
+
+```
+|__ConnectedNotificationCenter
+    |__ NotificationCenter
+        //The stateless notification center component
+        |__ NotificationCenterIcon
+            // The icon with a counter to display in your application bar
+        |__ NotificationCenterReceiver
+            // The receiver is in charge of displaying the new notifications when the panel is cloed and display them for a small amout of time (`dismissTimerDuration`)
+           |__ NotificationReceived
+               // The notification received is displayed by the notification receiver for (`dismissTimerDuration`)
+        |__ NotificationCenterPanel
+           // The panel which is displayed when the use clicks on the notification center icon
+           // It is composed of sevral groups of notifications each with a title and a list (by default grouped by time period)
+          |__ NotificationAdd
+            // A simple add component in order to add notification in the panel (not displayed by defaults)
+          |__ NotificationGroup
+              // A group of notification is composed of a list and a title
+              |__ NotificationGroupTitle
+                 // The title of the group
+              |__ NotificationList
+                // The list of notifications in the group²
+                 |__ Notification
+                 // The uniq notification (see model for more information)(icon | title + content | date or read action on hover)
+```
 ## How to start using it
 
 The notification center is really easy to plug in you own application.
@@ -29,7 +56,7 @@ The notification center is really easy to plug in you own application.
 - use it using on of the two two options:
   - **browser**:
     - use the file from `node_modules/focus-notifications/dist/focus-notifications.js`
-    - ``FocusNotifications` will be available in the `window`
+    - `FocusNotifications` will be available in the `window`
   - **webpack** or **browserify** and then you can use:
     - a simple `import FocusNotifications from 'focus-notifications'`
     - or a `const FocusNotifications = require('focus-notifications')`
