@@ -28,6 +28,7 @@ app.use(function(req, res, next) {
 var allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+  res.header("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
   res.header('Content-Type', 'application/json');
   next();
 }
@@ -47,6 +48,14 @@ app.get('/notifications/user/:name', function(req, res) {
    res.json(_.find(notificationsJSON, function(notification) {
        return notification.author == req.params.name;
    }));
+});
+app.delete('/notifications', function (req, res) {
+    res.json(JSON.stringify(req.body));
+
+});
+app.delete('/notifications/:id', function (req, res) {
+    res.json({id: req.params.id});
+ // res.send('DELETE request to homepage'+req.params.id );
 });
 
 // Server

@@ -1,6 +1,6 @@
-import config from '../config.json';
 import fetch from 'isomorphic-fetch';
-const URL = `${config.rootURL}/${config.notificationURL}`
+import {getConfig} from '../config';
+import {clearError, setError} from './error';
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
 export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
 
@@ -29,12 +29,17 @@ export function fetchNotifications(user, fromDate) {
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
     // thus making it able to dispatch actions itself.
-
+    //
     return function dispatchFetchNotifications(dispatch) {
+        //read the conf after extension.
+        const config = getConfig();
+        //Create the URL
+        const URL = `${config.rootURL}/${config.notificationURL}`
 
         // First dispatch: the app state is updated to inform
         // that the API call is starting.
-
+        //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
+        dispatch(clearError());
         dispatch(requestNotifications(user));
 
         // The function called by the thunk middleware can return a value,
@@ -51,6 +56,6 @@ export function fetchNotifications(user, fromDate) {
 
             dispatch(receiveNotifications(user, json))
         )
-        .catch(err => console.error('Fetch notification error', err));
+        .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     };
 }

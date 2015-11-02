@@ -5,5 +5,5 @@ export const exampleStyle = {
 	font: '100%/1.5 sans-serif'
 }
 
-require('../component/style/notification-center.scss');
-require('../component/style/notification-receiver.scss');
+//require('../component/style/notification-center.scss');
+//require('../component/style/notification-receiver.scss');
