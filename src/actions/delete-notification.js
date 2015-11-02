@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {getConfig} from '../config';
+import {clearError, setError} from './error';
 
 //Import other actions
 import {readNotification, readNotificationGroup} from './';
@@ -37,11 +38,13 @@ export function deleteNotification(notificationId) {
         const config = getConfig();
         //Create the URL
         const URL = `${config.rootURL}/${config.notificationURL}`;
+        //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
+        dispatch(clearError());
         dispatch(readNotification(notificationId));
         return fetch(`${URL}/${notificationId}`, {method: 'delete'})
         .then(response => response.json())
         .then(json => dispatch(deleteNotificationSuccess(json)))
-        .catch(err => console.error('Delete notification error', err));
+        .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     }
 }
 
@@ -52,10 +55,12 @@ export function deleteGroupNotification(notificationIds) {
         const config = getConfig();
         //Create the URL
         const URL = `${config.rootURL}/${config.notificationURL}`;
+        //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
+        dispatch(clearError());
         dispatch(readNotificationGroup(notificationIds));
         return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds)})
         .then(response => response.json())
         .then(json => dispatch(deleteNotificationGroupSuccess(json)))
-        .catch(err => console.error('Delete notification group error', err));
+        .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     }
 }

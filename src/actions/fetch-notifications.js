@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {getConfig} from '../config';
+import {clearError, setError} from './error';
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
 export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
 
@@ -37,7 +38,8 @@ export function fetchNotifications(user, fromDate) {
 
         // First dispatch: the app state is updated to inform
         // that the API call is starting.
-
+        //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
+        dispatch(clearError());
         dispatch(requestNotifications(user));
 
         // The function called by the thunk middleware can return a value,
@@ -54,6 +56,6 @@ export function fetchNotifications(user, fromDate) {
 
             dispatch(receiveNotifications(user, json))
         )
-        .catch(err => console.error('Fetch notification error', err));
+        .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     };
 }
