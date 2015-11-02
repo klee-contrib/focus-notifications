@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import NotificationCenter from '../component/notification-center';
-import createStore from '../store/create';
-import { addNotifications, openCenter } from '../actions';
+import SmartNotificationCenter from '../';
 import {exampleStyle as style} from './style'
-// Create the global redux store.
-const store = createStore();
 
 // Initial store population
 const mockNotifs = [
@@ -31,13 +26,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
-                <Provider store={store}><NotificationCenter hasAddNotif={false} /></Provider>
+                <SmartNotificationCenter config={{rootURL:'http://localhost:8888'}} />
               </nav>
 
             </div>
             </header>
             <div className='mdl-layout__drawer'>
-            <span className='mdl-layout-title'>Title</span>
+            <span className='mdl-layout-title'>Notification Center</span>
             <nav className='mdl-navigation'>
               <a className='mdl-navigation__link' href=''>Link</a>
               <a className='mdl-navigation__link' href=''>Link</a>
