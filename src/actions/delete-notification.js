@@ -1,7 +1,7 @@
-import config from '../config.json';
 import fetch from 'isomorphic-fetch';
-const URL = `${config.rootURL}/${config.notificationURL}`;
+import {getConfig} from '../config';
 
+//Import other actions
 import {readNotification, readNotificationGroup} from './';
 
 //Notification actions
@@ -33,6 +33,10 @@ function deleteNotificationGroupSuccess(notificationIds) {
 //
 export function deleteNotification(notificationId) {
     return function callDeleteNotification(dispatch) {
+        //read the conf after extension.
+        const config = getConfig();
+        //Create the URL
+        const URL = `${config.rootURL}/${config.notificationURL}`;
         dispatch(readNotification(notificationId));
         return fetch(`${URL}/${notificationId}`, {method: 'delete'})
         .then(response => response.json())
@@ -44,6 +48,10 @@ export function deleteNotification(notificationId) {
 //
 export function deleteGroupNotification(notificationIds) {
     return function callDeleteNotificationGroup(dispatch) {
+        //read the conf after extension.
+        const config = getConfig();
+        //Create the URL
+        const URL = `${config.rootURL}/${config.notificationURL}`;
         dispatch(readNotificationGroup(notificationIds));
         return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds)})
         .then(response => response.json())

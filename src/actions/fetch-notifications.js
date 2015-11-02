@@ -1,6 +1,5 @@
-import config from '../config.json';
 import fetch from 'isomorphic-fetch';
-const URL = `${config.rootURL}/${config.notificationURL}`
+import {getConfig} from '../config';
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
 export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
 
@@ -29,8 +28,12 @@ export function fetchNotifications(user, fromDate) {
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
     // thus making it able to dispatch actions itself.
-
+    //
     return function dispatchFetchNotifications(dispatch) {
+        //read the conf after extension.
+        const config = getConfig();
+        //Create the URL
+        const URL = `${config.rootURL}/${config.notificationURL}`
 
         // First dispatch: the app state is updated to inform
         // that the API call is starting.
