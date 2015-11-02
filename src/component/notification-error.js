@@ -3,13 +3,13 @@ import React, { Component , PropTypes} from 'react';
 
 const propTypes = {
     type: PropTypes.string.isRequired,
-    content: PropTypes.func.isRequired
+    content: PropTypes.string.isRequired
 };
 
 const NotificationError = ({type, content}) => {
     return (
         <div data-focus='notification-error' data-type={type}>
-            {content}
+            {type} {'----'}{content}
         </div>
     );
 };
