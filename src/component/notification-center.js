@@ -4,7 +4,8 @@ import NotificationCenterIcon from './notification-center-icon';
 import NotificationReceiver from './notification-receiver';
 import NotificationPanel from './notification-panel';
 import { connect } from 'react-redux';
-import { addNotification, readNotification, readNotificationGroup, setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import { addNotification,  setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import {deleteNotification, deleteGroupNotification} from '../actions/delete-notification'
 import { fetchNotifications } from '../actions/fetch-notifications';
 import{ dismissNotification } from '../actions/receive-notifications';
 
@@ -51,8 +52,8 @@ class NotificationCenter extends Component {
                             isFetching={isFetching}
                             onAddClick={data => dispatch(addNotification(data))}
                             onClosePanel={() => dispatch(closeCenter())}
-                            onGroupRead={data => dispatch(readNotificationGroup(data))}
-                            onSingleRead={data => dispatch(readNotification(data))}
+                            onGroupRead={data => dispatch(deleteGroupNotification(data))}
+                            onSingleRead={data => dispatch(deleteNotification(data))}
                             onTitleClick={() => dispatch(fetchNotifications())}
                             unreadNotifs={unreadNotifs}
                         />

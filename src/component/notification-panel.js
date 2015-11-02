@@ -6,7 +6,7 @@ import { addNotification, readNotification, readNotificationGroup, closeCenter }
 import { fetchNotifications } from '../actions/fetch-notifications';
 
 const propTypes = {
-    hasAddNotif: PropTypes.bool.isRequired, 
+    hasAddNotif: PropTypes.bool.isRequired,
     isFetching: PropTypes.bool.isRequired,
     unreadNotifs: PropTypes.array.isRequired,
     onGroupRead: PropTypes.func.isRequired,
