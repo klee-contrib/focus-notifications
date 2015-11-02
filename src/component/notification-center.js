@@ -4,10 +4,11 @@ import NotificationCenterIcon from './notification-center-icon';
 import NotificationReceiver from './notification-receiver';
 import NotificationPanel from './notification-panel';
 import { connect } from 'react-redux';
-import { addNotification,  setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import { addNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import {deleteNotification, deleteGroupNotification} from '../actions/delete-notification'
 import { fetchNotifications } from '../actions/fetch-notifications';
 import{ dismissNotification } from '../actions/receive-notifications';
+import {clearError} from '../actions/error';
 
 import polling from '../util/polling';
 // Notification center component
@@ -27,7 +28,7 @@ class NotificationCenter extends Component {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver} = this.props;
+        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, error} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
         //display only the undred notifications
         const unreadNotifs = notificationList.filter( n => !n.read);
@@ -48,10 +49,12 @@ class NotificationCenter extends Component {
                 {
                     isOpen &&
                         <NotificationPanel
+                            error={error}
                             hasAddNotif={hasAddNotif}
                             isFetching={isFetching}
                             onAddClick={data => dispatch(addNotification(data))}
                             onClosePanel={() => dispatch(closeCenter())}
+                            onDismissError={() => dispatch(clearError())}
                             onGroupRead={data => dispatch(deleteGroupNotification(data))}
                             onSingleRead={data => dispatch(deleteNotification(data))}
                             onTitleClick={() => dispatch(fetchNotifications())}
@@ -71,6 +74,7 @@ NotificationCenter.defaultProps = {
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
+    error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     hasAddNotif: PropTypes.bool,
     isFetching: PropTypes.bool,
     isOpen: PropTypes.bool,

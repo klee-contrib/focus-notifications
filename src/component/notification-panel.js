@@ -2,10 +2,14 @@
 import React, { Component , PropTypes} from 'react';
 import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
+import NotificationError from './notification-error';
+
 import { addNotification, readNotification, readNotificationGroup, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
 
 const propTypes = {
+    error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    onDismissError: PropTypes.func.isRequired,
     hasAddNotif: PropTypes.bool.isRequired,
     isFetching: PropTypes.bool.isRequired,
     unreadNotifs: PropTypes.array.isRequired,
@@ -16,7 +20,8 @@ const propTypes = {
     onAddClick: PropTypes.func.isRequired
 };
 
-const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick}) => {
+const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick, onDismissError, error}) => {
+    console.log(error);
     return (
         <div data-fetching={isFetching} data-focus='notification-center-panel'>
             <header>
@@ -28,6 +33,10 @@ const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupR
             {
                 hasAddNotif &&
                 <NotificationAdd onAddClick={onAddClick} />
+            }
+            {
+                error &&
+                <NotificationError onDismiss={onDismissError} {...error}/>
             }
             <NotificationGroup
                 data={unreadNotifs}
