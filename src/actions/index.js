@@ -33,10 +33,12 @@ export function addNotifications(notifs) {
 }
 
 export function readNotification(notificationId) {
+    console.log(readNotification, notificationId);
     return { type: READ_NOTIFICATION, payload: notificationId };
 }
 
 export function readNotificationGroup(notificationIds) {
+    console.log(readNotificationGroup, notificationIds);
     return { type: READ_NOTIFICATION_GROUP, payload: notificationIds };
 }
 
