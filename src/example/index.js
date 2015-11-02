@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
-                <SmartNotificationCenter config={{rootURL:'http://localhost:8888'}} />
+                <SmartNotificationCenter config={{rootURL:'http://localhost:9999'}} />
               </nav>
 
             </div>

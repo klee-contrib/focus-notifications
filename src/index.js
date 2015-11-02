@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig} from './config'
+//Import sass files
+import './component/style';
+
 const store = createStore();
 
 class SmartNotificationCenter extends Component {
