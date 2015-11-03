@@ -7,6 +7,7 @@ focusNotifConf.entry = [
 focusNotifConf.externals = {
     'focus-core': 'FocusCore',
     react: 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    moment: 'moment'
 };
 module.exports = productionConfig(focusNotifConf);
