@@ -41,7 +41,7 @@ export function deleteNotification(notificationId) {
         //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
         dispatch(clearError());
         dispatch(readNotification(notificationId));
-        return fetch(`${URL}/${notificationId}`, {method: 'delete'})
+        return fetch(`${URL}/${notificationId}`, {method: 'delete', credentials: 'include'})
         .then(response => response.json())
         .then(json => dispatch(deleteNotificationSuccess(json)))
         .catch(err => dispatch(setError({content: err.message, type: 'network'})));
@@ -58,7 +58,7 @@ export function deleteGroupNotification(notificationIds) {
         //Maybe see https://github.com/rackt/redux/issues/911#issuecomment-149361073 for a saner implementation instead of chaining two dispatch.
         dispatch(clearError());
         dispatch(readNotificationGroup(notificationIds));
-        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds)})
+        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds), credentials: 'include'})
         .then(response => response.json())
         .then(json => dispatch(deleteNotificationGroupSuccess(json)))
         .catch(err => dispatch(setError({content: err.message, type: 'network'})));
