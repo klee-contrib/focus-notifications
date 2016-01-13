@@ -2,7 +2,8 @@ import React , { Component , PropTypes }from 'react';
 import { Provider } from 'react-redux';
 import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
-import {extendConfig} from './config'
+import {extendConfig} from './config';
+import metadata from '../package.json';
 //Import sass files
 import './component/style';
 
@@ -22,4 +23,6 @@ SmartNotificationCenter.displayName = SmartNotificationCenter;
 SmartNotificationCenter.propTypes = {
     config: PropTypes.object
 };
+SmartNotificationCenter.VERSION = metadata.version;
 export default SmartNotificationCenter;
+export const VERSION = metadata.version;
