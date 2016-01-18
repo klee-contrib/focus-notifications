@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SmartNotificationCenter from '../';
+import 'material-design-lite/material.css';
+import 'material-design-lite/material.min';
 import {exampleStyle as style} from './style'
 
 // Initial store population
@@ -13,7 +15,8 @@ const mockNotifs = [
 
 // Create the react component when the DOM is loaded.
 document.addEventListener('DOMContentLoaded', (event) => {
-    const rootElement = document.getElementById('root');
+
+    const rootElement = document.querySelector(`.${__ANCHOR_CLASS__}`);
     // The child must be wrapped in a function
     // to work around an issue in React 0.13.
     ReactDOM.render(
@@ -26,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
-                <SmartNotificationCenter config={{rootURL:'http://localhost:9999'}} />
+                <SmartNotificationCenter config={{rootURL:'http://localhost:9999/x/notification'}} />
               </nav>
 
             </div>
