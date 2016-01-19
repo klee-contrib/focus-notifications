@@ -28,11 +28,10 @@ class NotificationCenter extends Component {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, error} = this.props;
+        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, error, zIndex} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
         //display only the undred notifications
         const unreadNotifs = notificationList.filter( n => !n.read);
-
         return (
             <div data-focus='notification-center'>
                 <NotificationCenterIcon
@@ -44,6 +43,7 @@ class NotificationCenter extends Component {
                     <NotificationReceiver
                         data={notificationsReceived}
                         onDismiss={notifId => dispatch(dismissNotification(notifId))}
+                        zIndex={zIndex}
                     />
                 }
                 {
@@ -59,6 +59,7 @@ class NotificationCenter extends Component {
                             onSingleRead={data => dispatch(deleteNotification(data))}
                             onTitleClick={() => dispatch(fetchNotifications())}
                             unreadNotifs={unreadNotifs}
+                            zIndex={zIndex}
                         />
                 }
             </div>
@@ -70,7 +71,8 @@ NotificationCenter.displayName = 'NotificationCenter';
 
 NotificationCenter.defaultProps = {
     hasAddNotif: false,
-    pollingTimer: 6* 10 * 1000 //1 min
+    pollingTimer: 6* 10 * 1000, //1 min
+    zIndex: 16777271
 };
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
@@ -80,7 +82,8 @@ NotificationCenter.propTypes = {
     isOpen: PropTypes.bool,
     notificationList: PropTypes.array,
     notificationReceiver: PropTypes.object,
-    pollingTimer: PropTypes.number
+    pollingTimer: PropTypes.number,
+    zIndex: PropTypes.number
 }
 
 // Select the notification from the state.

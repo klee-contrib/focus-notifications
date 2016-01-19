@@ -17,13 +17,14 @@ const propTypes = {
     onSingleRead: PropTypes.func.isRequired,
     onClosePanel: PropTypes.func.isRequired,
     onTitleClick: PropTypes.func.isRequired,
-    onAddClick: PropTypes.func.isRequired
+    onAddClick: PropTypes.func.isRequired,
+    zIndex: PropTypes.number.isRequired
 };
 
-const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick, onDismissError, error}) => {
-    console.log(error);
+const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick, onDismissError, error, zIndex}) => {
+    const style = {zIndex};
     return (
-        <div data-fetching={isFetching} data-focus='notification-center-panel'>
+        <div data-fetching={isFetching} data-focus='notification-center-panel' style={style}>
             <header>
                 <button className='mdl-button mdl-button--icon'  data-focus='notification-center-close' onClick={onClosePanel}>
                   <i className="material-icons">{'clear'}</i>
