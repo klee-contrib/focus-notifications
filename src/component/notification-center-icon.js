@@ -6,9 +6,10 @@ const propTypes = {
 };
 
 const NotificationCenterIcon = ({number, openCenter}) => {
+    const conditionnalProps = number > 0 ? {'data-badge': number} : {};
     return (
         <div data-focus='notification-center-icon'>
-            <span className='material-icons mdl-badge' data-badge={number} onClick={openCenter}>
+            <span className='material-icons mdl-badge' onClick={openCenter} {...conditionnalProps}>
                 add_alert
             </span>
             <span id='notification-center-icon'></span>
