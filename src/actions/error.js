@@ -9,7 +9,6 @@ export function clearError() {
 }
 
 export function setError({type, content}) {
-    console.log('type', type, 'content', content);
     return {
         type: SET_ERROR,
         payload: {type, content}
