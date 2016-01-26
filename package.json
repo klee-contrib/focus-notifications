@@ -11,7 +11,8 @@
     "start": "better-npm-run dev-server",
     "test": "better-npm-run test",
     "lint": "eslint src"
-  },  "betterScripts": {
+  },
+  "betterScripts": {
     "bundle": {
       "command": "webpack --progress",
       "env": {
@@ -95,7 +96,7 @@
     "html-webpack-plugin": "^1.6.2",
     "jsdom": "^6.5.1",
     "json-loader": "^0.5.2",
-    "material-design-icons-iconfont": "^2.0.3",
+    "material-design-icons-iconfont": "^2.0.4",
     "material-design-lite": "^1.0.5",
     "mocha": "^2.3.0",
     "moment": "^2.10.6",
