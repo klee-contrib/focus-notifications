@@ -1,6 +1,7 @@
 //Dependencies
 import React, { Component , PropTypes} from 'react';
 import NotificationList from './notification-list';
+import {capitalize} from 'lodash/string';
 import {groupBy, map, pluck} from 'lodash/collection';
 import moment from 'moment';
 const propTypes = {
@@ -25,6 +26,9 @@ function groupDate({creationDate: date}) {
     return 'before';
 }
 
+function translate(key){
+  return capitalize(key);
+}
 
 function formatDate(date) {
     if(_isYoungerThanA('day', date)) {
@@ -39,9 +43,13 @@ function formatDate(date) {
     return 'Before';
 }
 
+function sortDateFn(a, b){
+  return new Date(b.creationDate) - new Date(a.creationDate);
+}
+
 //Maybe i should add a Notification Group component by date which uses a notifciation list component
 const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
-    let idx = 0;
+    let idx = 0; // maybe use sth else as key
     return (
         <div data-focus='notification-group'>
             {
@@ -50,8 +58,8 @@ const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
                     (group, groupTitle) => {
                         return (
                             <div key={idx++}>
-                                <h2>{groupTitle} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
-                                <NotificationList data={group} onRead={onSingleRead}/>
+                                <h2>{translate(groupTitle)} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
+                                <NotificationList data={group.sort(sortDateFn)} onRead={onSingleRead}/>
                             </div>
                         );
                     }

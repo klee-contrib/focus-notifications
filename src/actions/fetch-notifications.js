@@ -48,7 +48,8 @@ export function fetchNotifications(user, fromDate) {
         // In this case, we return a promise to wait for.
         // This is not required by thunk middleware, but it is convenient for us.
         const datePartURL = fromDate ? `?date=${fromDate}` : '';
-        return fetch(`${URL}${datePartURL}`, { credentials: 'include'})
+        const fetchOptions = config.useCredentials ? { credentials: 'include'} : {};
+        return fetch(`${URL}${datePartURL}`, fetchOptions)
         .then(response => response.json())
         .then(json =>
 

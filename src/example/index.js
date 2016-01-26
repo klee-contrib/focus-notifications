@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SmartNotificationCenter from '../';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
-import {exampleStyle as style} from './style'
 
 // Initial store population
 const mockNotifs = [
