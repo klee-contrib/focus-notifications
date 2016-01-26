@@ -1,12 +1,38 @@
 "use strict";
 
-const webpackConfig = require('./webpack.config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const faker = require('faker');
 const moment = require('moment');
+
+const webpackConfig = require('./webpack.config');
 const serverLauncher = require('webpack-focus').serverLauncher;
-const notificationsJSON = require('./api-mock/notifs.json');
+
+const NB_GENERATED_NOTIF = 10;
+let notificationsJSON = [];//require('./api-mock/notifs.json');
+
+
+//let notificationsJSON = [];
+for(let i = 0; i < NB_GENERATED_NOTIF; i++){
+   notificationsJSON.push(
+       {
+        uuid: faker.random.uuid(),
+        type: faker.name.jobDescriptor(),
+        title: faker.lorem.sentence() ,
+        content: faker.lorem.sentences(),
+        creationDate:  i < 5 ? faker.date.recent() : faker.date.past(),
+        sender: faker.name.lastName(),
+        targetUrl: faker.internet.url(),
+        icon : faker.image.nature()
+      }
+   );
+}
+
+
+console.log('LLLLLLLLLLL')
+console.log('%j', notificationsJSON);
+console.log('LLLLLLLLLLL')
+
 
 const MOCKED_API_PORT = process.env.API_PORT;
 
