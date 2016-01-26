@@ -1,6 +1,7 @@
 const DEFAULT_CONF = {
     rootURL: 'http://localhost:9999',
-    notificationURL: 'notifications'
+    notificationURL: 'notifications',
+    useCredentials: false
 };
 
 //Default config on port 9999
