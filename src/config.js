@@ -2,11 +2,13 @@ const DEFAULT_CONF = {
     rootURL: 'http://localhost:9999',
     notificationURL: 'notifications',
     useCredentials: false,
+    //Translations
     i18n:{
-      lastWeek: 'Last Week',
-      today: 'Today',
-      month: 'Last month',
-      before: 'Avant'
+      center: 'Notification center',
+      '3_before': 'Before',
+      '1_lastWeek': 'Last Week',
+      '2_lastMonth': 'Last month',
+      '0_today': 'Today'
     }
 };
 
