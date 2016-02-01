@@ -115,17 +115,22 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
         [data-focus='notification-icon']{
             width: 10%;
             flex-grow: 1;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             img{
                 -webkit-filter: grayscale(0.7);
-                width: 90%;
+                width: 80%;
             }
         }
         [data-focus='notification-body']{
             width: 55%;
             flex-grow: 4;
             h4[data-focus='notification-title']{
-                font-size: 21px;
-                margin: 5px 0 5px;
+                font-size: 20px;
+                margin: 5px 0 0px;
             }
             [data-focus='notification-content']{
                 //max-height: 50px;
