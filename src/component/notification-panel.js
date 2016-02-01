@@ -6,6 +6,7 @@ import NotificationError from './notification-error';
 
 import { addNotification, readNotification, readNotificationGroup, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
+import {getConfig} from '../config';
 
 const propTypes = {
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
@@ -23,13 +24,14 @@ const propTypes = {
 
 const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick, onDismissError, error, zIndex}) => {
     const style = {zIndex};
+    const {i18n} = getConfig();
     return (
         <div data-fetching={isFetching} data-focus='notification-center-panel' style={style}>
             <header>
                 <button className='mdl-button mdl-button--icon'  data-focus='notification-center-close' onClick={onClosePanel}>
                   <i className="material-icons">{'clear'}</i>
                 </button>
-                <h1 onClick={onTitleClick}>{`Notification center (${unreadNotifs.length})`}</h1>
+                <h1 onClick={onTitleClick}>{`${i18n.center} (${unreadNotifs.length})`}</h1>
             </header>
             {
                 hasAddNotif &&
