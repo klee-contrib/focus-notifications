@@ -3,6 +3,7 @@ import React, { Component , PropTypes} from 'react';
 import NotificationList from './notification-list';
 import {capitalize} from 'lodash/string';
 import {groupBy, map, pluck} from 'lodash/collection';
+import {getConfig} from '../config';
 import moment from 'moment';
 const propTypes = {
     data: PropTypes.array,
@@ -27,7 +28,8 @@ function groupDate({creationDate: date}) {
 }
 
 function translate(key){
-  return capitalize(key);
+  const {i18n} = getConfig();
+  return i18n[key];
 }
 
 function formatDate(date) {
