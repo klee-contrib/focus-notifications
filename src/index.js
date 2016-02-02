@@ -4,6 +4,7 @@ import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig} from './config';
 import metadata from '../package.json';
+import DevTools from './container/dev-tools';
 //Import sass files
 import './component/style';
 
@@ -16,7 +17,7 @@ class SmartNotificationCenter extends Component {
         extendConfig(config);
     }
     render() {
-        return <Provider store={store}><NotificationCenter hasAddNotif={false} onSingleClick={this.props.onSingleClick} /></Provider>
+        return <Provider store={store}><div><NotificationCenter hasAddNotif={false} onSingleClick={this.props.onSingleClick} /><DevTools/></div></Provider>
     }
 }
 SmartNotificationCenter.displayName = SmartNotificationCenter;

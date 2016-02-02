@@ -44,6 +44,14 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
          }
       }
      }
+     &.panel-appear {
+   opacity: 0.01;
+ }
+
+ &.panel-appear.panel-appear-active {
+   opacity: 1;
+   transition: opacity .5s ease-in;
+ }
       width: 45%;
       min-width: 700px;
       overflow-y: scroll;

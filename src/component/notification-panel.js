@@ -7,6 +7,8 @@ import NotificationError from './notification-error';
 import { addNotification, readNotification, readNotificationGroup, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
 import {getConfig} from '../config';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
+const TRANSITION_TIMEOUT =  5000;
 
 const propTypes = {
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
@@ -27,28 +29,31 @@ const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupR
     const style = {zIndex};
     const {i18n} = getConfig();
     return (
+
+      <CSSTransitionGroup  transitionName='panel' transitionAppear={true} transitionAppearTimeout={500}>
         <div data-fetching={isFetching} data-focus='notification-center-panel' style={style}>
-            <header>
-                <button className='mdl-button mdl-button--icon'  data-focus='notification-center-close' onClick={onClosePanel}>
-                  <i className="material-icons">{'clear'}</i>
-                </button>
-                <h1 onClick={onTitleClick}>{`${i18n.center} (${unreadNotifs.length})`}</h1>
-            </header>
-            {
-                hasAddNotif &&
-                <NotificationAdd onAddClick={onAddClick} />
-            }
-            {
-                error &&
-                <NotificationError onDismiss={onDismissError} {...error}/>
-            }
-            <NotificationGroup
-                data={unreadNotifs}
-                onGroupRead={onGroupRead}
-                onSingleRead={onSingleRead}
-                onSingleClick={onSingleClick}
-            />
+              <header>
+                  <button className='mdl-button mdl-button--icon'  data-focus='notification-center-close' onClick={onClosePanel}>
+                    <i className="material-icons">{'clear'}</i>
+                  </button>
+                  <h1 onClick={onTitleClick}>{`${i18n.center} (${unreadNotifs.length})`}</h1>
+              </header>
+              {
+                  hasAddNotif &&
+                  <NotificationAdd onAddClick={onAddClick} />
+              }
+              {
+                  error &&
+                  <NotificationError onDismiss={onDismissError} {...error}/>
+              }
+              <NotificationGroup
+                  data={unreadNotifs}
+                  onGroupRead={onGroupRead}
+                  onSingleRead={onSingleRead}
+                  onSingleClick={onSingleClick}
+              />
         </div>
+        </CSSTransitionGroup>
     );
 };
 
