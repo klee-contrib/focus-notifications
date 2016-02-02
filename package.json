@@ -29,6 +29,7 @@
     "dev-server": {
       "command": "node ./server.js",
       "env": {
+        "DEV": true,
         "ENTRY_FILE_PATH": "./src/example/index",
         "PAGE_TITLE": "Focus notifications dev page",
         "MINIMIFY": false,
