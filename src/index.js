@@ -16,7 +16,7 @@ class SmartNotificationCenter extends Component {
         extendConfig(config);
     }
     render() {
-        return <Provider store={store}><NotificationCenter hasAddNotif={false} /></Provider>
+        return <Provider store={store}><NotificationCenter hasAddNotif={false} onSingleClick={this.props.onSingleClick} /></Provider>
     }
 }
 SmartNotificationCenter.displayName = SmartNotificationCenter;

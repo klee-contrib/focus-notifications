@@ -28,7 +28,7 @@ class NotificationCenter extends Component {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, error, zIndex} = this.props;
+        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver,onSingleClick, error, zIndex} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
         //display only the undred notifications
         const unreadNotifs = notificationList.filter( n => !n.read);
@@ -55,6 +55,7 @@ class NotificationCenter extends Component {
                             onAddClick={data => dispatch(addNotification(data))}
                             onClosePanel={() => dispatch(closeCenter())}
                             onDismissError={() => dispatch(clearError())}
+                            onSingleClick={onSingleClick}
                             onGroupRead={data => dispatch(deleteGroupNotification(data))}
                             onSingleRead={data => dispatch(deleteNotification(data))}
                             onTitleClick={() => dispatch(fetchNotifications())}
@@ -82,6 +83,7 @@ NotificationCenter.propTypes = {
     isOpen: PropTypes.bool,
     notificationList: PropTypes.array,
     notificationReceiver: PropTypes.object,
+    onSingleClick: PropTypes.func.isRequired,
     pollingTimer: PropTypes.number,
     zIndex: PropTypes.number
 }

@@ -11,12 +11,13 @@ const propTypes = {
     sender: PropTypes.string.isRequired,
     targetUrl: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    onRead: PropTypes.func.isRequired
+    onRead: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
 };
 
-const Notification = ({sender, creationDate, content, title, type, icon, targetUrl, hasDate, onRead, uuid}) => {
+const Notification = ({sender, creationDate, content, title, type, icon, targetUrl, hasDate, onRead, uuid, onClick}) => {
     return (
-        <li data-focus='notification' data-type={type}>
+        <li data-focus='notification' data-type={type} onClick={()=>{ onClick({targetUrl})}}>
             <div data-focus='notification-icon'><img src={icon}/></div>
             <div data-focus='notification-body' >
                 <h4 data-focus='notification-title'>{title}</h4>

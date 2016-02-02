@@ -8,7 +8,8 @@ import moment from 'moment';
 const propTypes = {
     data: PropTypes.array,
     onSingleRead: PropTypes.func.isRequired,
-    onGroupRead: PropTypes.func.isRequired
+    onGroupRead: PropTypes.func.isRequired,
+    onSingleClick: PropTypes.func.isRequired
 };
 function _isYoungerThanA(periodName, date) {
     return moment(date).diff(moment().subtract(1, periodName)) > 0;
@@ -46,7 +47,7 @@ function sortNameFn(a,b){
 }
 
 //Maybe i should add a Notification Group component by date which uses a notifciation list component
-const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
+const NotificationGroup = ({data, onGroupRead, onSingleRead, onSingleClick}) => {
     //    console.log('Grouped infos', groupBy(data, groupDate), reduce(groupBy(data, groupDate));
     const groupedAndSortedNotifs = reduce(
       groupBy(data, groupDate),
@@ -64,7 +65,7 @@ const NotificationGroup = ({data, onGroupRead, onSingleRead}) => {
                         return (
                             <div key={groupTitle}>
                                 <h2>{translate(groupTitle)} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
-                                <NotificationList data={group.sort(sortDateFn)} onRead={onSingleRead}/>
+                                <NotificationList data={group.sort(sortDateFn)} onRead={onSingleRead} onClick={onSingleClick}/>
                             </div>
                         );
                     }

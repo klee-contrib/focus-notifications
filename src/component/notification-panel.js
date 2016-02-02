@@ -15,6 +15,7 @@ const propTypes = {
     isFetching: PropTypes.bool.isRequired,
     unreadNotifs: PropTypes.array.isRequired,
     onGroupRead: PropTypes.func.isRequired,
+    onSingleClick: PropTypes.func.isRequired,
     onSingleRead: PropTypes.func.isRequired,
     onClosePanel: PropTypes.func.isRequired,
     onTitleClick: PropTypes.func.isRequired,
@@ -22,7 +23,7 @@ const propTypes = {
     zIndex: PropTypes.number.isRequired
 };
 
-const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onTitleClick, onAddClick, onDismissError, error, zIndex}) => {
+const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex}) => {
     const style = {zIndex};
     const {i18n} = getConfig();
     return (
@@ -45,6 +46,7 @@ const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupR
                 data={unreadNotifs}
                 onGroupRead={onGroupRead}
                 onSingleRead={onSingleRead}
+                onSingleClick={onSingleClick}
             />
         </div>
     );
