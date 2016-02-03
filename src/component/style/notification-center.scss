@@ -24,6 +24,10 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
 
 [data-focus='notification-center'] {
   display: block;
+  text-align: left;
+  h1,h2,h3{
+    color: white;
+  }
   [data-focus='notification-center-panel'] {
       &[data-fetching='true'] {
       div[data-focus='notification-group']{
