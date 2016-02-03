@@ -1,6 +1,6 @@
 {
   "name": "focus-notifications",
-  "version": "0.2.0-beta3",
+  "version": "0.2.0-beta5",
   "description": "Notification Center extension for focus",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
       "env": {
         "DEV": false,
         "NODE_ENV": "production",
-        "LIBRARY_NAME": "FocusComments",
+        "LIBRARY_NAME": "FocusNotifications",
         "MINIMIFY": false,
         "PACKAGE_JSON_PATH": "../"
       }
@@ -68,18 +68,18 @@
     "lodash": "^3.10.1",
     "material-design-lite": "1.0.6",
     "moment": "^2.10.6",
-    "react": "0.14.5",
-    "react-dom": "0.14.5",
     "react-redux": "^3.1.0",
     "redux": "^3.0.2",
     "redux-logger": "^2.0.3",
     "redux-thunk": "^1.0.0",
-    "react-addons-css-transition-group": "0.14.4",
     "redux-devtools": "3.1.0",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.3"
   },
   "devDependencies": {
+    "react": "0.14.5",
+    "react-dom": "0.14.5",
+    "react-addons-css-transition-group": "0.14.4",
     "animate.css": "^3.4.0",
     "babel": "^6.0.15",
     "babel-cli": "^6.4.0",
