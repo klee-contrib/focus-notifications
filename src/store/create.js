@@ -1,15 +1,28 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistState } from 'redux-devtools';
+import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
+import DevTools from '../container/dev-tools';
 
-const loggerMiddleware = createLogger();
+const enhancer = compose(
+  applyMiddleware(thunk),
+  DevTools.instrument(),
+  persistState(
+    window.location.href.match(
+      /[?&]debug_session=([^&]+)\b/
+    )
+  )
+);
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunkMiddleware,
-  loggerMiddleware
-)(createStore);
+export default function configureStore(initialState) {
+  const store = createStore(rootReducer, initialState, enhancer);
 
-export default function createNotificationStore(initialState) {
-    return createStoreWithMiddleware(rootReducer, initialState);
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers').default)
+    );
+  }
+
+  return store;
 }

@@ -15,9 +15,11 @@ This repository stands for the **Notification center** of FOCUS. It needs an **A
 ### Notifications Panel
 
 ### Display the date
-![panel with date](https://cloud.githubusercontent.com/assets/286966/10824106/5712a27a-7e5f-11e5-8447-7ff85e743c01.png)
+![panel without hover](https://cloud.githubusercontent.com/assets/286966/12809366/b4e1633a-cb1e-11e5-8d75-e51aaf270fc2.png)
+
+
 ### On hover the action is displayed
-![panel with hover](https://cloud.githubusercontent.com/assets/286966/10824174/9b1b7a50-7e5f-11e5-916d-3bb49e674274.png)
+![panel with hover](https://cloud.githubusercontent.com/assets/286966/12809383/dd4c146e-cb1e-11e5-86da-52f2c73148c2.png)
 
 
 ## Notification model
@@ -48,16 +50,32 @@ The notification center is really easy to plug in you own application.
     - use the file from `node_modules/focus-notifications/dist/focus-notifications.js`
     - `FocusNotifications` will be available in the `window`
   - **webpack** or **browserify** and then you can use:
-    - a simple `import FocusNotifications from 'focus-notifications'`
-    - or a `const FocusNotifications = require('focus-notifications')`
-  - then use it with `<FocusNotifications />` (it will import all the notification center and display the icon)
+    - a simple `import NotificationCenter from 'focus-notifications'`
+    - or a `const NotificationCenter = require('focus-notifications')`
+  - then use it with `<NotificationCenter />` (it will import all the notification center and display the icon)
 
+In a Focus App the easiest way to use it is to inject it into the heater using the following boilerplate code.
 ```jsx
-  ReactDOM.render(
-        <Layout barContentRight={NotificationCenter} />,
-        document.querySelector('application')
-  );
+import React from 'react';
+import dispatcher from 'focus-core/dispatcher';
+import NotificationCenter from 'focus-notifications';
+
+export default () => {
+  dispatcher.handleViewAction({
+        data: {
+          barContentRightComponent: {
+            component:  (props) => {
+              return   <NotificationCenter config={{rootURL:'http://localhost:9999/x/notification'}} onSingleClick={url => console.log('navigate', url)} />
+            }
+          }
+      },
+        type: 'update'
+  });
+}
+
  ```
+
+You can have a look at this Pull Request on [focus-demo-app](https://github.com/KleeGroup/focus-demo-app/pull/90) which includes the notification center.
 
 ## How does it work under the hood ?
 
@@ -118,6 +136,8 @@ The `NotificationCenter` can be customized with the following props:
 - `notificationURL` the notification part of the URL, by default it is `${apiRootURL}/notifications`
 - `pollingTimer` the duration between two refresh
 - `dismissTimerDuration` the duration between the display and the dismiss of the notification received without the notification center being open.
+
+You also have to provide the prop `onSingleClick` to the notification center which is the function called when you click on a notification. You then have to decide what you do with it knowing that you will have the url.
 
 ## Launch the example
 In order to launch the example you just have to clone this repository and perform an `npm install` then `npm run start` and the example shoud be available on `localhost:3000` with hot reload. If you need an **API** please read the next section.

@@ -3,11 +3,23 @@ import { Provider } from 'react-redux';
 import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig} from './config';
-import metadata from '../package.json';
+import DevTools from './container/dev-tools';
+const metadata = require(`${__PACKAGE_JSON_PATH__}/package.json`);
 //Import sass files
 import './component/style';
 
-const store = createStore();
+const notificationStore = createStore();
+
+
+function NotificationCenterDev({onSingleClick, store}){
+  return <Provider store={store}><div><NotificationCenter hasAddNotif={false} onSingleClick={onSingleClick} /><DevTools/></div></Provider>;
+}
+NotificationCenterDev.displayName = 'NotificationCenterDev';
+
+function NotificationCenterProd({onSingleClick, store}){
+  return <Provider store={store}><NotificationCenter hasAddNotif={false} onSingleClick={onSingleClick} /></Provider>;
+}
+NotificationCenterProd.displayName = 'NotificationCenterProd';
 
 class SmartNotificationCenter extends Component {
     componentWillMount() {
@@ -16,7 +28,8 @@ class SmartNotificationCenter extends Component {
         extendConfig(config);
     }
     render() {
-        return <Provider store={store}><NotificationCenter hasAddNotif={false} /></Provider>
+        const NotificationCenterComponent =  !__DEV__ ?  NotificationCenterProd : NotificationCenterDev;
+        return <NotificationCenterComponent onSingleClick={this.props.onSingleClick} store={notificationStore} />
     }
 }
 SmartNotificationCenter.displayName = SmartNotificationCenter;

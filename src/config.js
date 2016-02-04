@@ -1,7 +1,15 @@
 const DEFAULT_CONF = {
     rootURL: 'http://localhost:9999',
     notificationURL: 'notifications',
-    useCredentials: false
+    useCredentials: false,
+    //Translations
+    i18n:{
+      center: 'Notification center',
+      '3_before': 'Before',
+      '1_lastWeek': 'Last Week',
+      '2_lastMonth': 'Last month',
+      '0_today': 'Today'
+    }
 };
 
 //Default config on port 9999

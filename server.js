@@ -34,7 +34,7 @@ console.log('%j', notificationsJSON);
 console.log('LLLLLLLLLLL')
 
 
-const MOCKED_API_PORT = process.env.API_PORT;
+const MOCKED_API_PORT = process.env.API_PORT || 9999;
 
 /*****************************************
 ********* Webpack dev server *************
