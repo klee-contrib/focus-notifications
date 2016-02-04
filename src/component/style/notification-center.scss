@@ -49,13 +49,13 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
       }
      }
      &.panel-appear {
-   opacity: 0.01;
- }
+       opacity: 0.01;
+     }
 
- &.panel-appear.panel-appear-active {
-   opacity: 1;
-   transition: opacity .5s ease-in;
- }
+     &.panel-appear.panel-appear-active {
+       opacity: 1;
+       transition: opacity .5s ease-in;
+     }
       width: 45%;
       min-width: 700px;
       overflow-y: scroll;
@@ -75,6 +75,7 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
           top:0;
           left:0;
           width:100%;
+          padding-left: 0;
           background-color: rgba(56,66,72, 2555);
           //border: 1px dashed green;
           button[data-focus='notification-center-close'] {
@@ -85,6 +86,9 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
           h1{
               font-size: 25px;
               text-align: center;
+              font-weight: 400;
+              line-height: 1.35;
+              color: rgb(32, 32, 32);
               -webkit-margin-before: 0.1em;
               -webkit-margin-after: 0.1em;
           }
@@ -142,24 +146,16 @@ $SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
           [data-focus='notification-body']{
               width: 55%;
               flex-grow: 4;
+              white-space: normal;
               h4[data-focus='notification-title']{
-                  font-size: 20px;
-                  margin: 5px 0 0px;
+                color: rgb(32, 32, 32);
+                font-weight: 400;
+                line-height: 32px;
+                font-size: 20px;
+                margin: 5px 0 0px;
               }
               [data-focus='notification-content']{
-                  //max-height: 50px;
-                  //white-space: nowrap;
-                  overflow: hidden;
                   color: rgba(104,104,104, 255)
-                  /*
-                      text-overflow: ellipsis;
-                      &:hover{
-                          white-space: normal;
-                          overflow: visible;
-                          max-height: 200px;
-
-                      }
-                  */
               }
           }
           //On hover on the line, the date is hidden and the button is visible.
