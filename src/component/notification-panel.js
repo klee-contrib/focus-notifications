@@ -30,7 +30,7 @@ const NotificationCenterPanel = ({hasAddNotif,isFetching, unreadNotifs, onGroupR
     const {i18n} = getConfig();
     return (
 
-      <CSSTransitionGroup  transitionName='panel' transitionAppear={true} transitionAppearTimeout={500}>
+      <CSSTransitionGroup  transitionName='panel' transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div data-fetching={isFetching} data-focus='notification-center-panel' style={style}>
               <header>
                   <button className='mdl-button mdl-button--icon'  data-focus='notification-center-close' onClick={onClosePanel}>
