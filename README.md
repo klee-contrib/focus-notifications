@@ -136,6 +136,7 @@ The `NotificationCenter` can be customized with the following props:
 - `notificationURL` the notification part of the URL, by default it is `${apiRootURL}/notifications`
 - `pollingTimer` the duration between two refresh
 - `dismissTimerDuration` the duration between the display and the dismiss of the notification received without the notification center being open.
+- `useCredentials` to `true` to use credentials and send cookies over AJAX requests
 
 You also have to provide the prop `onSingleClick` to the notification center which is the function called when you click on a notification. You then have to decide what you do with it knowing that you will have the url.
 
