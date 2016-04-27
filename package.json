@@ -47,6 +47,11 @@
       "command": "node ./node_modules/mocha/bin/mocha src/**/__tests__/**/*.js"
     }
   },
+  "babel": {
+    "presets": [
+      "focus"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pierr/notif.git"
