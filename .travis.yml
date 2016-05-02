@@ -2,6 +2,15 @@ sudo: false
 language: node_js
 node_js:
 - '4.2'
+before_deploy: 'npm run build'
+deploy:
+  provider: npm
+  email: pierre.besson7+npm@gmail.com
+  api_key:
+    secure: hUSwbyOa1f2COJbiH0CzvywG/SkS+jlB9RoMeLiwalG0BKWddq1AAVkAyXX59Qrnuo1mf+H+9svH4nJEUbTOOHksRpGrNn3xX8759GW43KNBEBsA0Z0swLl4bFeT3cQUmI0nSCSrf2qbwxJOQLknSHx3FwrmLGfOSApgYCV3U+A=
+  skip_cleanup: true
+  on:
+    branch: develop
 branches:
   only:
   - master
@@ -10,6 +19,6 @@ branches:
 cache:
   directories:
   - node_modules
-notifications:
-  slack:
-    secure: clx+W9gR52TGIYfFTlWXNL4Gy1hvznKvPCpqgIznHYOSxll9G1nRCEW+08rd4JuEJPomAHgxWUTBslunmyHTy7IhLuc7QJV5RqyowqgY4qtqftDz8PhP29LyCSPnrZa9oO1r0t4jkdvRobl8H9fm65MEBhpQrJt6bMGpfpQXRRdy/v8FC61Ua16Q21Oa3aZ0K3cyRnLVqBY0lo9Li8fl3k9mu7SyLYYmvXRz6cynNIZvpmdQ1j+NKo+eYcfE/GI6SYh0bdECXxcyGyt0pBbfy9lU3hZUCGISxBMQaMvIoXNkP1a9MxOidqOD0pMT34AT1cCzNhizWHa1cpRp+Gnws5pTa1uPNfBekNt70OD20kiTnirvLVg9rkcxTdMzE1n5ZWIP57LArwHiwRKGl2Gvl/GWt2cIPL5r8QB0o/PyOUSVOoEFrWNz5urvC/VKvWPiE9t7veaHMwsC4tmXCPypiuySjxECtHMNYItjY/LJi+iuDA1E+5VJrpbjXNpwZGUIhHo45iiTVgI48ujBgFGyDhudV+wccl1hf0C4lKyFN/tW5/15aN9hNqG2bI7dlC7qGIsQJAth/1iTeitbgavY4TD19n0yZ1OCL3BwSzyWwUARzy0lliS6tNKqhJxndY4iK55SoCa+3bZdMvCxGiEQZNXciTHlutu0DCuCmIBoX+Q=
+  notifications:
+    slack:
+      secure: clx+W9gR52TGIYfFTlWXNL4Gy1hvznKvPCpqgIznHYOSxll9G1nRCEW+08rd4JuEJPomAHgxWUTBslunmyHTy7IhLuc7QJV5RqyowqgY4qtqftDz8PhP29LyCSPnrZa9oO1r0t4jkdvRobl8H9fm65MEBhpQrJt6bMGpfpQXRRdy/v8FC61Ua16Q21Oa3aZ0K3cyRnLVqBY0lo9Li8fl3k9mu7SyLYYmvXRz6cynNIZvpmdQ1j+NKo+eYcfE/GI6SYh0bdECXxcyGyt0pBbfy9lU3hZUCGISxBMQaMvIoXNkP1a9MxOidqOD0pMT34AT1cCzNhizWHa1cpRp+Gnws5pTa1uPNfBekNt70OD20kiTnirvLVg9rkcxTdMzE1n5ZWIP57LArwHiwRKGl2Gvl/GWt2cIPL5r8QB0o/PyOUSVOoEFrWNz5urvC/VKvWPiE9t7veaHMwsC4tmXCPypiuySjxECtHMNYItjY/LJi+iuDA1E+5VJrpbjXNpwZGUIhHo45iiTVgI48ujBgFGyDhudV+wccl1hf0C4lKyFN/tW5/15aN9hNqG2bI7dlC7qGIsQJAth/1iTeitbgavY4TD19n0yZ1OCL3BwSzyWwUARzy0lliS6tNKqhJxndY4iK55SoCa+3bZdMvCxGiEQZNXciTHlutu0DCuCmIBoX+Q=
