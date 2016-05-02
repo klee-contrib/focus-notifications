@@ -1,6 +1,6 @@
 {
   "name": "focus-notifications",
-  "version": "0.2.0-rc4",
+  "version": "0.2.0-rc5",
   "description": "Notification Center extension for focus",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
     "bundle": "better-npm-run bundle",
     "copy-sass": "better-npm-run copy-sass",
     "babelify": "better-npm-run babelify",
-    "prepublish": "npm run build",
     "start": "better-npm-run dev-server",
     "test": "better-npm-run test",
     "lint": "eslint src"
