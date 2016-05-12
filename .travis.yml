@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '6.0'
+- '4.3'
 before_deploy: npm run build
 branches:
   only:
