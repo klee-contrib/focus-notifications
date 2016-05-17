@@ -18,6 +18,7 @@
       "env": {
         "DEV": false,
         "NODE_ENV": "production",
+        "BABEL_ENV": "production",
         "LIBRARY_NAME": "FocusNotifications",
         "MINIMIFY": false,
         "PACKAGE_JSON_PATH": "../"
@@ -27,6 +28,10 @@
       "command": "cd src && find . -name *.scss | xargs tar cvf - | tar xfp - -C ../"
     },
     "babelify": {
+      "env": {
+        "BABEL_ENV": "production"
+        
+      },
       "command": "babel src --out-dir ./ --source-maps inline"
     },
     "dev-server": {
