@@ -32,7 +32,7 @@
         "BABEL_ENV": "production"
         
       },
-      "command": "node scripts/babelify.js"
+      "command": "node script/babelify.js"
     },
     "dev-server": {
       "command": "node ./server.js",
