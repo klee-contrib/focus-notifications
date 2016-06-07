@@ -1,6 +1,6 @@
 {
   "name": "focus-notifications",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Notification Center extension for focus",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
         "BABEL_ENV": "production"
         
       },
-      "command": "babel src --out-dir ./ --source-maps inline"
+      "command": "node scripts/babelify.js"
     },
     "dev-server": {
       "command": "node ./server.js",
