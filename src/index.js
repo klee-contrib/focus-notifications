@@ -4,9 +4,10 @@ import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig} from './config';
 import DevTools from './container/dev-tools';
-const metadata = require(`${__PACKAGE_JSON_PATH__}/package.json`);
+import metadata from './package.json';
+
 //Import sass files
-import './component/style';
+import './style';
 
 const notificationStore = createStore();
 

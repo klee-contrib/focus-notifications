@@ -26,3 +26,12 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 dist
+
+/actions
+/component
+/container
+/index.js
+/reducers
+/store
+/style
+/util
