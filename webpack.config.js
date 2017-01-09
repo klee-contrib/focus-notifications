@@ -4,9 +4,6 @@ const customConfig = {
         'react': 'React',
         'react-dom': 'ReactDOM',
         'redux-devtools': 'redux-devtools',
-        'react-addons-css-transition-group': {
-            root: ['React', 'addons', 'CSSTransitionGroup']
-        },
         moment: 'moment',
         lodash: 'lodash'
     }

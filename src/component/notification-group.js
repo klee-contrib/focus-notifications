@@ -65,7 +65,7 @@ const NotificationGroup = ({data, onGroupRead, onSingleRead, onSingleClick}) => 
                         return (
                             <div key={groupTitle}>
                                 <div data-focus='notification-group--title'>
-                                    <h2>{translate(groupTitle)}</h2>
+                                    <h2>{`${translate(groupTitle)} (${group.length})`}</h2>
                                     <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button>
                                 </div>
                                 <NotificationList data={group.sort(sortDateFn)} onRead={onSingleRead} onClick={onSingleClick}/>

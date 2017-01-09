@@ -10,9 +10,7 @@ div[data-focus='notification-center'] {
         font-family: 'roboto';
     }
     [data-focus='notification-center-icon'] {
-        i {
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
     [data-focus='notification-center-overlay'] {
         position: fixed;
@@ -95,7 +93,7 @@ div[data-focus='notification-center'] {
         ul[data-focus='notification-list'] {
             list-style-type: none;
             padding: 0 10px;
-            margin: 0 0 30px;
+            margin: 0 0 40px;
             li {
                 margin: 10px 0;
             }
