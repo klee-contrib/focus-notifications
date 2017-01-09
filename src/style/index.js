@@ -1,3 +1,5 @@
+import './mixins.scss';
+import './fonts/index.scss';
 import './animation.scss';
 import './notification-center.scss';
 import './notification-receiver.scss';

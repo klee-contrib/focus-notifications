@@ -28,6 +28,7 @@ node_modules
 dist
 
 /actions
+/config.js
 /component
 /container
 /index.js

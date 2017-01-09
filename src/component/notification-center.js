@@ -31,7 +31,7 @@ class NotificationCenter extends Component {
         const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, onSingleClick, error, zIndex} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
         //display only the undred notifications
-        const unreadNotifs = notificationList.filter( n => !n.read);
+        const unreadNotifs = notificationList.filter(n => !n.read);
         return (
             <div data-focus='notification-center'>
                 <NotificationCenterIcon

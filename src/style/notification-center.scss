@@ -1,40 +1,14 @@
-// global colors
-$BG_COLOR : rgba(0,0,0, 0.7);
-$TEXT_COLOR  :  red;
-$SEPARATOR_COLOR  :  rgba(0,0,0,0.5 );
+@import "mixins";
 
-@mixin BoxShadowHelper($level){
-    @if($level ==1) {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    }
-    @if($level == 2) {
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-    @if($level == 3) {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    }
-    @if($level == 4) {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    }
-    @if($level == 5) {
-        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    }
-}
-
-@mixin NotificationPanel() {
-    width: 600px;
-    height: 100vh;
-    position: absolute;
-    right: 0;
-    top:0;
-    bottom: 0;
-}
+$notification-panel-bg-color: rgba(255,255,255,1);
+$notification-text-color: rgb(50, 124, 169);
+$notification-separator-color:  rgba(0,0,0,0.1);
 
 
 div[data-focus='notification-center'] {
-    font-family: 'roboto';
-    display: block;
-    text-align: left;
+    & > * {
+        font-family: 'roboto';
+    }
     [data-focus='notification-center-icon'] {
         i {
             cursor: pointer;
@@ -42,39 +16,59 @@ div[data-focus='notification-center'] {
     }
     [data-focus='notification-center-overlay'] {
         position: fixed;
+        background-color: rgba(0, 0, 0, 0.4);
         top:0;
         left:0;
-        bottom:0;
-        right:0;
-
+        width: 100vw;
+        height: 100vh;
     };
     [data-focus='notification-center-panel'] {
-        @include NotificationPanel();
-        margin: auto;
-        box-sizing: border-box;
-        color: white;
+        @include shadow(10);
+        width: 650px;
+        height: 100vh;
+        right: 0;
+        top:0;
+        bottom: 0;
+        position: relative;
+        background: $notification-panel-bg-color;
         text-align: left;
+        overflow-y: auto;
         h1, h2, h3 {
-            color: white;
-            line-height: auto;
+            color: $notification-text-color;
+            line-height: normal;
+            margin: 0;
+            padding: 10px;
         }
-        &::before {
-            content: '';
-            @include NotificationPanel();
-            background: $BG_COLOR;
-            // filter: blur(10px);
-            // -webkit-filter: blur(10px);
-            // -moz-filter: blur(10px);
-            // -o-filter: blur(10px);
-            // -ms-filter: blur(10px);
-            // filter: url(#blur);
-            // //filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='10');
+        h1 {
+            font-size: 22px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 18px;
+        }
+        header {
+            position: relative;
+            button[data-focus='notification-center-close'] {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: $notification-text-color;
+            }
+        }
+        [data-focus='notification-group'] {
+            [data-focus='notification-group--title'] {
+                justify-content: space-between;
+                align-items: center;
+                display: flex;
+                background-color: $notification-separator-color;
+                button {
+                    margin: 0 10px;
+                    color: $notification-text-color;
+                }
+            }
         }
         &[data-fetching='true'] {
             div[data-focus='notification-group'] {
-                margin: 0;
-                padding: 0;
-                position: relative;
                 &:after {
                     content: 'Loading...';
                     position: absolute;
@@ -88,114 +82,88 @@ div[data-focus='notification-center'] {
                 }
             }
         }
-        &.panel-appear {
-            opacity: 0.01;
-        }
+        // &.panel-appear {
+        //     opacity: 0.01;
+        // }
+        //
+        // &.panel-appear.panel-appear-active {
+        //     opacity: 1;
+        //     transition: opacity .5s ease-in;
+        // }
 
-        &.panel-appear.panel-appear-active {
-            opacity: 1;
-            transition: opacity .5s ease-in;
-        }
 
-        header{
-            position: relative;
-            button[data-focus='notification-center-close'] {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-            h1 {
-                padding: 10px;
-                margin: 0;
-                font-size: 25px;
-                text-align: center;
-                font-weight: 400;
-            }
-        }
-        h2 {
-            @include BoxShadowHelper(2);
-            font-size: 24px;
-            padding-left:  12px;
-            background-color: rgba(56,66,72,255);
-            margin-top: 10px;
-            margin-bottom: 5px;
-            button{
-                position: absolute;
-                right: 5px;
-                top: auto;
-                bottom: auto;
-            }
-        }
-        ul {
-            -webkit-padding-start: 0px;
+        ul[data-focus='notification-list'] {
             list-style-type: none;
-            //         font-size: 0px;
-            li{
-                margin: 10px 5px 10px 5px;
-                border-radius: 3px;
+            padding: 0 10px;
+            margin: 0 0 30px;
+            li {
+                margin: 10px 0;
             }
-        }
-        [data-focus='notification']{
-            @include BoxShadowHelper(2);
-            border-top: 1px solid $SEPARATOR_COLOR;
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(250,250,250, 255);
-            color: rgba(32,32,32, 255);
-
-            &:hover {
-                background-color: rgba(224, 224, 224, 255);
-            }
-            [data-focus='notification-icon']{
-                width: 10%;
-                flex-grow: 1;
-                padding: 0;
-                margin: 0;
+            [data-focus='notification'] {
+                // @include BoxShadowHelper(2);
                 display: flex;
+                flex-flow: row wrap;
                 align-items: center;
                 justify-content: center;
-                img{
-                    -webkit-filter: grayscale(0.7);
-                    width: 80%;
+                background-color: rgba(0, 0, 0, 0.05);
+                color: rgba(32,32,32, 255);
+                padding: 3px;
+                border-radius: 5px;
+                &:hover {
+                    background-color: rgba(224, 224, 224, 255);
                 }
-            }
-            [data-focus='notification-body']{
-                width: 55%;
-                flex-grow: 4;
-                white-space: normal;
-                h4[data-focus='notification-title']{
-                    color: rgb(32, 32, 32);
-                    font-weight: 400;
-                    line-height: 32px;
-                    font-size: 20px;
-                    margin: 5px 0 0px;
-                }
-                [data-focus='notification-content']{
-                    color: rgba(104,104,104, 255)
-                }
-            }
-            //On hover on the line, the date is hidden and the button is visible.
-            &:hover {
-                div[data-focus='notification-date'] {
-                    button {
-                        display: inline-flex;
+                [data-focus='notification-icon']{
+                    width: 10%;
+                    flex-grow: 1;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        //-webkit-filter: grayscale(0.7);
+                        width: 80%;
                     }
-                    div{
+                }
+                [data-focus='notification-body']{
+                    width: 55%;
+                    flex-grow: 4;
+                    white-space: normal;
+                    padding: 10px;
+                    h4[data-focus='notification-title']{
+                        color: rgb(32, 32, 32);
+                        font-weight: 400;
+                        line-height: normal;;
+                        font-size: 16px;
+                        margin: 0 0 5px 0;
+                        padding: 0;
+                    }
+                    [data-focus='notification-content']{
+                        line-height: normal;
+                        font-size: 13px;
+                        color: rgba(104,104,104, 255)
+                    }
+                }
+                //On hover on the line, the date is hidden and the button is visible.
+                &:hover {
+                    div[data-focus='notification-date'] {
+                        button {
+                            display: inline-flex;
+                        }
+                        div {
+                            display: none;
+                        }
+                    }
+                }
+                [data-focus='notification-date']{
+                    color: $notification-text-color;
+                    text-align: center;
+                    width: 15%;
+                    font-size: 13px;
+                    button{
                         display: none;
                     }
                 }
-            }
-            [data-focus='notification-date']{
-                text-align: center;
-                width: 15%;
-                font-size: 13px;
-                button{
-                    display: none;
-                }
-
-                //flex-grow: 1;
             }
         }
     }

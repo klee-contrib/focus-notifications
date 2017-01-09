@@ -4,7 +4,7 @@ import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig} from './config';
 import DevTools from './container/dev-tools';
-import metadata from './package.json';
+import metadata from '../package.json';
 
 //Import sass files
 import './style';

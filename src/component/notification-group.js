@@ -29,20 +29,20 @@ function groupDate({creationDate: date}) {
 }
 
 function translate(key){
-  const {i18n} = getConfig();
-  return i18n[key];
+    const {i18n} = getConfig();
+    return i18n[key];
 }
 
 function sortDateFn(a, b){
-  return new Date(b.creationDate) - new Date(a.creationDate);
+    return new Date(b.creationDate) - new Date(a.creationDate);
 }
 
 function sortNameFn(a,b){
-  if (a.key < b.key)
+    if (a.key < b.key)
     return -1;
-  else if (a.key > b.key)
+    else if (a.key > b.key)
     return 1;
-  else
+    else
     return 0;
 }
 
@@ -50,12 +50,12 @@ function sortNameFn(a,b){
 const NotificationGroup = ({data, onGroupRead, onSingleRead, onSingleClick}) => {
     //    console.log('Grouped infos', groupBy(data, groupDate), reduce(groupBy(data, groupDate));
     const groupedAndSortedNotifs = reduce(
-      groupBy(data, groupDate),
-      (accumulator, value, key) => {
-          accumulator.push({key, value});
-          return accumulator;
-      },
-      []
+        groupBy(data, groupDate),
+        (accumulator, value, key) => {
+            accumulator.push({key, value});
+            return accumulator;
+        },
+        []
     ).sort(sortNameFn);
     return (
         <div data-focus='notification-group'>
@@ -64,7 +64,10 @@ const NotificationGroup = ({data, onGroupRead, onSingleRead, onSingleClick}) => 
                     ({value: group, key: groupTitle}) => {
                         return (
                             <div key={groupTitle}>
-                                <h2>{translate(groupTitle)} <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button></h2>
+                                <div data-focus='notification-group--title'>
+                                    <h2>{translate(groupTitle)}</h2>
+                                    <button className='mdl-button mdl-js-button mdl-button--icon' onClick={()=> onGroupRead(pluck(group, 'uuid'))}><i className='material-icons'>done_all</i></button>
+                                </div>
                                 <NotificationList data={group.sort(sortDateFn)} onRead={onSingleRead} onClick={onSingleClick}/>
                             </div>
                         );
