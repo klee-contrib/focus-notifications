@@ -1,6 +1,6 @@
 {
     "name": "focus-notifications",
-    "version": "0.3.0",
+    "version": "0.4.0-beta6",
     "description": "Notification Center extension for focus",
     "main": "index.js",
     "scripts": {
@@ -21,8 +21,7 @@
                 "NODE_ENV": "production",
                 "BABEL_ENV": "production",
                 "LIBRARY_NAME": "FocusNotifications",
-                "MINIMIFY": false,
-                "PACKAGE_JSON_PATH": ".."
+                "MINIMIFY": false
             }
         },
         "copy-sass": {
@@ -43,7 +42,6 @@
                 "PAGE_TITLE": "Focus notifications dev page",
                 "MINIMIFY": false,
                 "API_PORT": 9999,
-                "PACKAGE_JSON_PATH": "..",
                 "ANCHOR_CLASS": "notification-center-example"
             }
         },
@@ -71,29 +69,33 @@
     },
     "homepage": "https://github.com/pierr/notif#readme",
     "files": [
-        "actions",
-        "index.html",
-        "src",
-        "api-mock",
-        "index.js",
-        "store",
-        "component",
-        "LICENSE",
-        "test",
-        "config.js",
         "__tests__",
+        "actions",
+        "api-mock",
+        "component",
+        "config.js",
         "container",
-        "package.json",
-        "util",
         "dist",
-        "README.md",
-        "webpack.config.js",
         "example",
+        "index.html",
+        "index.js",
+        "LICENSE",
+        "package.json",
+        "README.md",
         "reducers",
-        "server.js"
+        "src",
+        "server.js",
+        "store",
+        "style",
+        "test",
+        "util",
+        "webpack.config.js"
     ],
     "dependencies": {
-        "isomorphic-fetch": "^2.1.1"
+        "isomorphic-fetch": "^2.1.1",
+        "redux-devtools": "^3.3.1",
+        "redux-devtools-dock-monitor": "^1.1.1",
+        "redux-devtools-log-monitor": "^1.2.0"
     },
     "peerDependencies": {
         "i18next": ">= 4.1.0",
@@ -147,15 +149,12 @@
         "react-hot-loader": "^1.2.7",
         "redux": "^3.6.0",
         "redux-thunk": "^2.1.0",
-        "redux-devtools": "3.3.1",
-        "redux-devtools-dock-monitor": "^1.1.1",
-        "redux-devtools-log-monitor": "^1.2.0",
         "redux-logger": "^2.7.4",
-        "sass-loader": "^3.0.0",
+        "sass-loader": "^3.1.2",
         "sinon": "^1.17.1",
         "sinon-chai": "^2.8.0",
         "source-map-loader": "^0.1.5",
-        "style-loader": "^0.12.3",
+    "style-loader": "^0.13.0",
         "url-loader": "^0.5.6",
         "webpack": "^1.9.6",
         "webpack-dev-server": "^1.8.2",

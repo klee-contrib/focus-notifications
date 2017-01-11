@@ -6,9 +6,9 @@ $notification-separator-color:  rgba(0,0,0,0.1);
 
 
 div[data-focus='notification-center'] {
-    & > * {
-        font-family: 'roboto';
-    }
+    // & > * {
+    //     font-family: 'roboto';
+    // }
     [data-focus='notification-center-icon'] {
         cursor: pointer;
     }
