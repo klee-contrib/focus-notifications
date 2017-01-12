@@ -4,11 +4,11 @@ const DEFAULT_CONF = {
     useCredentials: false,
     //Translations
     i18n: {
-      center: 'Notifications',
-      '3_before': 'Before',
-      '1_lastWeek': 'Last Week',
-      '2_lastMonth': 'Last month',
-      '0_today': 'Today'
+        center: 'Notifications',
+        '3_before': 'Before',
+        '1_lastWeek': 'Last Week',
+        '2_lastMonth': 'Last month',
+        '0_today': 'Today'
     }
 };
 

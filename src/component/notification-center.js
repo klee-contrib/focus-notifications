@@ -1,18 +1,18 @@
 //Dependencies
-import React, { Component , PropTypes } from 'react';
+import React, {PropTypes, PureComponent} from 'react';
 import NotificationCenterIcon from './notification-center-icon';
 import NotificationReceiver from './notification-receiver';
 import NotificationPanel from './notification-panel';
-import { connect } from 'react-redux';
-import { addNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
+import {connect} from 'react-redux';
+import {addNotification, setVisibilityFilter, openCenter, closeCenter } from '../actions';
 import {deleteNotification, deleteGroupNotification} from '../actions/delete-notification'
-import { fetchNotifications } from '../actions/fetch-notifications';
-import{ dismissNotification } from '../actions/receive-notifications';
+import {fetchNotifications} from '../actions/fetch-notifications';
+import {dismissNotification} from '../actions/receive-notifications';
 import {clearError} from '../actions/error';
 import polling from '../util/polling';
 
 // Notification center component
-class NotificationCenter extends Component {
+class NotificationCenter extends PureComponent {
     componentWillMount() {
         //build a polling timeout.
         const {pollingTimer, dispatch} = this.props;
@@ -28,13 +28,15 @@ class NotificationCenter extends Component {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, isOpen, isFetching, notificationReceiver, onSingleClick, error, zIndex} = this.props;
+        const {dispatch, hasAddNotif, notificationList, iconName, isOpen, isFetching, notificationReceiver,onSingleClick, error, zIndex} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
+
         //display only the undred notifications
         const unreadNotifs = notificationList.filter(n => !n.read);
         return (
             <div data-focus='notification-center'>
                 <NotificationCenterIcon
+                    iconName={iconName}
                     number={unreadNotifs.length}
                     openCenter={() => dispatch(openCenter())} />
 
@@ -66,16 +68,11 @@ class NotificationCenter extends Component {
 }
 
 NotificationCenter.displayName = 'NotificationCenter';
-
-NotificationCenter.defaultProps = {
-    hasAddNotif: false,
-    pollingTimer: 6* 10 * 1000, //1 min
-    zIndex: 16777271
-};
 NotificationCenter.propTypes = {
     dispatch: PropTypes.func,
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     hasAddNotif: PropTypes.bool,
+    iconName: PropTypes.string,
     isFetching: PropTypes.bool,
     isOpen: PropTypes.bool,
     notificationList: PropTypes.array,
@@ -84,6 +81,11 @@ NotificationCenter.propTypes = {
     pollingTimer: PropTypes.number,
     zIndex: PropTypes.number
 }
+NotificationCenter.defaultProps = {
+    hasAddNotif: false,
+    pollingTimer: 6* 10 * 1000, //1 min
+    zIndex: 16777271
+};
 
 // Select the notification from the state.
 function selectNotifications(notificationList, filter) {

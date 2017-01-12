@@ -11,6 +11,9 @@ div[data-focus='notification-center'] {
     // }
     [data-focus='notification-center-icon'] {
         cursor: pointer;
+        .mdl-badge::after {
+            left:15px;
+        }
     }
     [data-focus='notification-center-overlay'] {
         position: fixed;
