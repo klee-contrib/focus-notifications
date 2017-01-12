@@ -4,6 +4,7 @@ import SmartNotificationCenter from '../';
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
+import moment from 'moment';
 
 // Initial store population
 const mockNotifs = [
@@ -12,6 +13,11 @@ const mockNotifs = [
     {title: 'TITRE 3', content: 'CONTENT 3 ...', date: new Date().toISOString(), type: 'info', author: 'joe.lopez@gmail.com'}
 ];
 //store.dispatch(addNotifications(mockNotifs));
+
+
+const configuration = {
+    rootURL:'http://localhost:9999/x/notification'
+};
 
 // Create the react component when the DOM is loaded.
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -29,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
                 <a className='mdl-navigation__link' href=''>Link</a>
-                <SmartNotificationCenter config={{rootURL:'http://localhost:9999/x/notification'}} onSingleClick={url => console.log('navigate', url)} />
+                <SmartNotificationCenter config={configuration} onSingleClick={url => console.log('navigate', url)} />
               </nav>
 
             </div>

@@ -3,6 +3,7 @@ const DEFAULT_CONF = {
     notificationURL: 'notifications',
     useCredentials: false,
     //Translations
+    translateDate: undefined,
     i18n: {
         center: 'Notifications',
         '3_before': 'Before',
