@@ -20,7 +20,7 @@
                 "DEV": false,
                 "NODE_ENV": "production",
                 "BABEL_ENV": "production",
-                "LIBRARY_NAME": "FocusNotifications",
+                "LIBRARY_NAME": "focus-notifications",
                 "MINIMIFY": false
             }
         },
@@ -56,18 +56,18 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pierr/notif.git"
+        "url": "git+https://github.com/get-focus/focus-notifications.git"
     },
     "keywords": [
         "notification",
         "focus"
     ],
-    "author": "Pierre Besson <pierre.besson7@gmail.com>",
+    "author": "Focus by Kleegroup <focus@kleegroup.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/pierr/notif/issues"
+        "url": "https://github.com/get-focus/focus-notifications/issues"
     },
-    "homepage": "https://github.com/pierr/notif#readme",
+    "homepage": "https://github.com/get-focus/focus-notifications#readme",
     "files": [
         "__tests__",
         "actions",
@@ -131,8 +131,6 @@
         "extract-text-webpack-plugin": "^0.8.2",
         "faker": "^3.0.1",
         "file-loader": "^0.8.4",
-        "font-awesome": "^4.4.0",
-        "html-webpack-plugin": "^1.6.2",
         "jsdom": "^6.5.1",
         "json-loader": "^0.5.2",
         "lodash": "^4.15.0",
@@ -154,7 +152,7 @@
         "sinon": "^1.17.1",
         "sinon-chai": "^2.8.0",
         "source-map-loader": "^0.1.5",
-    "style-loader": "^0.13.0",
+        "style-loader": "^0.13.0",
         "url-loader": "^0.5.6",
         "webpack": "^1.9.6",
         "webpack-dev-server": "^1.8.2",
