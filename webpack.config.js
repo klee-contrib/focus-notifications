@@ -3,10 +3,7 @@ const customConfig = {
     externals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'redux-devtools': 'redux-devtools',
-        'react-addons-css-transition-group': {
-            root: ['React', 'addons', 'CSSTransitionGroup']
-        },
+        // 'redux-devtools': 'redux-devtools',
         moment: 'moment',
         lodash: 'lodash'
     }

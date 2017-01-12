@@ -3,8 +3,8 @@ const DEFAULT_CONF = {
     notificationURL: 'notifications',
     useCredentials: false,
     //Translations
-    i18n:{
-      center: 'Notification center',
+    i18n: {
+      center: 'Notifications',
       '3_before': 'Before',
       '1_lastWeek': 'Last Week',
       '2_lastMonth': 'Last month',
