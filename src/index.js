@@ -12,11 +12,11 @@ const isDev = __DEV__;
 const notificationStore = createStore();
 
 
-function NotificationCenterDev({onSingleClick, store}){
+function NotificationCenterDev({iconName, onSingleClick, store}){
     return (
         <Provider store={store}>
             <div>
-                <NotificationCenter hasAddNotif={false} onSingleClick={onSingleClick} />
+                <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} />
                 <DevTools/>
             </div>
         </Provider>
@@ -26,10 +26,10 @@ NotificationCenterDev.displayName = 'NotificationCenterDev';
 
 
 
-function NotificationCenterProd({onSingleClick, store}) {
+function NotificationCenterProd({iconName, onSingleClick, store}) {
     return (
         <Provider store={store}>
-            <NotificationCenter hasAddNotif={false} onSingleClick={onSingleClick} />
+            <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} />
         </Provider>
     );
 }
@@ -43,12 +43,14 @@ class SmartNotificationCenter extends Component {
         extendConfig(config);
     }
     render() {
+        const {iconName} = this.props;
         const NotificationCenterComponent = isDev ? NotificationCenterDev : NotificationCenterProd;
-        return <NotificationCenterComponent onSingleClick={this.props.onSingleClick} store={notificationStore} />
+        return <NotificationCenterComponent iconName={iconName} onSingleClick={this.props.onSingleClick} store={notificationStore} />
     }
 }
 SmartNotificationCenter.displayName = SmartNotificationCenter;
 SmartNotificationCenter.propTypes = {
-    config: PropTypes.object
+    config: PropTypes.object,
+    iconName: PropTypes.string
 };
 export default SmartNotificationCenter;
