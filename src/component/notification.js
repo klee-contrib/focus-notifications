@@ -4,7 +4,7 @@ import moment from 'moment';
 import {getConfig} from '../config';
 
 function translateDate(date) {
-    const {translateDate} = getConfig();
+    const {translateDate, locale} = getConfig();
     if(translateDate) {
         return translateDate(date);
     }

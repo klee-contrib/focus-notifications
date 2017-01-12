@@ -4,6 +4,7 @@ const DEFAULT_CONF = {
     useCredentials: false,
     //Translations
     translateDate: undefined,
+    locale: 'en',
     i18n: {
         center: 'Notifications',
         '3_before': 'Before',

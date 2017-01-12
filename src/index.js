@@ -2,15 +2,15 @@ import React , { Component , PropTypes }from 'react';
 import { Provider } from 'react-redux';
 import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
-import {extendConfig} from './config';
+import {extendConfig, getConfig} from './config';
 import DevTools from './container/dev-tools';
+import moment from 'moment';
 
 //Import sass files
 import './style';
 
 const isDev = __DEV__;
 const notificationStore = createStore();
-
 
 function NotificationCenterDev({iconName, onSingleClick, store}){
     return (
@@ -41,6 +41,8 @@ class SmartNotificationCenter extends Component {
     componentWillMount() {
         const {config} = this.props;
         extendConfig(config);
+        const {locale} = getConfig();
+        moment.locale(locale);
     }
     render() {
         const {iconName} = this.props;

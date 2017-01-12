@@ -16,7 +16,8 @@ const mockNotifs = [
 
 
 const configuration = {
-    rootURL:'http://localhost:9999/x/notification'
+    rootURL:'http://localhost:9999/x/notification',
+    locale: 'fr'
 };
 
 // Create the react component when the DOM is loaded.
