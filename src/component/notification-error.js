@@ -1,11 +1,5 @@
 //Dependencies
-import React, { Component , PropTypes} from 'react';
-
-const propTypes = {
-    type: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    onDismiss: PropTypes.func.isRequired
-};
+import React, {PropTypes} from 'react';
 
 const NotificationError = ({type, content, onDismiss}) => {
     return (
@@ -17,8 +11,7 @@ const NotificationError = ({type, content, onDismiss}) => {
             <div data-focus='notification-error--action'>
                 <button
                     className='mdl-button mdl-js-button mdl-button--icon'
-                    onClick={() => onDismiss()}
-                >
+                    onClick={() => onDismiss()}>
                     <i className='material-icons'>clear</i>
                 </button>
             </div>
@@ -26,6 +19,10 @@ const NotificationError = ({type, content, onDismiss}) => {
     );
 };
 
-NotificationError.propTypes = propTypes;
 NotificationError.displayName = 'NotificationError';
+NotificationError.propTypes = {
+    type: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    onDismiss: PropTypes.func.isRequired
+};
 export default NotificationError;

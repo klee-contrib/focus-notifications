@@ -10,14 +10,14 @@ import {getConfig} from '../config';
 class NotificationCenterPanel extends PureComponent {
     render() {
         const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
-        const {i18n} = getConfig();
+        const {translateText} = getConfig();
         return (
             <div style={{zIndex, top: 0, right: 0, position: 'fixed'}}>
                 <div data-focus='notification-center-overlay' className='fade-in' onClick={onClosePanel} style={{zIndex: 1}}></div>
                 <div data-focus='notification-center-panel' className='bounce-in-right' data-fetching={isFetching} style={{zIndex: 2}}>
                     <header>
                         <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={onClosePanel}><i className="material-icons">{'clear'}</i></button>
-                        <h1 onClick={onTitleClick}>{i18n.center}</h1>
+                        <h1 onClick={onTitleClick}>{translateText('focus.notifications.title')}</h1>
                     </header>
                     {hasAddNotif && <NotificationAdd onAddClick={onAddClick} />}
                     {error && <NotificationError onDismiss={onDismissError} {...error}/>}

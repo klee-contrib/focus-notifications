@@ -1,24 +1,18 @@
+
 const DEFAULT_CONF = {
-    rootURL: 'http://localhost:9999',
     notificationURL: 'notifications',
-    useCredentials: false,
-    //Translations
-    i18n: {
-        center: 'Notifications',
-        '3_before': 'Before',
-        '1_lastWeek': 'Last Week',
-        '2_lastMonth': 'Last month',
-        '0_today': 'Today'
-    }
+    rootURL: 'http://localhost:9999',
+    translateDate: undefined,
+    translateText: undefined,
+    useCredentials: false
 };
 
 //Default config on port 9999
 let conf = {...DEFAULT_CONF};
 
-
 export function extendConfig(newConf) {
     conf = {...conf, ...newConf};
-    console.info('new conf', conf);
+    console.info('NOTIFICATIONS = extends configuration', conf);
     return conf;
 }
 

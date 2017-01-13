@@ -1,7 +1,37 @@
 //Dependencies
-import React, { Component , PropTypes} from 'react';
-import moment from 'moment';
-const propTypes = {
+import React, {PropTypes, PureComponent} from 'react';
+import {getConfig} from '../config';
+
+function translateDate(date) {
+    const {translateDate} = getConfig();
+    return translateDate(date);
+}
+
+class Notification extends PureComponent {
+    render() {
+        const {creationDate, content, hasDate, icon, onClick, onRead, uuid, sender, targetUrl, title, type} = this.props;
+        return (
+            <li data-focus='notification' data-type={type} onClick={()=>{ onClick({targetUrl})}}>
+                <div data-focus='notification-icon'><img src={icon}/></div>
+                <div data-focus='notification-body' >
+                    <h4 data-focus='notification-title'>{title}</h4>
+                    <div data-focus='notification-content'>{content}</div>
+                </div>
+                {hasDate &&
+                    <div data-focus='notification-date'>
+                        <button className='mdl-button mdl-js-button mdl-button--icon' onClick={() => onRead(uuid)}>
+                            <i className='material-icons'>done</i>
+                        </button>
+                        <div>{translateDate(creationDate)}</div>
+                    </div>
+                }
+            </li>
+        );
+    };
+}
+
+Notification.displayName = 'Notification';
+Notification.propTypes = {
     hasDate: PropTypes.bool,
     uuid: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
@@ -14,29 +44,6 @@ const propTypes = {
     onRead: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired
 };
-
-const Notification = ({sender, creationDate, content, title, type, icon, targetUrl, hasDate, onRead, uuid, onClick}) => {
-    return (
-        <li data-focus='notification' data-type={type} onClick={()=>{ onClick({targetUrl})}}>
-            <div data-focus='notification-icon'><img src={icon}/></div>
-            <div data-focus='notification-body' >
-                <h4 data-focus='notification-title'>{title}</h4>
-                <div data-focus='notification-content'>{content}</div>
-            </div>
-            {hasDate &&
-                <div data-focus='notification-date'>
-                    <button className='mdl-button mdl-js-button mdl-button--icon' onClick={() => onRead(uuid)}>
-                        <i className='material-icons'>done</i>
-                    </button>
-                    <div>{moment(creationDate).fromNow() }</div>
-                </div>
-            }
-        </li>
-    );
-};
-
-Notification.propTypes = propTypes;
-Notification.displayName = 'Notification';
 Notification.defaultProps = {
     hasDate: true
 }

@@ -16,21 +16,22 @@ function _isYoungerThanA(periodName, date) {
 }
 // function to group date
 function groupDate({creationDate: date}) {
+    const root = 'focus.notifications.groups';
     if(_isYoungerThanA('day', date)) {
-        return '0_today';
+        return `${root}.0_today`;
     }
     if(_isYoungerThanA('week', date)) {
-        return '1_lastWeek';
+        return `${root}.1_lastWeek`;
     }
     if(_isYoungerThanA('month', date)) {
-        return '2_lastMonth';
+        return `${root}.2_lastMonth`;
     }
-    return '3_before';
+    return `${root}.3_before`;
 }
 
 function translate(key){
-    const {i18n} = getConfig();
-    return i18n[key];
+    const {translateText} = getConfig();
+    return translateText(key);
 }
 
 function sortDateFn(a, b){
