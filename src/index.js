@@ -4,7 +4,6 @@ import createStore from './store/create';
 import NotificationCenter from './component/notification-center';
 import {extendConfig, getConfig} from './config';
 import DevTools from './container/dev-tools';
-import moment from 'moment';
 
 //Import sass files
 import './style';
@@ -41,8 +40,13 @@ class SmartNotificationCenter extends Component {
     componentWillMount() {
         const {config} = this.props;
         extendConfig(config);
-        const {locale} = getConfig();
-        moment.locale(locale);
+        const {translateText, translateDate} = getConfig();
+        if(!translateText) {
+            console.error('please define a text translation function. ex: translateText: (text) => i18next.t(text)');
+        }
+        if(!translateDate) {
+            console.error('please define a date formatter function. ex: translateDate: (date) => moment(date).forNow()');
+        }
     }
     render() {
         const {iconName} = this.props;
