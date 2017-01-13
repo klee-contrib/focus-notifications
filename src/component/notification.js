@@ -1,14 +1,10 @@
 //Dependencies
 import React, {PropTypes, PureComponent} from 'react';
-import moment from 'moment';
 import {getConfig} from '../config';
 
 function translateDate(date) {
-    const {translateDate, locale} = getConfig();
-    if(translateDate) {
-        return translateDate(date);
-    }
-    return moment(date).fromNow();
+    const {translateDate} = getConfig();
+    return translateDate(date);
 }
 
 class Notification extends PureComponent {
