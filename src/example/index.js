@@ -23,7 +23,6 @@ i18next.init({
 moment.locale('fr');
 
 const configuration = {
-    rootURL:'http://localhost:9999/x/notification',
     translateDate: (date) => moment(date).fromNow(),
     translateText: (key) => i18next.t(key)
 };
