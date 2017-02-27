@@ -1,6 +1,6 @@
 
 const DEFAULT_CONF = {
-    notificationURL: 'notifications',
+    notificationURL: '/x/notification',
     rootURL: 'http://localhost:9999',
     translateDate: undefined,
     translateText: undefined,
