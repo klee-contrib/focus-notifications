@@ -1,60 +1,71 @@
+@import "mixins";
+
+$notification-bg-color: rgba(243, 243, 243, 1);
+$notification-hover-color:  rgba(0, 0, 0, 0.1);
+
 ul[data-focus='notification-receiver']{
-    width: 33%;
-    //height: 100%;
-    overflow-y: scroll;
     top: 60px;
-    right: 10px;
+    right: 0px;
     z-index: 7777;
     max-width: 500px;
     min-width: 200px;
     position: absolute;
-
-    -webkit-padding-start: 0px;
-     list-style-type: none;
+    list-style-type: none;
+    color: #000;
+    margin: 0;
+    padding: 0;
     [data-focus='notification-received']{
+        margin: 10px;
+        padding:5px;
         display: flex;
         flex-flow: row wrap;
         align-items: center;
         justify-content: center;
-        background-color: rgba(148, 148, 148, 0.5);
+        background-color: $notification-bg-color;
+        @include shadow();
         [data-focus='notification-icon']{
-            width: 20%;
-            img{
-                -webkit-filter: grayscale(0.7x);
-                width: 90%;
+            width: 10%;
+            flex-grow: 1;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
             }
         }
         [data-focus='notification-body']{
-            width: 70%;
+            width: 55%;
+            flex-grow: 4;
+            white-space: normal;
+            padding: 10px;
             h4[data-focus='notification-title']{
-                font-size: 19px;
-                margin: 3px 0 3px;
+                color: rgb(32, 32, 32);
+                font-weight: 400;
+                line-height: normal;
+                font-size: 16px;
+                margin: 0 0 5px 0;
+                padding: 0;
             }
             [data-focus='notification-content']{
-                text-overflow-multiline:ellipsis;
-                width: 100%;
-                //max-height: 50px;
-            //    white-space: nowrap;
-                overflow: hidden;
+                line-height: normal;
+                font-size: 13px;
+                color: rgba(0, 0, 0, 1);
             }
         }
         div[data-focus='notification-action'] {
-            //display: none;
             text-align: center;
             width: 10%;
-            display: block;
             button {
                 display: inline-flex;
             }
         }
         //On hover on the line, the date is hidden and the button is visible.
-        &:hover {
-            div[data-focus='notification-body']{
-                width: 70%;
-            }
-            div[data-focus='notification-action'] {
-                display: block;
-            }
-        }
+        // &:hover {
+        //     div[data-focus='notification-received']{
+        //         background-color: $notification-hover-color
+        //     }
+        // }
     }
 }
