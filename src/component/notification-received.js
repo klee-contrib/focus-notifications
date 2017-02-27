@@ -26,7 +26,7 @@ class NotificationReceived extends Component {
         const {sender, creationDate, content, title, type, icon, targetUrl, hasDate, onDismiss, uuid} = this.props;
         return (
             <li data-focus='notification-received' data-type={type} className='fade-in'>
-                <div data-focus='notification-icon'><img src={icon} /></div>
+                {icon && <div data-focus='notification-icon'><img src={icon} /></div>}
                 <div data-focus='notification-body'>
                     <h4 data-focus='notification-title'>{title}</h4>
                     <div data-focus='notification-content'>{shorten(content, 150)}</div>

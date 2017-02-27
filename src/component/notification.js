@@ -12,7 +12,7 @@ class Notification extends PureComponent {
         const {creationDate, content, hasDate, icon, onClick, onRead, uuid, sender, targetUrl, title, type} = this.props;
         return (
             <li data-focus='notification' data-type={type} onClick={()=>{ onClick({targetUrl})}}>
-                <div data-focus='notification-icon'><img src={icon}/></div>
+                {icon && <div data-focus='notification-icon'><img src={icon}/></div>}
                 <div data-focus='notification-body' >
                     <h4 data-focus='notification-title'>{title}</h4>
                     <div data-focus='notification-content'>{content}</div>
