@@ -8,15 +8,41 @@ import { fetchNotifications } from '../actions/fetch-notifications';
 import {getConfig} from '../config';
 
 class NotificationCenterPanel extends PureComponent {
+    constructor(props) {
+        super(props);
+        this._hideBodyOverflow = this._hideBodyOverflow.bind(this);
+        this._restoreBodyOverflow = this._restoreBodyOverflow.bind(this);
+        this._onClosePanel = this._onClosePanel.bind(this);
+    }
+    componentDidMount() {
+        this._hideBodyOverflow();
+    }
+    /**
+    * Store the body overgflow property, and set it to hidden
+    */
+    _hideBodyOverflow() {
+        document.body.style['overflow-y'] = 'hidden';
+    };
+    /**
+    * Restore body overflow property
+    */
+    _restoreBodyOverflow() {
+        document.body.style['overflow-y'] = 'auto';
+    };
+    _onClosePanel(evt) {
+        const {onClosePanel} = this.props;
+        onClosePanel(evt);
+        this._restoreBodyOverflow();
+    }
     render() {
-        const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onClosePanel, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
+        const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
         const {translateText} = getConfig();
         return (
             <div style={{zIndex, top: 0, right: 0, position: 'fixed'}}>
-                <div data-focus='notification-center-overlay' className='fade-in' onClick={onClosePanel} style={{zIndex: 1}}></div>
+                <div data-focus='notification-center-overlay' className='fade-in' onClick={this._onClosePanel} style={{zIndex: 1}}></div>
                 <div data-focus='notification-center-panel' className='bounce-in-right' data-fetching={isFetching} style={{zIndex: 2}}>
                     <header>
-                        <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={onClosePanel}><i className="material-icons">{'clear'}</i></button>
+                        <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={this._onClosePanel}><i className="material-icons">{'clear'}</i></button>
                         <h1 onClick={onTitleClick}>{translateText('focus.notifications.title')}</h1>
                     </header>
                     {hasAddNotif && <NotificationAdd onAddClick={onAddClick} />}
