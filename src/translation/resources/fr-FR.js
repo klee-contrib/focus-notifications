@@ -1,6 +1,7 @@
 export default {
     focus: {
         notifications: {
+            nothing: 'Aucune notification',
             title: 'Notifications',
             groups: {
                 '0_today': 'Aujourd\'hui',

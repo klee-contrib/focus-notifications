@@ -7,6 +7,11 @@ import { addNotification, readNotification, readNotificationGroup, closeCenter }
 import { fetchNotifications } from '../actions/fetch-notifications';
 import {getConfig} from '../config';
 
+function translate(key){
+    const {translateText} = getConfig();
+    return translateText(key);
+}
+
 class NotificationCenterPanel extends PureComponent {
     constructor(props) {
         super(props);
@@ -37,6 +42,7 @@ class NotificationCenterPanel extends PureComponent {
     render() {
         const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
         const {translateText} = getConfig();
+        const hasNotifications = unreadNotifs.length > 0;
         return (
             <div style={{zIndex, top: 0, right: 0, position: 'fixed'}}>
                 <div data-focus='notification-center-overlay' className='fade-in' onClick={this._onClosePanel} style={{zIndex: 1}}></div>
@@ -47,11 +53,16 @@ class NotificationCenterPanel extends PureComponent {
                     </header>
                     {hasAddNotif && <NotificationAdd onAddClick={onAddClick} />}
                     {error && <NotificationError onDismiss={onDismissError} {...error}/>}
-                    <NotificationGroup
-                        data={unreadNotifs}
-                        onGroupRead={onGroupRead}
-                        onSingleRead={onSingleRead}
-                        onSingleClick={onSingleClick} />
+                    {hasNotifications &&
+                        <NotificationGroup
+                            data={unreadNotifs}
+                            onGroupRead={onGroupRead}
+                            onSingleRead={onSingleRead}
+                            onSingleClick={onSingleClick} />
+                    }
+                    {!hasNotifications &&
+                        <div className='no-notification'>{translate('focus.notifications.nothing')}</div>
+                    }
                 </div>
             </div>
         );
