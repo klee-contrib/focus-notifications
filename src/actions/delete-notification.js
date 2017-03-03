@@ -62,7 +62,10 @@ export function deleteGroupNotification(notificationIds) {
         dispatch(readNotificationGroup(notificationIds));
 
         const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds), ...credentialOptions})
+        var headerJson = new Headers();
+        headerJson.append("Content-Type", "application/json");
+        
+        return fetch(`${URL}`, {method: 'delete', headers:headerJson, body: JSON.stringify(notificationIds), ...credentialOptions})
             .then(response => response.json())
             .then(json => dispatch(deleteNotificationGroupSuccess(json)))
             .catch(err => dispatch(setError({content: err.message, type: 'network'})));
