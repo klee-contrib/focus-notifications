@@ -9215,9 +9215,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // This is not required by thunk middleware, but it is convenient for us.
 	        var datePartURL = fromDate ? '?date=' + fromDate : '';
 	        var credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
-	        var contentType = config.noContentType ? {} : config.contentType ? { contentType: contentType } : { 'Content-Type': 'application/json' };
+	        var contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: contentType } } : { headers: { 'Content-Type': 'application/json' } };
 	        return (0, _isomorphicFetch2.default)('' + URL + datePartURL, _extends({}, contentType, credentialOptions)).then(function (response) {
-	            return response ? response.json() : response;
+	            return response && response.status !== 204 ? response.json() : undefined;
 	        }).then(function (json) {
 	            return dispatch(receiveNotifications(user, json));
 	        }) // Here, we update the app state with the results of the API call.
@@ -31389,10 +31389,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        dispatch((0, _.readNotification)(notificationId));
 	
 	        var credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
-	        var contentType = config.noContentType ? {} : config.contentType ? { contentType: contentType } : { 'Content-Type': 'application/json' };
+	        var contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: contentType } } : { headers: { 'Content-Type': 'application/json' } };
 	
 	        return (0, _isomorphicFetch2.default)(URL + '/' + notificationId, _extends({ method: 'delete' }, credentialOptions, contentType)).then(function (response) {
-	            return response ? response.json() : response;
+	            return response && response.status !== 204 ? response.json() : undefined;
 	        }).then(function (json) {
 	            return dispatch(deleteNotificationSuccess(json));
 	        }).catch(function (err) {
@@ -31413,10 +31413,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        dispatch((0, _.readNotificationGroup)(notificationIds));
 	
 	        var credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
-	        var contentType = config.noContentType ? {} : config.contentType ? { contentType: contentType } : { 'Content-Type': 'application/json' };
+	        var contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: contentType } } : { headers: { 'Content-Type': 'application/json' } };
 	
 	        return (0, _isomorphicFetch2.default)('' + URL, _extends({ method: 'delete', body: JSON.stringify(notificationIds) }, credentialOptions, contentType)).then(function (response) {
-	            return response ? response.json() : response;
+	            return response && response.status !== 204 ? response.json() : undefined;
 	        }).then(function (json) {
 	            return dispatch(deleteNotificationGroupSuccess(json));
 	        }).catch(function (err) {
