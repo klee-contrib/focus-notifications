@@ -11,11 +11,11 @@ import './style';
 const isDev = __DEV__;
 const notificationStore = createStore();
 
-function NotificationCenterDev({iconName, onSingleClick, store}){
+function NotificationCenterDev({iconName, onSingleClick, store, panelFooter, panelHeader}) {
     return (
         <Provider store={store}>
             <div>
-                <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} />
+                <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} panelHeader={panelHeader} panelFooter={panelFooter}/>
                 <DevTools/>
             </div>
         </Provider>
@@ -25,10 +25,10 @@ NotificationCenterDev.displayName = 'NotificationCenterDev';
 
 
 
-function NotificationCenterProd({iconName, onSingleClick, store}) {
+function NotificationCenterProd({iconName, onSingleClick, store, panelFooter, panelHeader}) {
     return (
         <Provider store={store}>
-            <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} />
+            <NotificationCenter iconName={iconName} hasAddNotif={false} onSingleClick={onSingleClick} panelHeader={panelHeader} panelFooter={panelFooter} />
         </Provider>
     );
 }
@@ -49,9 +49,9 @@ class SmartNotificationCenter extends Component {
         }
     }
     render() {
-        const {iconName} = this.props;
+        const {iconName, panelFooter, panelHeader} = this.props;
         const NotificationCenterComponent = isDev ? NotificationCenterDev : NotificationCenterProd;
-        return <NotificationCenterComponent iconName={iconName} onSingleClick={this.props.onSingleClick} store={notificationStore} />
+        return <NotificationCenterComponent iconName={iconName} onSingleClick={this.props.onSingleClick} store={notificationStore} panelHeader={panelHeader} panelFooter={panelFooter}/>
     }
 }
 SmartNotificationCenter.displayName = SmartNotificationCenter;
