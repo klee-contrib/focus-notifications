@@ -7,7 +7,7 @@ import { addNotification, readNotification, readNotificationGroup, closeCenter }
 import { fetchNotifications } from '../actions/fetch-notifications';
 import {getConfig} from '../config';
 
-function translate(key){
+function translate(key) {
     const {translateText} = getConfig();
     return translateText(key);
 }
@@ -27,20 +27,20 @@ class NotificationCenterPanel extends PureComponent {
     */
     _hideBodyOverflow() {
         document.body.style['overflow-y'] = 'hidden';
-    };
+    }
     /**
     * Restore body overflow property
     */
     _restoreBodyOverflow() {
         document.body.style['overflow-y'] = 'auto';
-    };
+    }
     _onClosePanel(evt) {
         const {onClosePanel} = this.props;
         onClosePanel(evt);
         this._restoreBodyOverflow();
     }
     render() {
-        const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
+        const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex, panelHeader, panelFooter} = this.props;
         const {translateText} = getConfig();
         const hasNotifications = unreadNotifs.length > 0;
         return (
@@ -50,6 +50,7 @@ class NotificationCenterPanel extends PureComponent {
                     <header>
                         <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={this._onClosePanel}><i className="material-icons">{'clear'}</i></button>
                         <h1 onClick={onTitleClick}>{translateText('focus.notifications.title')}</h1>
+                        {panelHeader && panelHeader}
                     </header>
                     {hasAddNotif && <NotificationAdd onAddClick={onAddClick} />}
                     {error && <NotificationError onDismiss={onDismissError} {...error}/>}
@@ -63,11 +64,12 @@ class NotificationCenterPanel extends PureComponent {
                     {!hasNotifications &&
                         <div className='no-notification'>{translate('focus.notifications.nothing')}</div>
                     }
+                    {panelFooter && <footer>{panelFooter}</footer>}
                 </div>
             </div>
         );
     }
-};
+}
 NotificationCenterPanel.displayName = 'NotificationCenterPanel';
 NotificationCenterPanel.propTypes = {
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
