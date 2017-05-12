@@ -43,8 +43,10 @@ export function deleteNotification(notificationId) {
         dispatch(readNotification(notificationId));
 
         const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        return fetch(`${URL}/${notificationId}`, {method: 'delete', ...credentialOptions})
-        .then(response => response.json())
+        const contentType = config.noContentType ? {} : config.contentType ? {contentType} : { 'Content-Type': 'application/json' };
+
+        return fetch(`${URL}/${notificationId}`, {method: 'delete', ...credentialOptions, ...contentType})
+        .then(response => response ? response.json() : response)
         .then(json => dispatch(deleteNotificationSuccess(json)))
         .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     }
@@ -62,8 +64,10 @@ export function deleteGroupNotification(notificationIds) {
         dispatch(readNotificationGroup(notificationIds));
 
         const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds), ...credentialOptions})
-            .then(response => response.json())
+        const contentType = config.noContentType ? {} : config.contentType ? {contentType} : { 'Content-Type': 'application/json' };
+
+        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds), ...credentialOptions, ...contentType})
+            .then(response => response ? response.json() : response)
             .then(json => dispatch(deleteNotificationGroupSuccess(json)))
             .catch(err => dispatch(setError({content: err.message, type: 'network'})));
     }

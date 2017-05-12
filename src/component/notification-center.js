@@ -28,7 +28,7 @@ class NotificationCenter extends PureComponent {
     //}
     //Should be replaced by a promise.cancel
     render() {
-        const {dispatch, hasAddNotif, notificationList, iconName, isOpen, isFetching, notificationReceiver, onSingleClick, error, zIndex} = this.props;
+        const {dispatch, hasAddNotif, notificationList, iconName, isOpen, isFetching, notificationReceiver, onSingleClick, error, zIndex, panelHeader, panelFooter} = this.props;
         const {notificationsReceived, hasFetchedOnce} = notificationReceiver;
 
         //display only the undred notifications
@@ -60,6 +60,8 @@ class NotificationCenter extends PureComponent {
                         onTitleClick={() => dispatch(fetchNotifications())}
                         unreadNotifs={unreadNotifs}
                         zIndex={zIndex}
+                        panelHeader={panelHeader}
+                        panelFooter={panelFooter}
                         />
                 }
             </div>
