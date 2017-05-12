@@ -1,0 +1,71 @@
+@import "mixins";
+
+$notification-bg-color: rgba(243, 243, 243, 1);
+$notification-hover-color:  rgba(0, 0, 0, 0.1);
+
+ul[data-focus='notification-receiver']{
+    top: 60px;
+    right: 0px;
+    z-index: 7777;
+    max-width: 500px;
+    min-width: 200px;
+    position: absolute;
+    list-style-type: none;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    [data-focus='notification-received']{
+        margin: 10px;
+        padding:5px;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+        background-color: $notification-bg-color;
+        @include shadow();
+        [data-focus='notification-icon']{
+            width: 10%;
+            flex-grow: 1;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
+            }
+        }
+        [data-focus='notification-body']{
+            width: 55%;
+            flex-grow: 4;
+            white-space: normal;
+            padding: 10px;
+            h4[data-focus='notification-title']{
+                color: rgb(32, 32, 32);
+                font-weight: 400;
+                line-height: normal;
+                font-size: 16px;
+                margin: 0 0 5px 0;
+                padding: 0;
+            }
+            [data-focus='notification-content']{
+                line-height: normal;
+                font-size: 13px;
+                color: rgba(0, 0, 0, 1);
+            }
+        }
+        div[data-focus='notification-action'] {
+            text-align: center;
+            width: 10%;
+            button {
+                display: inline-flex;
+            }
+        }
+        //On hover on the line, the date is hidden and the button is visible.
+        // &:hover {
+        //     div[data-focus='notification-received']{
+        //         background-color: $notification-hover-color
+        //     }
+        // }
+    }
+}

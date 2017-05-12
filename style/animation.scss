@@ -1,0 +1,22 @@
+.fade-in {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+
+.bounce-in-right {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-name: bounceInRight;
+}
+
+@keyframes bounceInRight {
+    0% { opacity: 0; transform: translate3d(500px, 0, 0); }
+    5% { opacity: 1; }
+    to { transform: none; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,292 @@
+.fade-in {
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn; }
+
+.bounce-in-right {
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: bounceInRight;
+          animation-name: bounceInRight; }
+
+@-webkit-keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(500px, 0, 0);
+            transform: translate3d(500px, 0, 0); }
+  5% {
+    opacity: 1; }
+  to {
+    -webkit-transform: none;
+            transform: none; } }
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(500px, 0, 0);
+            transform: translate3d(500px, 0, 0); }
+  5% {
+    opacity: 1; }
+  to {
+    -webkit-transform: none;
+            transform: none; } }
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+div[data-focus='notification-center'] [data-focus='notification-center-icon'] {
+  cursor: pointer; }
+  div[data-focus='notification-center'] [data-focus='notification-center-icon'] .mdl-badge::after {
+    left: 15px; }
+
+div[data-focus='notification-center'] [data-focus='notification-center-overlay'] {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; }
+
+div[data-focus='notification-center'] [data-focus='notification-center-panel'] {
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  width: 650px;
+  height: 100vh;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: relative;
+  background: white;
+  text-align: left;
+  overflow-y: auto; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] h1, div[data-focus='notification-center'] [data-focus='notification-center-panel'] h2, div[data-focus='notification-center'] [data-focus='notification-center-panel'] h3 {
+    color: #327ca9;
+    line-height: normal;
+    margin: 0;
+    padding: 10px; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] h1 {
+    font-size: 22px;
+    text-align: center; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] h2 {
+    font-size: 18px; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] .no-notification {
+    color: #c7c7c7;
+    text-align: center;
+    padding: 100px 20px;
+    font-size: 28px; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] header {
+    position: relative; }
+    div[data-focus='notification-center'] [data-focus='notification-center-panel'] header button[data-focus='notification-center-close'] {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #327ca9; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] [data-focus='notification-group'] [data-focus='notification-group--title'] {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.1); }
+    div[data-focus='notification-center'] [data-focus='notification-center-panel'] [data-focus='notification-group'] [data-focus='notification-group--title'] button {
+      margin: 0 10px;
+      color: #327ca9; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'][data-fetching='true'] div[data-focus='notification-group']:after {
+    content: 'Loading...';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.19);
+    text-align: center;
+    color: #FFF; }
+  div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] {
+    list-style-type: none;
+    padding: 0 10px;
+    margin: 0 0 40px; }
+    div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] li {
+      margin: 10px 0; }
+    div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: row wrap;
+              flex-flow: row wrap;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #202020;
+      padding: 3px;
+      border-radius: 5px; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification']:hover {
+        background-color: #e0e0e0; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-icon'] {
+        width: 10%;
+        -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
+        padding: 0;
+        margin: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center; }
+        div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-icon'] img {
+          width: 80%; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-body'] {
+        width: 55%;
+        -webkit-box-flex: 4;
+            -ms-flex-positive: 4;
+                flex-grow: 4;
+        white-space: normal;
+        padding: 10px; }
+        div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-body'] h4[data-focus='notification-title'] {
+          color: #202020;
+          font-weight: 400;
+          line-height: normal;
+          font-size: 16px;
+          margin: 0 0 5px 0;
+          padding: 0; }
+        div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-body'] [data-focus='notification-content'] {
+          line-height: normal;
+          font-size: 13px;
+          color: #686868; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification']:hover div[data-focus='notification-date'] button {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification']:hover div[data-focus='notification-date'] div {
+        display: none; }
+      div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-date'] {
+        color: #327ca9;
+        text-align: center;
+        width: 15%;
+        font-size: 13px; }
+        div[data-focus='notification-center'] [data-focus='notification-center-panel'] ul[data-focus='notification-list'] [data-focus='notification'] [data-focus='notification-date'] button {
+          display: none; }
+ul[data-focus='notification-receiver'] {
+  top: 60px;
+  right: 0px;
+  z-index: 7777;
+  max-width: 500px;
+  min-width: 200px;
+  position: absolute;
+  list-style-type: none;
+  color: #000;
+  margin: 0;
+  padding: 0; }
+  ul[data-focus='notification-receiver'] [data-focus='notification-received'] {
+    margin: 10px;
+    padding: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+    ul[data-focus='notification-receiver'] [data-focus='notification-received'] [data-focus='notification-icon'] {
+      width: 10%;
+      -webkit-box-flex: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+      padding: 0;
+      margin: 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+      ul[data-focus='notification-receiver'] [data-focus='notification-received'] [data-focus='notification-icon'] img {
+        width: 80%; }
+    ul[data-focus='notification-receiver'] [data-focus='notification-received'] [data-focus='notification-body'] {
+      width: 55%;
+      -webkit-box-flex: 4;
+          -ms-flex-positive: 4;
+              flex-grow: 4;
+      white-space: normal;
+      padding: 10px; }
+      ul[data-focus='notification-receiver'] [data-focus='notification-received'] [data-focus='notification-body'] h4[data-focus='notification-title'] {
+        color: #202020;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 16px;
+        margin: 0 0 5px 0;
+        padding: 0; }
+      ul[data-focus='notification-receiver'] [data-focus='notification-received'] [data-focus='notification-body'] [data-focus='notification-content'] {
+        line-height: normal;
+        font-size: 13px;
+        color: black; }
+    ul[data-focus='notification-receiver'] [data-focus='notification-received'] div[data-focus='notification-action'] {
+      text-align: center;
+      width: 10%; }
+      ul[data-focus='notification-receiver'] [data-focus='notification-received'] div[data-focus='notification-action'] button {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex; }
+[data-focus='notification-error'] {
+  background-color: #D32F2F;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  [data-focus='notification-error'] [data-focus='notification-error--icon'] {
+    width: 20%; }
+  [data-focus='notification-error'] [data-focus='notification-error--content'] {
+    text-align: center;
+    width: 60%; }
+  [data-focus='notification-error'] [data-focus='notification-error--action'] {
+    text-align: right;
+    width: 20%; }
+
+/*# sourceMappingURL=focus-notifications.css.map*/

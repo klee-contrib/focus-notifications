@@ -1,0 +1,20 @@
+[data-focus='notification-error']{
+    background-color: #D32F2F;
+    color: white;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+
+    [data-focus='notification-error--icon']{
+        width: 20%;
+    }
+    [data-focus='notification-error--content']{
+        text-align: center;
+        width: 60%;
+    }
+    [data-focus='notification-error--action']{
+        text-align: right;
+        width: 20%;
+    }
+}
