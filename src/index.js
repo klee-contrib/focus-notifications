@@ -54,7 +54,7 @@ class SmartNotificationCenter extends Component {
         return <NotificationCenterComponent iconName={iconName} onSingleClick={this.props.onSingleClick} store={notificationStore} panelHeader={panelHeader} panelFooter={panelFooter}/>
     }
 }
-SmartNotificationCenter.displayName = SmartNotificationCenter;
+SmartNotificationCenter.displayName = 'SmartNotificationCenter';
 SmartNotificationCenter.propTypes = {
     config: PropTypes.object,
     iconName: PropTypes.string
