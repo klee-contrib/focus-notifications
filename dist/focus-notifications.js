@@ -202,7 +202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return SmartNotificationCenter;
 	}(_react.Component);
 	
-	SmartNotificationCenter.displayName = SmartNotificationCenter;
+	SmartNotificationCenter.displayName = 'SmartNotificationCenter';
 	SmartNotificationCenter.propTypes = {
 	    config: _react.PropTypes.object,
 	    iconName: _react.PropTypes.string
