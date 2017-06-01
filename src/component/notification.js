@@ -8,6 +8,19 @@ function translateDate(date) {
 }
 
 class Notification extends PureComponent {
+    
+    constructor(props) {
+        super(props);
+        this.handleOnRead = this.handleOnRead.bind(this);
+    }
+    
+    handleOnRead(event){
+        const {onRead, uuid} = this.props;
+        event.preventDefault();
+        event.stopPropagation();
+        onRead(uuid);
+    }
+    
     render() {
         const {creationDate, content, hasDate, icon, onClick, onRead, uuid, sender, targetUrl, title, type} = this.props;
         return (
@@ -19,7 +32,7 @@ class Notification extends PureComponent {
                 </div>
                 {hasDate &&
                     <div data-focus='notification-date'>
-                        <button className='mdl-button mdl-js-button mdl-button--icon' onClick={() => onRead(uuid)}>
+                        <button className='mdl-button mdl-js-button mdl-button--icon' onClick={this.handleOnRead}>
                             <i className='material-icons'>done</i>
                         </button>
                         <div>{translateDate(creationDate)}</div>
