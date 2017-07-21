@@ -1,4 +1,12 @@
-# focus-notification
+Focus notifications
+=====================
+
+[![master](https://travis-ci.org/KleeGroup/focus-notifications.svg?branch=master)](https://travis-ci.org/KleeGroup/focus-notifications)
+[![develop](https://travis-ci.org/KleeGroup/focus-notifications.svg?branch=develop)](https://travis-ci.org/KleeGroup/focus-notifications)
+
+[![Dependencies Status](https://david-dm.org/KleeGroup/focus-notifications.svg)](https://david-dm.org/KleeGroup/focus-notifications)
+[![Dev Dependencies Status](https://david-dm.org/KleeGroup/focus-notifications/dev-status.svg)](https://david-dm.org/KleeGroup/focus-notifications?type=dev)
+[![Peer Dependencies Status](https://david-dm.org/KleeGroup/focus-notifications/peer-status.svg)](https://david-dm.org/KleeGroup/focus-notifications?type=peer)
 
 This repository stands for the **Notification center** of FOCUS. It needs an **API** in order to be functionnal.
 
