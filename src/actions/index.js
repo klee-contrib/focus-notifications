@@ -49,8 +49,8 @@ export function setVisibilityFilter(filter) {
 //Actions creators related to the opening state.
 
 export function openCenter() {
-    return {type: OPEN_CENTER};
+    return { type: OPEN_CENTER };
 }
 export function closeCenter() {
-    return {type: CLOSE_CENTER};
+    return { type: CLOSE_CENTER };
 }

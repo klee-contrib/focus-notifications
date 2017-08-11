@@ -1,14 +1,14 @@
-import React, {PropTypes, PureComponent} from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import NotificationGroup from './notification-group';
 import NotificationAdd from './notification-add';
 import NotificationError from './notification-error';
 
 import { addNotification, readNotification, readNotificationGroup, closeCenter } from '../actions';
 import { fetchNotifications } from '../actions/fetch-notifications';
-import {getConfig} from '../config';
+import { getConfig } from '../config';
 
-function translate(key){
-    const {translateText} = getConfig();
+function translate(key) {
+    const { translateText } = getConfig();
     return translateText(key);
 }
 
@@ -27,47 +27,50 @@ class NotificationCenterPanel extends PureComponent {
     */
     _hideBodyOverflow() {
         document.body.style['overflow-y'] = 'hidden';
-    };
+    }
     /**
     * Restore body overflow property
     */
     _restoreBodyOverflow() {
-        document.body.style['overflow-y'] = 'auto';
-    };
+        document.body.style['overflow-y'] = 'visible';
+    }
     _onClosePanel(evt) {
-        const {onClosePanel} = this.props;
+        const { onClosePanel } = this.props;
         onClosePanel(evt);
         this._restoreBodyOverflow();
     }
     render() {
-        const {hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex} = this.props;
-        const {translateText} = getConfig();
+        const { hasAddNotif, isFetching, unreadNotifs, onGroupRead, onSingleRead, onSingleClick, onTitleClick, onAddClick, onDismissError, error, zIndex, panelHeader, panelFooter } = this.props;
+        const { translateText } = getConfig();
         const hasNotifications = unreadNotifs.length > 0;
         return (
-            <div style={{zIndex, top: 0, right: 0, position: 'fixed'}}>
-                <div data-focus='notification-center-overlay' className='fade-in' onClick={this._onClosePanel} style={{zIndex: 1}}></div>
-                <div data-focus='notification-center-panel' className='bounce-in-right' data-fetching={isFetching} style={{zIndex: 2}}>
+            <div style={{ zIndex, top: 0, right: 0, position: 'fixed' }}>
+                <div data-focus='notification-center-overlay' className='fade-in' onClick={this._onClosePanel} style={{ zIndex: 1 }} />
+                <div data-focus='notification-center-panel' className='bounce-in-right' data-fetching={isFetching} style={{ zIndex: 2 }}>
                     <header>
-                        <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={this._onClosePanel}><i className="material-icons">{'clear'}</i></button>
+                        <button className='mdl-button mdl-button--icon' data-focus='notification-center-close' onClick={this._onClosePanel}><i className='material-icons'>{'clear'}</i></button>
                         <h1 onClick={onTitleClick}>{translateText('focus.notifications.title')}</h1>
+                        {panelHeader && panelHeader}
                     </header>
                     {hasAddNotif && <NotificationAdd onAddClick={onAddClick} />}
-                    {error && <NotificationError onDismiss={onDismissError} {...error}/>}
+                    {error && <NotificationError onDismiss={onDismissError} {...error} />}
                     {hasNotifications &&
                         <NotificationGroup
                             data={unreadNotifs}
                             onGroupRead={onGroupRead}
                             onSingleRead={onSingleRead}
-                            onSingleClick={onSingleClick} />
+                            onSingleClick={onSingleClick}
+                        />
                     }
                     {!hasNotifications &&
                         <div className='no-notification'>{translate('focus.notifications.nothing')}</div>
                     }
+                    {panelFooter && <footer>{panelFooter}</footer>}
                 </div>
             </div>
         );
     }
-};
+}
 NotificationCenterPanel.displayName = 'NotificationCenterPanel';
 NotificationCenterPanel.propTypes = {
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
