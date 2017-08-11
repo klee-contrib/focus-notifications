@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
-import {getConfig} from '../config';
-import {clearError, setError} from './error';
+import { getConfig } from '../config';
+import { clearError, setError } from './error';
 export const REQUEST_NOTIFICATIONS = 'REQUEST_NOTIFICATIONS';
 export const RECEIVE_NOTIFICATIONS = 'RECEIVE_NOTIFICATIONS'
 
@@ -48,11 +48,11 @@ export function fetchNotifications(user, fromDate) {
         // In this case, we return a promise to wait for.
         // This is not required by thunk middleware, but it is convenient for us.
         const datePartURL = fromDate ? `?date=${fromDate}` : '';
-        const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        const contentType = config.noContentType ? {} : config.contentType ? {headers: {contentType}} : { headers: {'Content-Type': 'application/json' }};
-        return fetch(`${URL}${datePartURL}`, {...contentType, ...credentialOptions})
-        .then(response => response && response.status !== 204 ? response.json() : undefined)
+        const credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
+        const contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: config.contentType } } : { headers: { 'Content-Type': 'application/json' } };
+        return fetch(`${URL}${datePartURL}`, { ...contentType, ...credentialOptions })
+            .then(response => response && response.status !== 204 ? response.json() : undefined)
             .then(json => dispatch(receiveNotifications(user, json))) // Here, we update the app state with the results of the API call.
-            .catch(err => dispatch(setError({content: err.message, type: 'network'})));
+            .catch(err => dispatch(setError({ content: err.message, type: 'network' })));
     };
 }

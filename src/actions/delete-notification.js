@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch';
-import {getConfig} from '../config';
-import {clearError, setError} from './error';
+import { getConfig } from '../config';
+import { clearError, setError } from './error';
 
 //Import other actions
-import {readNotification, readNotificationGroup} from './';
+import { readNotification, readNotificationGroup } from './';
 
 //Notification actions
 export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
@@ -42,13 +42,13 @@ export function deleteNotification(notificationId) {
         dispatch(clearError());
         dispatch(readNotification(notificationId));
 
-        const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        const contentType = config.noContentType ? {} : config.contentType ? {headers: {contentType}} : { headers: {'Content-Type': 'application/json' }};
+        const credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
+        const contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: config.contentType } } : { headers: { 'Content-Type': 'application/json' } };
 
-        return fetch(`${URL}/${notificationId}`, {method: 'delete', ...credentialOptions, ...contentType})
-        .then(response => response && response.status !== 204 ? response.json() : undefined)
-        .then(json => dispatch(deleteNotificationSuccess(json)))
-        .catch(err => dispatch(setError({content: err.message, type: 'network'})));
+        return fetch(`${URL}/${notificationId}`, { method: 'delete', ...credentialOptions, ...contentType })
+            .then(response => response && response.status !== 204 ? response.json() : undefined)
+            .then(json => dispatch(deleteNotificationSuccess(json)))
+            .catch(err => dispatch(setError({ content: err.message, type: 'network' })));
     }
 }
 
@@ -63,12 +63,12 @@ export function deleteGroupNotification(notificationIds) {
         dispatch(clearError());
         dispatch(readNotificationGroup(notificationIds));
 
-        const credentialOptions = config.useCredentials ? { credentials: 'include'} : {};
-        const contentType = config.noContentType ? {} : config.contentType ? {headers: {contentType}} : { headers: {'Content-Type': 'application/json' }};
+        const credentialOptions = config.useCredentials ? { credentials: 'include' } : {};
+        const contentType = config.noContentType ? {} : config.contentType ? { headers: { contentType: config.contentType } } : { headers: { 'Content-Type': 'application/json' } };
 
-        return fetch(`${URL}`, {method: 'delete', body: JSON.stringify(notificationIds), ...credentialOptions, ...contentType})
-        .then(response => response && response.status !== 204 ? response.json() : undefined)
+        return fetch(`${URL}`, { method: 'delete', body: JSON.stringify(notificationIds), ...credentialOptions, ...contentType })
+            .then(response => response && response.status !== 204 ? response.json() : undefined)
             .then(json => dispatch(deleteNotificationGroupSuccess(json)))
-            .catch(err => dispatch(setError({content: err.message, type: 'network'})));
+            .catch(err => dispatch(setError({ content: err.message, type: 'network' })));
     }
 }
